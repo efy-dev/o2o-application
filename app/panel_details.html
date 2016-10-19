@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+
+<body class="detail" style="padding-bottom:60px">
+<div class="header" dot-template="header"></div>
+<!--//End--header-->
+
+<div dot-template="panel-base"></div>
+
+
+<div class="footer"></div>
+
+<script type="text/x-dot-template" id="panel-base">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {{ for( var i=0; i < it.imageList.length; i++ ){ }}
+            <div class="swiper-slide"><img src="{{=it.imageList[i].image.src}}@!o2o-home-banner" alt=""></div>
+            {{ } }}
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+    {{if(it.media!=null) { }}
+    <div class="audio audio-box" id="audio">
+        <a data-type="audio-button">
+            <span class="play active" data-type="audio-icon"><i class="icon"></i></span>
+        </a>
+        <span class="title">
+        <p>{{=it.name}}</p>
+        <p>{{=it.name}}的语音简介</p>
+        </span>
+        <span class="time"></span>
+        <audio data-type="audio-body" id="media" src="{{=it.media.src}}" autoplay="autoplay"></audio>
+    </div>
+
+    {{ } }}
+
+
+</script>
+
+
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+
+
+<script>
+    $().ready(function() {
+        initPage();
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.panelId = requestParam.panelId;
+
+        PageVariable.title = decodeURI(requestParam.title);
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+        getPanelById(PageVariable.panelId, function() {
+            renderTemplate(PageVariable.template.panelBase, PageVariable.panelList);
+            $(".audio-box").each(function () {
+                PageVariable.audioList.push(new Audio($(this).attr("id")));
+            });
+        });
+
+
+
+    }
+</script>
+</body>
+
+</html>

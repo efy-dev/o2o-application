@@ -1,72 +1,72 @@
 var api_url = 'http://192.168.1.72';
 
 var PageVariable = {
-        template: {
-            homeRecommendList: "home-recommend-list",
-            tenantBase: "tenant-base",
-            tenantPraise: "tenant-praise",
-            tenantProductList: "tenant-product-list",
-            tenantPanelList: "tenant-panel-list",
-            productBase: "product-base",
-            productDetail: "product-detail",
-            productBuy: "product-buy",
-            productList: "product-list",
-            tenantList: "tenant-list",
-            tenantAudioList: "tenant-audio-list"
-        },
-        service: {
-            login: "/wx/login",
-            listProductModel: api_url + "/product/getProductModelList",
-            listTenant: api_url + "/tenant/getTenantList",
-            listRecommend: api_url + "/tenant/getRecommendList",
-            viewTenantById: api_url + "/tenant/getTenantById",
-            listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
-            saveTenantPraise: api_url + "/tenant/saveTenantPraise",
-            listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
-            viewProductModelById: api_url + "/product/getProductModelById",
-            listProductModelPanel: api_url + "/product/getColumnListByProductModel",
-            currentUser: api_url + "/user/getCurrentUser"
-        },
+    template: {
+        homeRecommendList: "home-recommend-list",
+        tenantBase: "tenant-base",
+        tenantPraise: "tenant-praise",
+        tenantProductList: "tenant-product-list",
+        tenantPanelList: "tenant-panel-list",
+        productBase: "product-base",
+        productDetail: "product-detail",
+        productBuy: "product-buy",
+        productList: "product-list",
+        tenantList: "tenant-list",
+        tenantAudioList: "tenant-audio-list",
+        panelBase: "panel-base"
+    },
+    service: {
+        login: "/wx/login",
+        listProductModel: api_url + "/product/getProductModelList",
+        listTenant: api_url + "/tenant/getTenantList",
+        listRecommend: api_url + "/tenant/getRecommendList",
+        viewTenantById: api_url + "/tenant/getTenantById",
+        listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
+        saveTenantPraise: api_url + "/tenant/saveTenantPraise",
+        listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
+        viewProductModelById: api_url + "/product/getProductModelById",
+        listProductModelPanel: api_url + "/product/getColumnListByProductModel",
+        currentUser: api_url + "/user/getCurrentUser",
+        panelById: api_url + "/tenant/getPanelById"
+    },
 
-        currentUser: null,
-        userId: "",
-        tenant: {},
-        productModelList: [],
-        tenantColumnList: [],
-        tenantPraiseList: [],
-        productModel: {},
-        productModelColumnList: [],
-        tenantList: [],
-        master: {},
-        project: {},
-        imageTextList: [],
-        imageText: {},
-        recommendList: [],
+    currentUser: null,
+    userId: "",
+    tenant: {},
+    productModelList: [],
+    tenantColumnList: [],
+    tenantPraiseList: [],
+    productModel: {},
+    productModelColumnList: [],
+    tenantList: [],
+    master: {},
+    project: {},
+    imageTextList: [],
+    imageText: {},
+    recommendList: [],
+    panelList: [],
+    imageStyle: {},
+    currentAudio: null,
+    audioList: [],
 
-        imageStyle: {},
-
-        currentAudio: null,
-
-        audioList: [],
-
-        setCurrentAudio: function (audio) {
-            if (PageVariable.currentAudio != null) {
-                PageVariable.currentAudio.bodyStop();
-            }
-            PageVariable.currentAudio = audio;
-            PageVariable.currentAudio.bodyPlay();
+    setCurrentAudio: function (audio) {
+        if (PageVariable.currentAudio != null) {
+            PageVariable.currentAudio.bodyStop();
         }
-        ,
+        PageVariable.currentAudio = audio;
+        PageVariable.currentAudio.bodyPlay();
+    }
+    ,
 
-        removeCurrentAudio: function (audio) {
-            if (PageVariable.currentAudio == null) {
-                audio.bodyStop();
-            } else if (audio.id == PageVariable.currentAudio.id) {
-                PageVariable.currentAudio.bodyStop();
-                PageVariable.currentAudio = null;
-            }
+    removeCurrentAudio: function (audio) {
+        if (PageVariable.currentAudio == null) {
+            audio.bodyStop();
+        } else if (audio.id == PageVariable.currentAudio.id) {
+            PageVariable.currentAudio.bodyStop();
+            PageVariable.currentAudio = null;
         }
-    };
+    }
+};
 
 function getTenantById(id, callback) {
     var success = function (data) {
@@ -217,6 +217,33 @@ function getRecommendList(param, limit, offset, callback) {
     requestParam.limit = limit;
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.listRecommend, requestParam, success);
+}
+
+/**
+ * @param id
+ * @param callback
+ */
+function getPanelById(id, callback) {
+    var success = function (data) {
+        PageVariable.panelList = data;
+        if (typeof callback == "function") {
+            callback();
+
+            //首页店铺推荐swiper初始化
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 10,
+                initialSlide: 0,
+                autoHeight: true, //高度随内容变化
+                pagination: '.swiper-pagination',
+            });
+        }
+    };
+
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.panelById, requestParam, success);
 }
 
 getCurrentUser();

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>语音导览</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body class="detail">
+<header class="header" dot-template="header"></header>
+<!--//End--header-->
+<div class="guide">
+    <div class="image"><img src="uploads/guide1.jpg" alt=""></div>
+    <div class="vertical" dot-template="tenant-audio-list">
+
+    </div>
+
+</div>
+
+<div class="footer">
+</div>
+
+<script type="text/x-dot-template" id="tenant-audio-list">
+
+    <ul class="list" style="width: 100%;">
+        {{ for(var i = 0 ; i < it.length ; i++){ }}
+        {{ if(it[i].audio!=null){ }}
+        <li>
+            <div class="audio-box" id="{{=it[i].id}}">
+                <a data-type="audio-button">
+                    <div class="img"><img src="{{=it[i].pictureUrl}}@!o2o-audio-list" alt="">
+                        <div class="audio">
+                            <audio class="audio" data-type="audio-body" src="{{=it[i].audio}}"></audio>
+                            <span class="play" data-type="audio-icon">
+                            <i class="icon"></i>
+                        </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="text">
+                <div class="txt">{{=it[i].name}}</div>
+                <div class="des">{{=subString(it[i].content,28,"...")}}
+                    <a class="more" href="/app/tenant_details.html?tenantId={{=it[i].id}}&title={{=it[i].name}}">了解详情<i
+                            class="angle right"></i></a>
+                </div>
+            </div>
+        </li>
+        {{ } }}
+        {{ } }}
+    </ul>
+
+</script>
+
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<script>
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        var param = {};
+        for (var p in requestParam) {
+            if (requestParam.hasOwnProperty(p)) {
+                if (p.indexOf("param.") > 0) {
+                    var key = p.substr(6, p.length);
+                    param[key] = requestParam[p];
+                }
+            }
+        }
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.param = JSON.stringify(param);
+        PageVariable.title = decodeURI(requestParam.title);
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+
+        getTenantList(PageVariable.param, 10, 0, function () {
+            renderTemplate(PageVariable.template.tenantAudioList, PageVariable.tenantList);
+            $(".audio-box").each(function () {
+                PageVariable.audioList.push(new Audio($(this).attr("id")));
+            });
+        })
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

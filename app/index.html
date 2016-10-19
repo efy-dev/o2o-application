@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>前门华韵</title>
+    <!--<link rel="stylesheet" href="assets/css/swiper.min.css">-->
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<div class="header" dot-template="header">
+</div>
+
+<!--//End--header-->
+
+<div class="focus">
+    <div class="swiper-container" id="focus">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!--//End--focus-->
+
+<div class="menu">
+    <a href="http://www.efeiyi.com/app/audio_guide.html?title=语音导览"><i class="icon icon-audio"></i><span>语音导览</span></a>
+    <a href=""><i class="icon icon-tour"></i><span>旅游攻略</span></a>
+    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i
+            class="icon icon-limit"></i><span>限时折扣</span></a>
+</div>
+<!--//End--menu-->
+
+<div class="promimg">
+    <a href="" title=""><img alt="" src="uploads/ad1.jpg"></a>
+</div>
+<!--//End--ad-->
+
+<div class="horizontal">
+    <div class="title"><h1>艺术馆</h1><a class="more" href="" title="更多">更多&gt;</a></div>
+    <div class="swiper-container" dot-template="home-recommend-list">
+    </div>
+</div>
+<!--//End--product-->
+
+
+<div class="footer">
+</div>
+
+<script type="text/x-dot-template" id="home-recommend-list">
+
+    <div class="swiper-wrapper">
+        {{ for(var i = 0 ; i < it.length ;i++){ }}
+        {{ if(it[i].image!=null){ }}
+        <div class="swiper-slide">
+            <a href="{{=it[i].redirect}}">
+                <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
+                <div class="base">
+                    <dl class="txt" style="padding-right: 0px;">
+                        <dt>{{=it[i].title}}</dt>
+                        <dd>{{=it[i].shortText}}</dd>
+                    </dl>
+                </div>
+            </a>
+        </div>
+        <!--//End 3-->
+        {{ } }}
+        {{ } }}
+    </div>
+</script>
+<script type="text/x-dot-template" id="header">
+    <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a>
+    <a class="icon user" title="个人中心"></a>
+    <div class="layer">
+        <a class="link" href="/"><i class="icon icon-home"></i>首页</a>
+        <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a>
+        <i class="angle"></i>
+    </div>
+</script>
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+<!--<script src="assets/js/system.js"></script>-->
+
+
+<script>
+
+    wx_share_title = "前门华韵"; //分享标题
+    wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
+    var redirect = "http://www.efeiyi.com/app/index.html";
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+    $().ready(function () {
+        initPage();
+        setTimeout(function () {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 10,
+                initialSlide: 0
+            });
+        }, 1000)
+    });
+
+
+    function initPage() {
+
+        $("[dot-template=header]").html(renderHomeHeader());
+
+        getRecommendList({}, 5, 0, function () {
+            renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
+            setTimeout(function () {
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 'auto',
+                    centeredSlides: true,
+                    spaceBetween: 10,
+                    initialSlide: 0
+                });
+            }, 200)
+        });
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

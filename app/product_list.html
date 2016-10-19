@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<header class="header" dot-template="header">
+
+</header>
+<!--//End--header-->
+
+<div class="vertical" dot-template="product-list">
+</div>
+<!--//End--tenant_list-->
+<div class="footer">
+</div>
+<script type="text/x-dot-template" id="product-list">
+
+    <ul class="items">
+        {{ for(var i = 0 ; i < it.length ; i++) { }}
+        <li>
+            <a href="/app/product_details.html?productId={{=it[i].id}}&title={{=it[i].product.name}}">
+                <img src="{{=it[i].productModel_url}}@!o2o-tenant-list" alt="">
+                <div class="text">
+                    <div class="txt">{{=it[i].product.name }}</div>
+                    <div class="des">{{=it[i].product.subName}}</div>
+                </div>
+                <div class="price"><span>¥ </span>{{=it[i].price}}</div>
+            </a>
+        </li>
+        {{ } }}
+    </ul>
+
+</script>
+
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<script>
+
+    wx_share_title = "商品列表"; //分享标题
+    wx_share_des = "";  //分享描述
+    var redirect = window.location.href;
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        var param = {};
+        for (var p in requestParam) {
+            if (requestParam.hasOwnProperty(p)) {
+                if (p.indexOf("param.") > 0) {
+                    var key = p.substr(6, p.length);
+                    param[key] = requestParam[p];
+                }
+            }
+        }
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.param = JSON.stringify(param);
+        PageVariable.title = decodeURI(requestParam.title);
+        wx_share_title = PageVariable.title; //分享标题
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+
+        getProductModelList(PageVariable.param, 10, 0, function () {
+            renderTemplate(PageVariable.template.productList, PageVariable.productModelList);
+        })
+
+    }
+
+</script>
+
+
+</body>
+</html>

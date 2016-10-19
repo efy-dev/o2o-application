@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body class="detail" style="padding-bottom:60px">
+<div class="header" dot-template="header"></div>
+<!--//End--header-->
+
+<div dot-template="product-base"></div>
+
+<div class="wlist" dot-template="product-detail">
+</div>
+<!--//End wlist-->
+
+
+<div class="fixed" dot-template="product-buy"></div>
+
+<div class="footer">
+</div>
+<script type="text/x-dot-template" id="product-base">
+
+
+    <div class="shop_signs">
+        <a href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img
+                src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
+    </div>
+
+    <div class="focus">
+        <img style="width: 100%;" src="{{=it.productModel_url}}@!o2o-product-detail" alt="">
+    </div>
+
+    {{if(it.audio!=null) { }}
+    <div class="audio audio-box" id="audio">
+        <a data-type="audio-button">
+            <span class="play active" data-type="audio-icon"><i class="icon"></i></span>
+        </a>
+        <span class="title">
+        <p>{{=it.product.name}}</p>
+        <p>{{=it.product.name}}的语音简介</p>
+        </span>
+        <span class="time"></span>
+        <audio data-type="audio-body" id="media" src="{{=it.audio}}"></audio>
+    </div>
+
+    {{ } }}
+
+    <div class="info">
+        <div class="base">
+            <div class="title text_hidden">{{=it.product.name}}</div>
+            <div class="txt">{{=it.product.subName}}</div>
+            <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
+            {{ if(it.marketPrice!=null && it.marketPrice>it.price){ }}
+            <div class="price_sub"><span>¥ {{=it.marketPrice}}</span></div>
+            {{ } }}
+        </div>
+        {{ if(it.product.master!=null) { }}
+        <div class="master">
+            <a href="http://minglu.efeiyi.com/minglu/master/{{=it.product.master.id}}">
+                <div class="img"><img src="http://tenant.efeiyi.com/{{=it.product.master.favicon}}" alt=""></div>
+                <div class="text">
+                    <p>{{=it.product.master.fullName}}</p>
+                    <p>{{=(it.product.master.title!=null &&it.product.master.title!="" ?
+                        it.product.master.title:"大师简介")}}</p>
+                </div>
+                <i class="angle right"></i>
+            </a>
+        </div>
+        {{ } }}
+        {{ if(it.product.project!=null){ }}
+        <div class="brief">
+            <div class="title">非遗技艺</div>
+            <div class="text"><span>技艺名称：</span>{{=it.product.project.name}}</div>
+            {{ if(it.product.project.addressDistrict!=null){ }}
+            <div class="text"><span>所属地区：</span>{{=it.product.project.addressDistrict.name}}</div>
+            {{ } }}
+            <div class="text des"><span>技艺简介：</span>{{=it.product.project.description}}</div>
+            <div class="text more"><a
+                    href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i
+                    class="angle right"></i></a></div>
+        </div>
+        {{ } }}
+    </div>
+
+</script>
+
+<script type="text/x-dot-template" id="product-detail">
+    <div class="title"><h2>作品详情</h2></div>
+    {{
+    for (var i = 0 ; i < it.length ; i++){
+    var imageList = it[i].imageList;
+    for (var j = 0 ; j < imageList.length ; j++){
+    }}
+    <div class="img"><img src="{{=imageList[j].image.src}}@!o2o-product-detail" alt=""></div>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script type="text/x-dot-template" id="product-buy">
+    <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
+       class="button-block-danger">立即购买</a>
+</script>
+
+
+<script src="common/js/jquery-3.1.0.min.js"></script>
+<script src="common/js/swiper.min.js"></script>
+<script src="common/js/doT.min.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<script>
+
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.productId = requestParam.productId;
+        PageVariable.title = decodeURI(requestParam.title);
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+        getProductModelById(PageVariable.productId, function () {
+            wx_share_title = PageVariable.productModel.product.name;
+            wx_share_des = PageVariable.productModel.product.subName;  //分享描述
+            var redirect = "http://www.efeiyi.com/qrcode/redirect/product/" + PageVariable.productId;
+            var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+            wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                    "appid=wx7f6aa253b75466dd" +
+                    "&redirect_uri=" +
+                    encodeURI(redirect_uri) +
+                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+            wx_share_imgUrl = PageVariable.productModel.productModel_url + "@!o2o-audio-list";
+            renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
+            renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
+            $(".audio-box").each(function () {
+                PageVariable.audioList.push(new Audio($(this).attr("id"), true));
+                wx.ready(function () {
+                    PageVariable.setCurrentAudio(PageVariable.audioList[0]);
+                })
+            });
+        });
+
+
+//        setTimeout(function () {
+//            console.log("自动播放");
+//            PageVariable.currentAudio.bodyPlay();
+//        }.bind(this), 2000);
+
+        getColumnListByProductModel(PageVariable.productId, function () {
+            renderTemplate(PageVariable.template.productDetail, PageVariable.productModelColumnList);
+        })
+
+    }
+
+
+</script>
+</body>
+</html>

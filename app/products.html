@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <script src="/app/common/js/jquery-3.1.0.min.js"></script>
+    <script src="/app/common/js/doT.min.js"></script>
+    <script src="/app/common/js/util.js"></script>
+    <script src="/app/guide/js/model.js"></script>
+    <script src="/app/guide/js/controller.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+<div dot-template="productModelList"></div>
+
+<!--模板-->
+<script type="text/x-dot-template" id="productModelList">
+    {{=JSON.stringify(it)}}
+</script>
+
+<script>
+    //demo
+    getProductModelList({}, 10, 0);
+
+    function getRequestParameter() {
+        var url = window.location.href.split("?");
+        var result = {};
+        if (url.length > 1) {
+            var queryStr = url[1];
+            var paramList = queryStr.split("&");
+            for (var i = 0; i < paramList.length; i++) {
+                var param = paramList[i].split("=");
+                if (param[0] != "") {
+                    result[param[0]] = param[1];
+                }
+            }
+            console.log(result);
+            return result
+        }
+        console.log(result);
+        return result;
+    }
+
+    $().ready(function () {
+        getRequestParameter();
+    });
+
+</script>
+</body>
+</html>

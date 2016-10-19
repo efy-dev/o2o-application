@@ -1,3 +1,5 @@
+var api_url = 'http://192.168.1.72';
+
 var PageVariable = {
         template: {
             homeRecommendList: "home-recommend-list",
@@ -14,16 +16,16 @@ var PageVariable = {
         },
         service: {
             login: "/wx/login",
-            listProductModel: "/product/getProductModelList",
-            listTenant: "/tenant/getTenantList",
-            listRecommend: "/tenant/getRecommendList",
-            viewTenantById: "/tenant/getTenantById",
-            listTenantPraise: "/tenant/getTenantPraiseListByTenant",
-            saveTenantPraise: "/tenant/saveTenantPraise",
-            listTenantPanel: "/tenant/getImageTextListByTenant",
-            viewProductModelById: "/product/getProductModelById",
-            listProductModelPanel: "/product/getColumnListByProductModel",
-            currentUser: "/user/getCurrentUser"
+            listProductModel: api_url + "/product/getProductModelList",
+            listTenant: api_url + "/tenant/getTenantList",
+            listRecommend: api_url + "/tenant/getRecommendList",
+            viewTenantById: api_url + "/tenant/getTenantById",
+            listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
+            saveTenantPraise: api_url + "/tenant/saveTenantPraise",
+            listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
+            viewProductModelById: api_url + "/product/getProductModelById",
+            listProductModelPanel: api_url + "/product/getColumnListByProductModel",
+            currentUser: api_url + "/user/getCurrentUser"
         },
 
         currentUser: null,

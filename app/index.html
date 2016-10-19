@@ -13,17 +13,8 @@
 
 <!--//End--header-->
 
-<div class="focus">
-    <div class="swiper-container" id="focus">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-            <div class="swiper-slide"><img src="uploads/b1.jpg" alt=""></div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+<div class="image">
+    <img src="uploads/b1.jpg" alt="">
 </div>
 <!--//End--focus-->
 
@@ -108,32 +99,12 @@
 
     $().ready(function () {
         initPage();
-        setTimeout(function () {
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 'auto',
-                centeredSlides: true,
-                spaceBetween: 10,
-                initialSlide: 0
-            });
-        }, 1000);
-
     });
 
-
     function initPage() {
-
         $("[dot-template=header]").html(renderHomeHeader());
-
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
-            setTimeout(function () {
-                var swiper = new Swiper('.swiper-container', {
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
-                    spaceBetween: 10,
-                    initialSlide: 0
-                });
-            }, 200)
         });
 
     }

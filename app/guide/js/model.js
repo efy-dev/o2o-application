@@ -1,4 +1,4 @@
-var api_url = 'http://192.168.1.72';
+var api_url = 'http://192.168.1.10';
 
 var PageVariable = {
     template: {
@@ -179,6 +179,7 @@ function getProductModelList(param, limit, offset, callback) {
         PageVariable.productModelList = data;
         if (typeof callback == "function") {
             callback();
+            swiperContaniner('[dot-template=tenant-product-list]');
         }
     };
     var requestParam = {};
@@ -193,6 +194,7 @@ function getImageTextListByTenant(id, callback) {
         PageVariable.imageTextList = data;
         if (typeof callback == "function") {
             callback();
+            swiperContaniner('[dot-template=tenant-panel-list]');
         }
     };
     var requestParam = {};
@@ -210,6 +212,7 @@ function getRecommendList(param, limit, offset, callback) {
         PageVariable.recommendList = data;
         if (typeof callback == "function") {
             callback();
+            swiperContaniner('.swiper-container');
         }
     };
     var requestParam = {};
@@ -228,16 +231,7 @@ function getPanelById(id, callback) {
         PageVariable.panelList = data;
         if (typeof callback == "function") {
             callback();
-
-            //首页店铺推荐swiper初始化
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 'auto',
-                centeredSlides: true,
-                spaceBetween: 10,
-                initialSlide: 0,
-                autoHeight: true, //高度随内容变化
-                pagination: '.swiper-pagination',
-            });
+            swiperContaniner('.swiper-container');
         }
     };
 

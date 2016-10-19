@@ -16,9 +16,11 @@ function ajaxRequest(url, param, success) {
     })
     ;
 }
+
 function renderTemplate(templateId, data) {
     $("[dot-template=" + templateId + "]").html(doT.template($("#" + templateId).text())(data));
 }
+
 Date.prototype.format = function (fmt) { //author: meizz
     var o = {
         "M+": this.getMonth() + 1,                 //月份
@@ -36,6 +38,7 @@ Date.prototype.format = function (fmt) { //author: meizz
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 };
+
 function getRequestParameter() {
     var url = window.location.href.split("?");
     var result = {};
@@ -55,7 +58,6 @@ function getRequestParameter() {
     return result;
 }
 
-
 function subString(str, number, postfix) {
     if (number <= 0) {
         return str;
@@ -68,7 +70,6 @@ function subString(str, number, postfix) {
     }
     return result;
 }
-
 
 /**
  * modal
@@ -83,12 +84,12 @@ var modal = {
      * value: 提示文字
      * status: 提示的状态
      */
-    overAlert: function(value, status) {
+    overAlert: function (value, status) {
         var str = '<div id="modal" class="modal tips ' + status + '"><h4>' + value + '</h4></div>';
         $('body').append(str);
-        $('#modal').stop().animate({ 'top': '0' }, 800);
-        setTimeout(function() {
-            $('#modal').stop().animate({ 'top': '-100%' }, 800);
+        $('#modal').stop().animate({'top': '0'}, 800);
+        setTimeout(function () {
+            $('#modal').stop().animate({'top': '-100%'}, 800);
         }, 4000);
     },
     /**
@@ -96,7 +97,7 @@ var modal = {
      * value: 提示文字
      * status: 按钮的状态 为空显示一个 不为空显示两个
      */
-    confirm: function(value, status, callback) {
+    confirm: function (value, status, callback) {
         var btnHtml = '';
         var btnOne = '<a id="btnyes" style="width:100%" href="javascript:;">确定并继续</a>';
         var btnTwo = '<a id="btnyes" href="javascript:;">确定</a><a id="btnno" href="javascript:;">取消</a>';
@@ -104,7 +105,7 @@ var modal = {
         var str = '<div id="modal" class="modal confirm" style="display:none"><div class="content"><h4>' + value + '</h4>' + btnHtml + '</div></div>';
         $('body').append(str);
         $('#modal').fadeIn('fast');
-        $('#btnyes').on('click', function() {
+        $('#btnyes').on('click', function () {
             $('#modal').remove();
             if (typeof callback == 'function') {
                 callback;
@@ -112,10 +113,29 @@ var modal = {
             console.log('删除成功');
             return false;
         });
-        $('#btnno').on('click', function() {
+        $('#btnno').on('click', function () {
             $('#modal').remove();
             console.log('取消删除');
             return false;
         });
     },
 };
+
+//轮播初始化
+// var swiper = new Swiper('.swiper-container', {
+//     slidesPerView: 'auto',
+//     centeredSlides: true,
+//     spaceBetween: 10,
+//     initialSlide: 0
+// });
+
+function swiperContaniner(obj) {
+    new Swiper(obj, {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        spaceBetween: 10,
+        initialSlide: 0,
+        autoHeight: true,
+        pagination: '.swiper-pagination'
+    })
+}

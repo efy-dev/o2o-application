@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta charset="UTF-8">
     <title>店铺详情</title>
-    <!--<link rel="stylesheet" href="assets/css/swiper.min.css">-->
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body class="detail">
@@ -221,26 +220,10 @@
 
         getProductModelList("{\"product.tenant.id\":\"" + PageVariable.tenantId + "\"}", 30, 0, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-            setTimeout(function () {
-                PageVariable.productSwiper = new Swiper('[dot-template=tenant-product-list]', {
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
-                    spaceBetween: 10,
-                    initialSlide: 0
-                });
-            }, 200)
         });
 
         getImageTextListByTenant(PageVariable.tenantId, function () {
             renderTemplate(PageVariable.template.tenantPanelList, PageVariable.imageTextList);
-            setTimeout(function () {
-                PageVariable.panelSwiper = new Swiper('[dot-template=tenant-panel-list]', {
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
-                    spaceBetween: 10,
-                    initialSlide: 0
-                });
-            }, 200)
         })
 
     }

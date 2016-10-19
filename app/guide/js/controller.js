@@ -14,7 +14,7 @@ function renderHomeHeader(it /**/) {
 }
 
 function renderFooter(it /**/) {
-    var out = ' <footer> <div class="bd item"><h3>战略合作伙伴</h3> <div class="bd icons"><span><a href="http://en.unesco.org/" title="联合国教科文组织"><em class="bd"><i class="icon-home icon1"></i></em>联合国教科文组织</a></span><span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i class="icon-home icon2"></i></em>非物质文化遗产平台</a></span><span><a title="中国非物质文化遗产保护协会"><em class="bd"><i class="icon-home icon3"></i></em>中国非遗保护协会</a></span></div> </div> <div class="bd content"> <div class="bd wechat"> <div class="bd"> <div class="icon-home icon-logo"></div> </div> <div class="bd"><h4>非物质文化遗产平台</h4></div> <div class="bd img"><img src="/app/images/icon-home-wechat.png"></div> <div class="bd txt"><p>关注微信公众号</p> <p>领取超值代金券</p></div> </div> </div> <div class="bd copyright">京ICP备15032511号-1</div> </footer>';
+    var out = ' <footer> <div class="bd item"><h3>战略合作伙伴</h3> <div class="bd icons"><span><a href="http://en.unesco.org/" title="联合国教科文组织"><em class="bd"><i class="icon-home icon1"></i></em>联合国教科文组织</a></span><span><a href="http://mall.efeiyi.com" title="非物质文化遗产平台"><em class="bd"><i class="icon-home icon2"></i></em>非物质文化遗产平台</a></span><span><a title="中国非物质文化遗产保护协会"><em class="bd"><i class="icon-home icon3"></i></em>中国非遗保护协会</a></span></div> </div> <div class="bd content"> <div class="bd wechat"> <div class="bd"> <div class="icon-home icon-logo"></div> </div> <div class="bd"><h4>非物质文化遗产平台</h4></div> <div class="bd img"><img src="http://www.efeiyi.com/app/images/icon-home-wechat.png"></div> <div class="bd txt"><p>关注微信公众号</p> <p>领取超值代金券</p></div> </div> </div> <div class="bd copyright">京ICP备15032511号-1</div> </footer>';
     return out;
 }
 

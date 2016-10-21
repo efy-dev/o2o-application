@@ -19,7 +19,7 @@
     <ul class="items">
         {{ for(var i = 0 ; i < it.length ; i++){ }}
         <li>
-            <img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt="">
+            <div class="image"><img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt=""></div>
             <div class="text audio-box" id="{{=it[i].id}}">
                 <div class="txt">{{=it[i].name}}</div>
                 <div class="des">{{=it[i].content}}</div>

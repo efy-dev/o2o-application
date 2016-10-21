@@ -177,9 +177,6 @@ img {
 	background-position: -20px -30px;
 	width: 20px;
 	height: 20px;
-	display: inline-block;
-	position: relative;
-	top: 1px;
 }
 .icon_heart {
 	background-position: -40px -30px;
@@ -376,15 +373,14 @@ img {
 	z-index: 2;
 }
 /*--//End menu--*/
-	.focus,
-.image {
+.focus,.image {
 	font-size: 0;
 }
 /*--//End focus--*/
-	.promimg {
+.promimg {
 	padding: 0 16px;
 	font-size: 0;
-	margin-top: 20px;
+	margin: 20px 0;
 }
 .promimg img {
 	border: 1px solid #ebebeb;
@@ -481,7 +477,7 @@ img {
 }
 /*--//End product--*/
 	.detail .audio {
-	height: 59px;
+	height: 60px;
 	padding: 6px 0;
 	border: 1px solid #e6e6e6;
 	background: #fafafa;
@@ -546,32 +542,44 @@ img {
 	height: 50px;
 }
 .detail .info {
-	padding: 12px 16px 0 16px;
+	padding: 15px 16px 0 16px;
 }
 .detail .info .base {
-	padding-bottom: 16px;
-	line-height: 24px;
+	padding-bottom: 24px;
 	font-size: 14px;
 	color: #666;
 }
 .detail .info .base .title {
 	font-size: 18px;
+    height:18px;
+    line-height:18px;
 	color: #333;
 }
-.detail .info .base .txt span {
+.detail .info .base .subtitle {
+    height:14px;
+    line-height:14px;
+    margin-top:12px;
+}
+.detail .info .base .subtitle span {
 	position: relative;
 }
-.detail .info .base .txt .icon_map {
+
+
+.detail .info .base .subtitle .icon_map {
 	position: absolute;
+    top: 0px;
 }
 .detail .info .base .price {
-	line-height: 20px;
 	color: #b5261f;
 	font-size: 12px;
+    margin-top:12px;
 }
 .detail .info .base .price strong {
 	font-size: 18px;
+    height:18px;
+    line-height: 18px;
 	font-weight: normal;
+    display: inline-block;
 }
 .detail .info .base .price_sub {
 	line-height: 20px;
@@ -689,9 +697,10 @@ img {
 	line-height: 30px;
 }
 .detail .info .brief .text {
-	min-height: 30px;
+    line-height:12px;
 	padding-left: 60px;
 	position: relative;
+    margin-top:12px;
 }
 .detail .info .brief .text span {
 	color: #999;
@@ -700,8 +709,8 @@ img {
 	left: 0;
 }
 .detail .info .brief .text.more {
-	line-height: 40px;
 	text-align: right;
+    margin-bottom:12px;
 }
 .detail .info .brief .text.more a {
 	padding-right: 13px;
@@ -726,6 +735,7 @@ img {
 	bottom: 3px;
 }
 .detail .info .brief .text.des {
+    line-height:24px;
 	max-height: 72px;
 	display: -webkit-box;
 	overflow: hidden;
@@ -746,6 +756,15 @@ img {
 	display: inline-block;
 	margin: 0;
 	font-weight: normal;
+}
+.detail .fixed .tenant_link {
+    background: url(../../images/icon_tenant.png) 0 0 no-repeat;
+    background-size: 56px auto;
+    width:56px;
+    height:56px;
+    position: fixed;
+    right:16px;
+    bottom:60px;
 }
 /**/
 	.vertical {
@@ -896,6 +915,8 @@ img {
 .guide .image {
 	font-size: 0;
 }
+
+
 .footer,
 footer .bd {
 	width: 100%;

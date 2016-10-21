@@ -15,14 +15,14 @@
 
 <div dot-template="tenant-base"></div>
 
-<div class="horizontal" style="margin-top: 0;">
+<div class="horizontal" style="margin-top: 0;margin-bottom:24px">
     <div class="title"><h2>所有商品</h2></div>
     <div class="swiper-container" dot-template="tenant-product-list">
     </div>
 </div>
 
 
-<div class="horizontal" style="margin-top: 0;">
+<div class="horizontal" style="margin-top: 0;margin-bottom:24px">
     <div class="title"><h2>店内实景</h2></div>
     <div class="swiper-container" dot-template="tenant-panel-list">
 
@@ -55,17 +55,14 @@
         <div class="base">
             <div class="title text_hidden">{{=it.name}}</div>
             {{ if(it.tenantProjectList.length>0){ }}
-            <div class="txt text_hidden">分类：{{=it.tenantProjectList[0].project.name }}
+            <div class="subtitle text_hidden">分类：{{=it.tenantProjectList[0].project.name }}
             </div>
             {{ } }}
-            <!--<div class="txt text_hidden">主营项目：苏绣手工艺术品</div>-->
-            <div class="txt text_hidden">地址：<a style="color: #333;"
-                                               onclick="openLocation({{=it.latitude}},{{=it.longitude}},'{{=it.name}}',14,'')"><span>{{=it.address}}<i
-                    class="icon icon_map"></i></span></a></div>
+            <!--<div class="subtitle text_hidden">主营项目：苏绣手工艺术品</div>-->
+            <div class="subtitle text_hidden">地址：<a style="color: #333;" onclick="openLocation({{=it.latitude}},{{=it.longitude}},'{{=it.name}}',14,'')"><span>{{=it.address}}<i class="icon icon_map"></i></span></a></div>
         </div>
         <!--//End base-->
-        <div class="praise" dot-template="tenant-praise">
-        </div>
+        <div class="praise" dot-template="tenant-praise"></div>
         <!--//End praise-->
         {{
         if(it.tenantMasterList.length!=null &&it.tenantMasterList.length > 0) {

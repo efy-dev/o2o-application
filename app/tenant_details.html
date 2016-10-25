@@ -8,9 +8,7 @@
 </head>
 <body class="detail">
 
-<div class="header" dot-template="header">
-
-</div>
+<div class="header" dot-template="header"></div>
 <!--//End--header-->
 
 <div dot-template="tenant-base"></div>
@@ -142,9 +140,9 @@
 
 <script type="text/x-dot-template" id="tenant-panel-list">
     <div class="swiper-wrapper">
-        {{ for( var i = 0 ; i < it.length ; i++){ }}
+        {{ for( var i=0; i < it[0].imageList.length; i++ ){ }}
         <div class="swiper-slide">
-            <img src="{{=it[i].imageList[0].image.src}}@!o2o-tenant-list" alt="">
+            <img src="{{=it[0].imageList[i].image.src}}@!o2o-tenant-list" alt="">
         </div>
         {{ } }}
     </div>

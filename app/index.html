@@ -27,7 +27,7 @@
 <!--//End--menu-->
 
 <div class="promimg">
-    <a href="" title=""><img alt="" src="uploads/ad1.jpg"></a>
+    <a href="" title=""><img style="height:60px" alt="" src="uploads/ad1.jpg"></a>
 </div>
 <!--//End--ad-->
 
@@ -96,7 +96,12 @@
             "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
+
         initPage();
+    });
+
+    $(function () {
+       // newFastClick(document.body);
     });
 
     function initPage() {

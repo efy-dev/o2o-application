@@ -24,15 +24,20 @@ function renderFooter(it /**/) {
 $().ready(function () {
     initWx("http://www.efeiyi.com/wx/init.do");
 
-    $("[dot-template=header]").on("click", ".icon.user", function () {
-        $(".layer").slideToggle(50, function () {
-            if ($(".icon.user").hasClass("active")) {
-                $(".icon.user").removeClass("active")
-            } else {
-                $(".icon.user").addClass("active");
-            }
-        });
-    })
+    $("[dot-template=header]").on("touchend", '.icon.user', function (e) {
+        var iconUser = $('.icon.user');
+        var layer = $('.layer');
+
+        if(layer.is(':hidden')){
+            iconUser.addClass('active');
+            layer.show();
+        }else{
+            layer.hide();
+            iconUser.removeClass('active');
+        }
+        e.preventDefault();
+
+    });
 
     $(".footer").html(renderFooter());
 });

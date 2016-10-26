@@ -22,7 +22,7 @@
 
 <div class="horizontal" style="margin-top: 0;margin-bottom:24px">
     <div class="title"><h2>店内实景</h2></div>
-    <div class="swiper-container" dot-template="tenant-panel-list">
+    <div class="swiper-container" style="font-size:30px" dot-template="tenant-panel-list">
 
     </div>
 </div>
@@ -140,9 +140,11 @@
 
 <script type="text/x-dot-template" id="tenant-panel-list">
     <div class="swiper-wrapper">
-        {{ for( var i=0; i < it[0].imageList.length; i++ ){ }}
+        {{ for( var i=0; i < it.length; i++ ){ }}
         <div class="swiper-slide">
-            <img src="{{=it[0].imageList[i].image.src}}@!o2o-tenant-list" alt="">
+            <a href="/panel_details.html?panelId={{=it[i].id}}&title={{=it[i].name}}">
+                <img src="{{=it[i].imageList[0].image.src}}@!o2o-tenant-list" alt="">
+            </a>
         </div>
         {{ } }}
     </div>
@@ -155,7 +157,6 @@
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!--//End-->
-<!--<script src="assets/js/system.js"></script>-->
 
 <script>
 

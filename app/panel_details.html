@@ -12,7 +12,7 @@
 <div class="header" dot-template="header"></div>
 <!--//End--header-->
 
-<div dot-template="panel-base"></div>
+<div class="panel" dot-template="panel-base"></div>
 
 
 <div class="footer"></div>
@@ -20,8 +20,19 @@
 <script type="text/x-dot-template" id="panel-base">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            {{ for( var i=0; i < it.imageList.length; i++ ){ }}
-            <div class="swiper-slide"><img src="{{=it.imageList[i].image.src}}@!o2o-home-banner" alt=""></div>
+            {{
+            for( var i=0; i < it.imageList.length; i++ ){
+            var $imageList=it.imageList;
+            var $hotSpotList=$imageList[i].image.hotSpotList;
+            }}
+            <div class="swiper-slide">
+                <img src="{{=$imageList[i].image.src}}@!o2o-home-banner" alt="">
+                {{ for(var j=0; j < $hotSpotList.length; j++){ }}
+                <span class="hot" data-abscissa="{{=$hotSpotList[j].abscissa}}" data-ordinate="{{=$hotSpotList[j].ordinate}}">
+                    <a href="/app/product_details.html?productId={{=$hotSpotList[j].productModel.id}}&title={{=$hotSpotList[j].productModel.name}}"><em>{{=$hotSpotList[j].productModel.name}}</em><i class="icon"></i></a>
+                </span>
+                {{ } }}
+            </div>
             {{ } }}
         </div>
         <!-- Add Pagination -->
@@ -48,7 +59,6 @@
 </script>
 
 
-
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
@@ -59,7 +69,7 @@
 
 
 <script>
-    $().ready(function() {
+    $().ready(function () {
         initPage();
     });
 
@@ -74,13 +84,30 @@
         $("title").html(PageVariable.title);
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
-        getPanelById(PageVariable.panelId, function() {
+        getPanelById(PageVariable.panelId, function () {
             renderTemplate(PageVariable.template.panelBase, PageVariable.panelList);
             $(".audio-box").each(function () {
                 PageVariable.audioList.push(new Audio($(this).attr("id")));
             });
-        });
 
+
+            //热点部分
+            $('.swiper-wrapper span.hot').each(function () {
+                var _this = $(this);
+                var locationParam = getScreenInfo(_this.attr('data-abscissa'), _this.attr('data-ordinate'));
+                var $top=locationParam.top;
+                var $left=locationParam.left;
+                var $aWidth=_this.find('a').width()+36;
+                if($left > $aWidth){
+                    _this.addClass('hot_left');
+                }else{
+                    _this.addClass('hot_right');
+                }
+                _this.css({top: $top + 'px', left: $left + 'px'});
+            })
+
+
+        });
 
 
     }

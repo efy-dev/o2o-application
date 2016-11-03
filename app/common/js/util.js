@@ -121,16 +121,12 @@ var modal = {
     },
 };
 
-//轮播初始化
-// var swiper = new Swiper('.swiper-container', {
-//     slidesPerView: 'auto',
-//     centeredSlides: true,
-//     spaceBetween: 10,
-//     initialSlide: 0
-// });
-
-function swiperContaniner(obj) {
-    new Swiper(obj, {
+/**
+ * 轮播初始化
+ * @param className
+ */
+function swiperContaniner(className) {
+    new Swiper(className, {
         slidesPerView: 'auto',
         centeredSlides: true,
         spaceBetween: 10,
@@ -138,4 +134,16 @@ function swiperContaniner(obj) {
         autoHeight: true,
         pagination: '.swiper-pagination'
     })
+}
+
+/**
+ * 计算手机屏幕分辨率
+ * @param x
+ * @param y
+ * @returns {{top: Number, left: Number}}
+ */
+function getScreenInfo(x, y) {
+    var per = window.screen.width / 750;
+    var result = {'top': parseInt(x * per), 'left': parseInt(y * per)};
+    return result;
 }

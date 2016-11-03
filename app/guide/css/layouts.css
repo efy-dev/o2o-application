@@ -169,7 +169,7 @@ img {
 	display: block;
 }
 /*--//End Reset--*/
-	.icon {
+.icon {
 	background: url(../../images/icon.png) 0 0 no-repeat;
 	background-size: 132px auto;
 }
@@ -766,8 +766,68 @@ img {
     right:16px;
     bottom:60px;
 }
+
+.detail .panel .hot {
+    width:9px;
+    height:9px;
+    position: absolute;
+}
+
+.detail .panel .hot:after{
+    content: '';
+    width:9px;
+    height:9px;
+    background: #fff;
+    -webkit-border-radius:50%;
+    border-radius:50%;
+    position: absolute;
+    top:0;
+    right:0;
+    border: 3px solid rgba(0,0,0,.7);
+}
+.detail .panel .hot a {
+    padding-left:10px;
+    line-height:25px;
+    text-align: center;
+    font-size:15px;
+    color: #fff;
+    position: absolute;
+    top:-5px;
+    left:-21px;
+    white-space:nowrap;
+    background:rgba(0, 0, 0, 0.75);
+    -webkit-border-radius:5px 0 0 5px;
+    border-radius:5px 0 0 5px;
+    transform:translateX(-100%);
+}
+.detail .panel .hot i{
+    width:13px;
+    height:25px;
+    background-position: 0 -150px;
+    position: absolute;
+    top:0;
+    right:-13px;
+    z-index:1;
+}
+.detail .panel .hot em {
+    font-style: normal;
+    position: relative;
+    z-index:2;
+}
+
+.detail .panel .hot_right a{
+    padding-right:10px;
+    transform:translateX(0);
+    left: 23px;
+    -webkit-border-radius:0 5px 5px 0;
+    border-radius:0 5px 5px 0;
+}
+.detail .panel .hot_right i {
+    left:-13px;
+    transform: rotate(180deg);
+}
 /**/
-	.vertical {
+.vertical {
 	border-top: 1px solid #e6e6e6;
 	padding: 16px;
 	display: flex;

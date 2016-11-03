@@ -787,7 +787,6 @@ img {
 }
 .detail .panel .hot a {
     padding-left:10px;
-    line-height:25px;
     text-align: center;
     font-size:15px;
     color: #fff;
@@ -810,12 +809,17 @@ img {
     z-index:1;
 }
 .detail .panel .hot em {
+    height:15px;
+    line-height:16px;
     font-style: normal;
     position: relative;
     z-index:2;
+    margin: 5px 0;
+    display: inline-block;
 }
 
 .detail .panel .hot_right a{
+    padding-left:0;
     padding-right:10px;
     transform:translateX(0);
     left: 23px;

@@ -4,13 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta charset="UTF-8">
     <title>前门华韵</title>
-    <!--<link rel="stylesheet" href="assets/css/swiper.min.css">-->
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body>
-<div class="header" dot-template="header">
-</div>
-
+<div class="header" dot-template="header"></div>
 <!--//End--header-->
 
 <div class="image">
@@ -21,8 +18,7 @@
 <div class="menu">
     <a href="http://www.efeiyi.com/app/audio_guide.html?title=语音导览"><i class="icon icon-audio"></i><span>语音导览</span></a>
     <a href=""><i class="icon icon-tour"></i><span>旅游攻略</span></a>
-    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i
-            class="icon icon-limit"></i><span>限时折扣</span></a>
+    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i class="icon icon-limit"></i><span>限时折扣</span></a>
 </div>
 <!--//End--menu-->
 
@@ -43,7 +39,6 @@
 </div>
 
 <script type="text/x-dot-template" id="home-recommend-list">
-
     <div class="swiper-wrapper">
         {{ for(var i = 0 ; i < it.length ;i++){ }}
         {{ if(it[i].image!=null){ }}
@@ -84,7 +79,6 @@
 
 
 <script>
-
     wx_share_title = "前门华韵"; //分享标题
     wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
     var redirect = "http://www.efeiyi.com/app/index.html";
@@ -101,7 +95,7 @@
     });
 
     $(function () {
-       // newFastClick(document.body);
+
     });
 
     function initPage() {

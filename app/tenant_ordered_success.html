@@ -5,47 +5,54 @@
     <meta charset="UTF-8">
     <title>预约信息详情</title>
     <link rel="stylesheet" href="guide/css/layouts.css">
+    <style>
+        .appointment .form .group input[type=text], .appointment .form .group input[type=number] {
+            padding-top:5px;
+            padding-bottom:15px;
+            height:40px;
+        }
+    </style>
 </head>
 <body>
 <div class="header" dot-template="header" style="border-bottom: 1px solid #f0f0f0;"></div>
 <!--//End--header-->
-<div class="appointment">
+<div class="appointment" dot-template="tenant-appointment">
+
+</div>
+
+
+
+<script type="text/x-dot-template" id="tenant-appointment">
     <div class="form">
         <form action="" method="post">
             <div class="group">
-                <p>人数</p>
-                <label for=""><input name="count" type="text" value="6" disabled></label>
+                <p>预约号</p>
+                <label for=""><input name="name" type="text" value="{{=it.orderNumber}}" disabled></label>
             </div>
             <div class="group">
                 <p>联系人姓名</p>
-                <label for=""><input name="name" type="text" value="asd12asd" disabled></label>
-            </div>
-            <div class="group">
-                <p>联系人证件号</p>
-                <label for=""><input name="caac" type="text" value="123123123123123" disabled></label>
+                <label for=""><input name="name" type="text" value="{{=it.name}}" disabled></label>
             </div>
             <div class="group">
                 <p>联系方式</p>
-                <label for=""><input name="Phone" type="text" value="15311482587" disabled></label>
+                <label for=""><input name="Phone" type="text" value="{{=it.phone}}" disabled></label>
             </div>
             <div class="group">
-                <p class="group-btn">参观日期</p>
-                <label for=""><input name="Date" type="text" value="2016" disabled></label>
+                <p>人数</p>
+                <label for=""><input name="count" type="text" value="{{=it.count}}" disabled></label>
             </div>
             <div class="group">
                 <p class="group-btn">参观时间</p>
-                <label for=""><input name="Date2" type="text" value="10:00—11:00" disabled></label>
+                <label for=""><input name="Date" type="text" value="{{=it.date}}" disabled></label>
             </div>
             <div class="group">
                 <p>备注</p>
-                <label for=""><input name="Message" type="text" value="备注信息" disabled></label>
+                <label for=""><input name="Message" type="text" value="{{=it.message}}" disabled></label>
             </div>
             <div class="group"></div>
         </form>
     </div>
-</div>
-
-
+</script>
 
 </body>
 <script src="common/js/common.js"></script>
@@ -70,6 +77,12 @@
         PageVariable.title = decodeURI(requestParam.title);
         $("[dot-template=header]").html(renderHeader(PageVariable));
         $("h1").html('预约信息详情');
+
+        //
+        getOrderById(PageVariable.id, function () {
+            renderTemplate(PageVariable.template.tenantAppointment, PageVariable.appointment);
+        })
+
 
     }
 

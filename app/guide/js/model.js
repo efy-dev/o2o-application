@@ -13,7 +13,8 @@ var PageVariable = {
         productList: "product-list",
         tenantList: "tenant-list",
         tenantAudioList: "tenant-audio-list",
-        panelBase: "panel-base"
+        panelBase: "panel-base",
+        tenantAppointment: "tenant-appointment",
     },
     service: {
         login: "/wx/login",
@@ -28,7 +29,8 @@ var PageVariable = {
         listProductModelPanel: api_url + "/product/getColumnListByProductModel",
         currentUser: api_url + "/user/getCurrentUser",
         panelById: api_url + "/tenant/getPanelById",
-        saveOrder:api_url + "/tenant/saveUserOrder",  //预约信息
+        saveUserOrder:api_url + "/tenant/saveUserOrder",  //提交预约信息
+        getOrderById:api_url + "/tenant/getOrderById",  //获取预约信息
     },
 
     currentUser: null,
@@ -46,6 +48,7 @@ var PageVariable = {
     imageText: {},
     recommendList: [],
     panelList: [],
+    appointment: {},
     imageStyle: {},
     currentAudio: null,
     audioList: [],
@@ -240,5 +243,24 @@ function getPanelById(id, callback) {
     requestParam.id = id;
     ajaxRequest(PageVariable.service.panelById, requestParam, success);
 }
+
+
+/**
+ * @param 店铺预约
+ * @param callback
+ */
+function getOrderById(id, callback) {
+    var success = function (data) {
+        console.log(data)
+        PageVariable.appointment = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
+}
+
 
 getCurrentUser();

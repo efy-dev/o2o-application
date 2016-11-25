@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>店铺预约信息</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<div class="header" dot-template="header" style="border-bottom: 1px solid #f0f0f0;"></div>
+<!--//End--header-->
+<div class="appointment">
+    <div class="text" style="display: none;">
+        <h2>参观须知</h2>
+        <p>1.严禁携带易燃易爆品、危险品进入馆内；禁止在展馆内吸烟或使用明火。</p>
+        <p>2.衣冠不整者谢绝入馆；禁止携带宠物入馆。</p>
+        <p>3.身高1.3米以下儿童需由监护人带领参观，行动不便的老人需由亲友团陪同。</p>
+        <p>4.携带食品、饮品、金属物品、颜料、伞具等入馆请放在门口处，如有需求本馆有权请客人出示物品进行检查。</p>
+        <p>5.场馆内请勿吸烟、拍照。</p>
+        <p>6.保持馆内安静和卫生清洁。</p>
+        <p>7.不得随意触摸展品和其它易碎品。</p>
+        <p>8.参观过程中，请听从本馆工作人员的安排，有序参观；如损坏公务或展品，本馆有权要求损坏物品者作出相应赔偿；如有特殊情况可寻求本馆工作人员指导和帮助。</p>
+    </div>
+
+
+    <div class="form">
+        <form action="" method="post">
+            <div class="group">
+                <p>人数</p>
+                <label for=""><input name="count" type="number" value="10" placeholder="请输入预约人数，必须大于5人"></label>
+            </div>
+            <div class="group">
+                <p>联系人姓名</p>
+                <label for=""><input name="name" type="text" value="mingzi" placeholder="请输入联系人的姓名，必填"></label>
+            </div>
+            <div class="group">
+                <p>联系人证件号</p>
+                <label for=""><input name="idCard" type="text" value="123123123123123" placeholder="请输入证件号，入场出示证件，必填"></label>
+            </div>
+            <div class="group">
+                <p>联系方式</p>
+                <label for=""><input name="Phone" type="text" value="15311482587" placeholder="请输入联系人的手机号，必填"></label>
+            </div>
+            <div class="group">
+                <p class="group-btn">参观日期<i class="angle down"></i></p>
+                <label for=""><input name="Date" type="text" value="2016" placeholder="请选择您的参观日期，必填" disabled></label>
+                <ul id="group-drop-date" class="group-drop" style="display: none;">
+                    <li>下周周一</li>
+                    <li>下周周三</li>
+                    <li>下周周五</li>
+                </ul>
+            </div>
+            <div class="group">
+                <p class="group-btn">参观时间<i class="angle down"></i></p>
+                <label for=""><input name="Date2" type="text" value="10:00—11:00" placeholder="请选择您的参观日期，必填" disabled></label>
+                <ul class="group-drop" style="display: none;">
+                    <li>上午 10:00——11:00</li>
+                    <li>下午 14:00——15:00</li>
+                </ul>
+            </div>
+            <div class="group">
+                <p>备注</p>
+                <label for=""><input name="Message" type="text" value="备注" placeholder="请输入您的其他需求"></label>
+            </div>
+            <div class="group">
+                <label for=""><input id="button" type="button" value="提交信息"></label>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+</body>
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+<script>
+    $().ready(function () {
+        initPage();
+        //提交表单
+        $('#button').on('click', function () {
+            var $form = $('.form');
+            var $count = $form.find('input[name=count]').val();
+            var $name = $form.find('input[name=name]').val();
+            var $idCard = $form.find('input[name=idCard]').val();
+            var $Phone = $form.find('input[name=Phone]').val();
+            var $Date = $form.find('input[name=Date]').val();
+            var $Message = $form.find('input[name=Message]').val();
+
+
+            //验证->预约人数
+            if ($count == '') {
+                modal.overAlert('预约人数不能为空', 'fail');
+                return;
+            } else if ($count < 5) {
+                modal.overAlert('预约人数必须大于5人', 'fail');
+                return;
+            }
+
+            //验证->联系人姓名
+            var $nameRe = /^[a-zA-Z0-9]{4,20}$/;
+            if ($name == '') {
+                modal.overAlert('请输入联系人的姓名', 'fail');
+                return;
+            } else if (!$nameRe.test($name)) {
+                modal.overAlert('长度只能在4-20个字符之间', 'fail');
+                return;
+            }
+
+            //验证->证件号
+            var $idCardRe = /^[a-zA-Z0-9]{4,20}$/;
+            if ($idCard == '') {
+                modal.overAlert('请输入证件号，入场出示证件', 'fail');
+                return;
+            } else if (!$idCardRe.test($idCard)) {
+                modal.overAlert('证件号长度只能在4-20个字符之间', 'fail');
+                return;
+            }
+
+            //验证->联系方式
+            var $PhoneRe = /^1[34578]\d{9}$/;
+            if ($Phone == '') {
+                modal.overAlert('请输入联系人的手机号', 'fail');
+                return;
+            } else if (!$PhoneRe.test($Phone)) {
+                modal.overAlert('手机号码有误，请重填', 'fail');
+                return;
+            }
+
+
+            var param = {
+                'count': $count,
+                'name': $name,
+                'phone': $Phone,
+                'idCard': $idCard,
+                'date': $Date,
+                'message': $Message,
+                'tenantId': 'ie87iqtt259intjx'
+            };
+
+            console.log('$count=>'+$count);
+            console.log('$name=>'+$name);
+            console.log('$Phone=>'+$Phone);
+            console.log('$idCard=>'+$idCard);
+            console.log('$Date=>'+$Date);
+            console.log('$Message=>'+$Message);
+
+
+
+            $.ajax({
+                crossDomain: true,
+                type: "post",
+                url: PageVariable.service.saveOrder,
+                cache: false,
+                dataType: "json",
+                data: param,
+                success: function (data) {
+                    //1.处理data当中的错误信息
+                    console.log(data);
+                    window.location="tenant_appointment_success.html?id="+data.id;
+                },
+                error: function () {
+                    // @TODO renderRequestErrorTemplate
+                    console.log('错误');
+                    modal.overAlert('信息提交失败，请重试！', 'fail');
+                }
+            });
+
+
+        });
+
+        //下拉
+        $('.group-btn').on('click', function () {
+            var $this = $(this);
+            var $input = $this.siblings('label').find('input');
+            var $ul = $this.siblings('.group-drop');
+            $this.toggleClass('active');
+            $ul.stop().slideToggle(200);
+
+            $ul.find('li').on('click', function () {
+                $input.val($(this).html());
+                $this.removeClass('active');
+                $ul.slideUp(200);
+            });
+
+        });
+
+
+    });
+
+    function initPage() {
+        var requestParam = getRequestParameter();
+        if (typeof requestParam.title == "undefined") {
+            requestParam.title = "";
+        }
+        PageVariable.tenantId = requestParam.tenantId;
+
+        PageVariable.title = decodeURI(requestParam.title);
+        $("title").html(PageVariable.title);
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+
+
+
+        //
+        appointmentData();
+
+
+    }
+
+
+    //获取时间
+    function appointmentData() {
+        var $li = $('#group-drop-date').find('li');
+        var currentFirstDate;
+        var formatDate = function (date) {
+            var year = date.getFullYear() + '年';
+            var month = (date.getMonth() + 1) + '月';
+            var day = date.getDate() + '日';
+            var week = '(' + ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][date.getDay()] + ')';
+            return year + month + day + ' ' + week;
+        };
+
+        var addDate = function (date, n) {
+            date.setDate(date.getDate() + n);
+            return date;
+        };
+        var setDate = function (date) {
+            var week = date.getDay() - 1;
+            date = addDate(date, week * -1);
+            currentFirstDate = new Date(date);
+            for (var i = 0; i < 8; i++) {
+                if (i == 0) {
+                    $li.eq(0).attr('data-time', formatDate(i == 0 ? date : addDate(date, 1)));
+                } else if (i == 2) {
+                    $li.eq(1).attr('data-time', formatDate(i == 0 ? date : addDate(date, 1)));
+                } else if (i == 4) {
+                    $li.eq(2).attr('data-time', formatDate(i == 0 ? date : addDate(date, 1)));
+                }
+            }
+        };
+
+        setDate(new Date());
+    }
+</script>
+</html>

@@ -61,7 +61,7 @@
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
-<script src="common/js/weixin.js"></script>
+<!--<script src="common/js/weixin.js"></script>-->
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -78,18 +78,18 @@
         if (typeof requestParam.title == "undefined") {
             requestParam.title = "";
         }
-        PageVariable.panelId = requestParam.panelId;
+        PageVariable.id = requestParam.id;
 
         PageVariable.title = decodeURI(requestParam.title);
         $("title").html(PageVariable.title);
         $("[dot-template=header]").html(renderHeader(PageVariable));
 
-        getPanelById(PageVariable.panelId, function () {
+        getPanelById(PageVariable.id, function () {
             renderTemplate(PageVariable.template.panelBase, PageVariable.panelList);
+
             $(".audio-box").each(function () {
                 PageVariable.audioList.push(new Audio($(this).attr("id")));
             });
-
 
             //热点部分
             $('.swiper-wrapper span.hot').each(function () {

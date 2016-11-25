@@ -13,8 +13,7 @@ function ajaxRequest(url, param, success) {
         error: function () {
             // @TODO renderRequestErrorTemplate
         }
-    })
-    ;
+    });
 }
 
 function renderTemplate(templateId, data) {
@@ -87,10 +86,15 @@ var modal = {
     overAlert: function (value, status) {
         var str = '<div id="modal" class="modal tips ' + status + '"><h4>' + value + '</h4></div>';
         $('body').append(str);
-        $('#modal').stop().animate({'top': '0'}, 800);
+        var $modal=$('body #modal');
+        $modal.stop().animate({'top': '0'}, 500);
         setTimeout(function () {
-            $('#modal').stop().animate({'top': '-100%'}, 800);
-        }, 4000);
+            $modal.stop().animate({'top': '-100%'}, 500);
+            setTimeout(function () {
+                $modal.remove();
+            }, 1000);
+        }, 2000);
+
     },
     /**
      * 确认框

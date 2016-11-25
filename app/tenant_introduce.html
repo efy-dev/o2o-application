@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>前门场馆介绍</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<div class="header" dot-template="header" style="border-bottom: 1px solid #f0f0f0;"></div>
+<!--//End--header-->
+<div class="detail introduce">
+    <div class="focus"><img style="width:100%;" src="uploads/tenant_introduce1.jpg" alt=""></div>
+    <div class="info">
+        <div class="base">
+            <div class="title text_hidden">前门传统文化艺术中心</div>
+            <div class="subtitle">全国非遗大师的经典作品汇聚其中，带您体验中华传统文化的魅力</div>
+            <div class="phone">
+                <span>咨询电话：</span>
+                <a href="tel:400-876-8766">400-876-8766</a>
+            </div>
+        </div>
+        <!--/End/-->
+        <div class="base base2">
+            <div class="title text_hidden">场馆地址</div>
+            <div class="subtitle">北京前门大街西二胡同18号</div>
+            <div class="focus0"><img style="width:100%;" src="uploads/tenant_introduce2.jpg" alt=""></div>
+        </div>
+        <!--/End/-->
+        <div class="base base2">
+            <div class="title text_hidden">预约须知</div>
+            <ul class="text">
+                <li><strong>1.</strong><p>本馆以预约参观为主。</p></li>
+                <li><strong>2.</strong><p>本馆同时进场参观人数限制在10人以内，10人以上的团队需要分批入场参观。</p></li>
+                <li><strong>3.</strong><p>本馆不支持个人预约</p></li>
+                <li><strong>2.</strong><p>团队预约须提供单位名称，联系人及联系方式等信息，团队人数必须大于5人。</p></li>
+                <li><strong>3.</strong><p>每个证件号码（身份证、驾驶证、护照）每日限预约3张参观票。</p></li>
+                <li><strong>4.</strong><p>参观时间：11月18日-星期五（10:00-11:00，14：00-15:00）；</p><p>11月21-23日-星期一、二、三（10:00-11:00，14：00-15:00）。</p></li>
+            </ul>
+        </div>
+        <!--/End/-->
+    </div>
+    <!--/End/-->
+    <div class="imglist">
+        <div class="title">展馆介绍</div>
+        <div class="focus"><img style="width:100%;" src="uploads/tenant_introduce3.jpg" alt=""></div>
+        <div class="focus"><img style="width:100%;" src="uploads/tenant_introduce4.jpg" alt=""></div>
+    </div>
+    <!--/End/-->
+    <a class="btn" href="tenant_appointment.html" title="立即预约参观">立即预约参观</a>
+</div>
+
+
+</body>
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+<script>
+    $().ready(function () {
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+        $("h1").html('前门场馆介绍');
+    });
+
+</script>
+</html>

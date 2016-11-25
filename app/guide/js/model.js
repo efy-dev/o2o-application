@@ -1,6 +1,5 @@
-var api_url = 'http://192.168.1.10';
-// var api_url = 'http://192.168.1.72';
-
+//var api_url = 'http://192.168.1.10';
+var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -28,7 +27,8 @@ var PageVariable = {
         viewProductModelById: api_url + "/product/getProductModelById",
         listProductModelPanel: api_url + "/product/getColumnListByProductModel",
         currentUser: api_url + "/user/getCurrentUser",
-        panelById: api_url + "/tenant/getPanelById"
+        panelById: api_url + "/tenant/getPanelById",
+        saveOrder:api_url + "/tenant/saveUserOrder",  //预约信息
     },
 
     currentUser: null,

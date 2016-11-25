@@ -15,7 +15,6 @@
 <div class="wlist" dot-template="product-detail"></div>
 <!--//End wlist-->
 
-
 <div class="fixed" dot-template="product-buy"></div>
 
 <div class="footer"></div>
@@ -50,10 +49,19 @@
         <div class="base">
             <div class="title text_hidden">{{=it.product.name}}</div>
             <div class="subtitle">{{=it.product.subName}}</div>
+
+            {{ if(it.price != null){ }}
             <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
-            {{ if(it.marketPrice!=null && it.marketPrice>it.price){ }}
-            <div class="price_sub"><span>¥ {{=it.marketPrice}}</span></div>
+            <div class="fixed">
+                <a class="tenant_link" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+                <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
+                   class="button-block-danger">立即购买</a>
+            </div>
+            {{ }else{ }}
+            <div class="fixed"><a class="tenant_link" style="bottom:16px" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a></div>
             {{ } }}
+
+
         </div>
         {{ if(it.product.master!=null) { }}
         <div class="master">
@@ -76,9 +84,7 @@
             <div class="text"><span>所属地区：</span>{{=it.product.project.addressDistrict.name}}</div>
             {{ } }}
             <div class="text des"><span>技艺简介：</span>{{=it.product.project.description}}</div>
-            <div class="text more"><a
-                    href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i
-                    class="angle right"></i></a></div>
+            <div class="text more"><a href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i class="angle right"></i></a></div>
         </div>
         {{ } }}
     </div>
@@ -97,8 +103,7 @@
     {{ } }}
 </script>
 
-<script type="text/x-dot-template" id="product-buy">
-
+<!--<script type="text/x-dot-template" id="product-buy">
     {{ if( it.amount > 0 ){ }}
         <a class="tenant_link" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
         <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
@@ -106,7 +111,7 @@
     {{ }else{ }}
         <a class="tenant_link" style="bottom:16px" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
     {{ } }}
-</script>
+</script>-->
 
 
 <script src="common/js/common.js"></script>

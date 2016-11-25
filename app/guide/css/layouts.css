@@ -1132,6 +1132,9 @@ img {
     height: 14px;
     line-height: 14px;
     margin-top: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .detail .info .base .subtitle span {

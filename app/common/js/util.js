@@ -50,10 +50,8 @@ function getRequestParameter() {
                 result[param[0]] = param[1];
             }
         }
-        console.log(result);
         return result
     }
-    console.log(result);
     return result;
 }
 

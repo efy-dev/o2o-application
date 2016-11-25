@@ -17,19 +17,22 @@
 
 <div class="footer"></div>
 
+
 <script type="text/x-dot-template" id="panel-base">
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {{
-            for( var i=0; i < it.imageList.length; i++ ){
-            var $imageList=it.imageList;
-            var $hotSpotList=$imageList[i].image.hotSpotList;
+            var $imgList=it.imageList;
+            for( var i=0; i < $imgList.length; i++ ){
+            var $hotSpotList=$imgList[i].image.hotSpotList;
             }}
             <div class="swiper-slide">
-                <img src="{{=$imageList[i].image.src}}@!o2o-home-banner" alt="">
+                <img src="{{=$imgList[i].image.src}}@!o2o-home-banner" alt="">
                 {{ for(var j=0; j < $hotSpotList.length; j++){ }}
-                <span class="hot" data-abscissa="{{=$hotSpotList[j].abscissa}}" data-ordinate="{{=$hotSpotList[j].ordinate}}">
-                    <a href="/app/product_details.html?productId={{=$hotSpotList[j].productModel.id}}&title={{=$hotSpotList[j].productModel.name}}"><em>{{=$hotSpotList[j].productModel.name}}</em><i class="icon"></i></a>
+                <span class="hot" data-abscissa="{{=$hotSpotList[j].abscissa}}"
+                      data-ordinate="{{=$hotSpotList[j].ordinate}}">
+                    <a href="product_details.html?productId={{=$hotSpotList[j].productModel.id}}&title={{=$hotSpotList[j].productModel.name}}"><em>{{=$hotSpotList[j].productModel.name}}</em><i
+                            class="icon"></i></a>
                 </span>
                 {{ } }}
             </div>
@@ -38,8 +41,6 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-
-
     {{if(it.media!=null) { }}
     <div class="audio audio-box" id="audio">
         <a data-type="audio-button">
@@ -52,7 +53,6 @@
         <span class="time"></span>
         <audio data-type="audio-body" id="media" src="{{=it.media.src}}" autoplay="autoplay"></audio>
     </div>
-
     {{ } }}
 
 
@@ -61,7 +61,7 @@
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
-<!--<script src="common/js/weixin.js"></script>-->
+<script src="common/js/weixin.js"></script>
 <script src="guide/js/controller.js"></script>
 <script src="guide/js/model.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -95,16 +95,16 @@
             $('.swiper-wrapper span.hot').each(function () {
                 var _this = $(this);
                 var locationParam = getScreenInfo(_this.attr('data-abscissa'), _this.attr('data-ordinate'));
-                var $top=locationParam.top;
-                var $left=locationParam.left;
-                var $aWidth=_this.find('a').width()+36;
-                if($left > $aWidth){
+                var $top = locationParam.top;
+                var $left = locationParam.left;
+                var $aWidth = _this.find('a').width() + 36;
+                if ($left > $aWidth) {
                     _this.addClass('hot_left');
-                }else{
+                } else {
                     _this.addClass('hot_right');
                 }
                 _this.css({top: $top + 'px', left: $left + 'px'});
-            })
+            });
 
 
         });

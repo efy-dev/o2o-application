@@ -47,7 +47,7 @@ var PageVariable = {
     imageTextList: [],
     imageText: {},
     recommendList: [],
-    panelList: [],
+    panelList: {},  //店铺实景
     appointment: {},
     imageStyle: {},
     currentAudio: null,
@@ -227,7 +227,7 @@ function getRecommendList(param, limit, offset, callback) {
 }
 
 /**
- * @param id
+ * @param 店铺实景
  * @param callback
  */
 function getPanelById(id, callback) {
@@ -245,13 +245,13 @@ function getPanelById(id, callback) {
 }
 
 
+
 /**
  * @param 店铺预约
  * @param callback
  */
 function getOrderById(id, callback) {
     var success = function (data) {
-        console.log(data)
         PageVariable.appointment = data;
         if (typeof callback == "function") {
             callback();

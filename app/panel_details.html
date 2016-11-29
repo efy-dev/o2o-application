@@ -78,7 +78,7 @@
         if (typeof requestParam.title == "undefined") {
             requestParam.title = "";
         }
-        PageVariable.id = requestParam.id;
+        PageVariable.id = requestParam.panelId;
 
         PageVariable.title = decodeURI(requestParam.title);
         $("title").html(PageVariable.title);

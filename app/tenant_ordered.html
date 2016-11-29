@@ -10,7 +10,7 @@
 <div class="header" dot-template="header" style="border-bottom: 1px solid #f0f0f0;"></div>
 <!--//End--header-->
 <div class="appointment">
-    <div class="text" style="display: none;">
+    <div class="text">
         <h2>参观须知</h2>
         <p>1.严禁携带易燃易爆品、危险品进入馆内；禁止在展馆内吸烟或使用明火。</p>
         <p>2.衣冠不整者谢绝入馆；禁止携带宠物入馆。</p>
@@ -27,25 +27,23 @@
         <form action="" method="post">
             <div class="group">
                 <p>人数</p>
-                <label for=""><input name="count" type="number" value="10" placeholder="请输入预约人数，必须大于5人"></label>
+                <label for=""><input name="count" type="number" value="" placeholder="请输入预约人数，必须大于5人"></label>
             </div>
             <div class="group">
                 <p>联系人姓名</p>
-                <label for=""><input name="name" type="text" value="mingzi" placeholder="请输入联系人的姓名，必填"></label>
+                <label for=""><input name="name" type="text" value="" placeholder="请输入联系人的姓名，必填"></label>
             </div>
             <div class="group">
                 <p>联系人证件号</p>
-                <label for=""><input name="idCard" type="text" value="123123123123123"
-                                     placeholder="请输入证件号，入场出示证件，必填"></label>
+                <label for=""><input name="idCard" type="text" value="" placeholder="请输入证件号，入场出示证件，必填"></label>
             </div>
             <div class="group">
                 <p>联系方式</p>
-                <label for=""><input name="phone" type="text" value="15311482587" placeholder="请输入联系人的手机号，必填"></label>
+                <label for=""><input name="phone" type="text" value="" placeholder="请输入联系人的手机号，必填"></label>
             </div>
             <div class="group">
                 <p class="group-btn">参观日期<i class="angle down"></i></p>
-                <label for=""><input data-time="下周周一" name="time1" type="text" value="2016" placeholder="请选择您的参观日期，必填"
-                                     disabled></label>
+                <label for=""><input data-time="" name="time1" type="text" value="" placeholder="请选择您的参观日期，必填" disabled></label>
                 <ul id="group-drop-date" class="group-drop" style="display: none;">
                     <li>下周周一</li>
                     <li>下周周三</li>
@@ -54,8 +52,7 @@
             </div>
             <div class="group">
                 <p class="group-btn">参观时间<i class="angle down"></i></p>
-                <label for=""><input data-time="上午 10:00——11:00" name="time2" type="text" value="10:00—11:00"
-                                     placeholder="请选择您的参观日期，必填" disabled></label>
+                <label for=""><input data-time="" name="time2" type="text" value="" placeholder="请选择您的参观日期，必填" disabled></label>
                 <ul class="group-drop" style="display: none;">
                     <li>上午 10:00——11:00</li>
                     <li>下午 14:00——15:00</li>
@@ -63,7 +60,7 @@
             </div>
             <div class="group">
                 <p>备注</p>
-                <label for=""><input name="Message" type="text" value="备注" placeholder="请输入您的其他需求"></label>
+                <label for=""><input name="Message" type="text" value="" placeholder="请输入您的其他需求"></label>
             </div>
             <div class="group">
                 <label for=""><input id="button" type="button" value="提交信息"></label>
@@ -188,7 +185,7 @@
 
             $ul.find('li').on('click', function () {
                 $input.val($(this).html());
-                $input.attr('data-time', $(this).attr('data-time'));
+                $input.attr('data-time', $(this).html());
                 $this.removeClass('active');
                 $ul.slideUp(200);
             });
@@ -202,7 +199,10 @@
         $("[dot-template=header]").html(renderHeader(PageVariable));
         $("h1").html('预约信息详情');
         //
-        appointmentData();
+        //appointmentData();
+
+
+
     }
 
     //获取时间
@@ -213,7 +213,7 @@
             var year = date.getFullYear() + '年';
             var month = (date.getMonth() + 1) + '月';
             var day = date.getDate() + '日';
-            var week = '&nbsp;&nbsp;' + ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][date.getDay()] + '&nbsp;&nbsp;';
+            var week = '  ' + ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][date.getDay()] + '  ';
             return year + month + day + ' ' + week;
         };
 
@@ -224,18 +224,29 @@
 
         var setDate = function (date) {
             var week = date.getDay() -1;
-            date = addDate(date, week);
+            date = addDate(date, week*-1);
             currentFirstDate = new Date(date);
-            for (var i = 0; i < 7; i++) {
+
+            for(var i = 0;i<6;i++){
+                console.log(i+'==>'+formatDate(i==0 ? date : addDate(date,1)))
+                $li.eq(i).attr('data-time', i==0 ? date : addDate(date,1));
+            }
+
+
+            /*for (var i = 0; i < 7; i++) {
                 if (i == 0) {
+                    console.log(formatDate(addDate(date, 0)))
                     $li.eq(0).attr('data-time', formatDate(addDate(date, -1)));
                 } else if (i == 2) {
+                    console.log(formatDate(addDate(date, 1)))
                     $li.eq(1).attr('data-time', formatDate(addDate(date, 2)));
                 } else if (i == 4) {
+                    console.log(formatDate(addDate(date, 1)))
                     $li.eq(2).attr('data-time', formatDate(addDate(date, 2)));
                 }
-            }
+            }*/
         };
+
 
         setDate(new Date());
     }

@@ -1945,7 +1945,12 @@ footer .copyright {
     border: 0;
 }
 
+.detail.introduce .info{
+    width:100%;
+}
+
 .introduce {
+    width:100%;
     padding-bottom:80px;
     float: left;
 }

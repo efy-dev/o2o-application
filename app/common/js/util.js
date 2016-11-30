@@ -84,7 +84,7 @@ var modal = {
     overAlert: function (value, status) {
         var str = '<div id="modal" class="modal tips ' + status + '"><h4>' + value + '</h4></div>';
         $('body').append(str);
-        var $modal=$('body #modal');
+        var $modal = $('body #modal');
         $modal.stop().animate({'top': '0'}, 500);
         setTimeout(function () {
             $modal.stop().animate({'top': '-100%'}, 500);
@@ -148,4 +148,45 @@ function getScreenInfo(x, y) {
     var per = window.screen.width / 750;
     var result = {'top': parseInt(x * per), 'left': parseInt(y * per)};
     return result;
+}
+
+//前门店铺预约
+function orderFormatDate() {
+    var $ul=$('#group-drop-date');
+    var $li = $ul.find('li');
+    var $length = $li.length;
+    var currentFirstDate;
+
+    var formatDate = function (date) {
+        var year = date.getFullYear() + '年';
+        var month = (date.getMonth() + 1) + '月';
+        var day = date.getDate() + '日';
+        var week = '' + ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][date.getDay()] + '';
+        var str = year + month + day + ' ' + week;
+        if (week == '星期一' || week == '星期三' || week == '星期五') {
+            return str;
+        } else {
+            return str = '';
+        }
+    };
+    var addDate = function (date, n) {
+        date.setDate(date.getDate() + n);
+        return date;
+    };
+    var setDate = function (date) {
+        var week = date.getDay() - 1;
+        date = addDate(date, week * -1);
+        currentFirstDate = new Date(date);
+        $li.each(function () {
+            var index=$(this).index();
+            $(this).attr('data-time',formatDate(index == 0 ? date : addDate(date, 1)));
+        })
+    };
+    $ul.on('click', function () {
+        setDate(addDate(currentFirstDate, 7));
+    });
+    setTimeout(function () {
+        $ul.click().unbind();
+    }, 100)
+    setDate(new Date());
 }

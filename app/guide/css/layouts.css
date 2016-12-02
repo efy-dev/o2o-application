@@ -608,7 +608,10 @@ dt {
 img {
     width: 100%;
 }
-
+input[type=button]{
+    -webkit-appearance:none;
+    outline:none
+}
 .fixed {
     position: fixed;
     bottom: 0;
@@ -1896,7 +1899,7 @@ footer .copyright {
 .appointment .form .group input[type=button] {
     width: 150px;
     height: 44px;
-    line-height: 44px;
+    line-height: 41px;
     font-size: 16px;
     color: #00863c;
     border: 1px solid #00863c;

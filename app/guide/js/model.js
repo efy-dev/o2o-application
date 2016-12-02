@@ -1,4 +1,5 @@
-var api_url = 'http://192.168.1.10';
+//var api_url = 'http://192.168.1.10';
+var api_url = '';
 // var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
@@ -14,7 +15,7 @@ var PageVariable = {
         tenantList: "tenant-list",
         tenantAudioList: "tenant-audio-list",
         panelBase: "panel-base",
-        tenantAppointment: "tenant-appointment",
+        tenantAppointment: "tenant-appointment"
     },
     service: {
         login: "/wx/login",
@@ -29,8 +30,9 @@ var PageVariable = {
         listProductModelPanel: api_url + "/product/getColumnListByProductModel",
         currentUser: api_url + "/user/getCurrentUser",
         panelById: api_url + "/tenant/getPanelById",
-        saveUserOrder:api_url + "/tenant/saveUserOrder",  //提交预约信息
-        getOrderById:api_url + "/tenant/getOrderById",  //获取预约信息
+        saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
+        getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
+        hasArtistry: api_url + "/project/hasArtistry"
     },
 
     currentUser: null,
@@ -245,7 +247,6 @@ function getPanelById(id, callback) {
 }
 
 
-
 /**
  * @param 店铺预约
  * @param callback
@@ -260,6 +261,17 @@ function getOrderById(id, callback) {
     var requestParam = {};
     requestParam.id = id;
     ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
+}
+
+
+function hasArtistry(projectId, callback) {
+    var success = function (data) {
+        PageVariable.hasArtistry = data;
+        callback();
+    };
+    var requestParam = {};
+    requestParam.projectId = projectId;
+    ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
 }
 
 

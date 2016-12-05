@@ -19,13 +19,15 @@
     <ul class="items">
         {{ for(var i = 0 ; i < it.length ; i++){ }}
         <li>
-            {{ if(it[i].pictureUrl !=null){ }}
-            <div class="image"><img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt=""></div>
-            {{ } }}
+            <a href="tenant_details.html?tenantId={{=it[i].id}}&title={{=it[i].name}}">
+                {{ if(it[i].pictureUrl !=null){ }}
+                <div class="image"><img src="{{=it[i].pictureUrl}}@!o2o-tenant-list" alt=""></div>
+                {{ } }}
+            </a>
             <div class="text audio-box" id="{{=it[i].id}}">
                 <div class="txt">{{=it[i].name}}</div>
                 <div class="des">{{=it[i].content}}</div>
-                {{ if(it[i].audio!=null){ }}
+                {{ if(it[i].audio != ''){ }}
                 <a data-type="audio-button">
                     <div class="audio">
                         <span class="play" data-type="audio-icon"><i class="icon"></i></span>

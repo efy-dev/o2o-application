@@ -20,7 +20,7 @@
     <ul class="items">
         {{ for(var i = 0 ; i < it.length ; i++) { }}
         <li>
-            <a href="/app/product_details.html?productId={{=it[i].id}}&title={{=it[i].product.name}}">
+            <a href="product_details.html?productId={{=it[i].id}}&title={{=it[i].product.name}}">
                 <img src="{{=it[i].productModel_url}}@!o2o-tenant-list" alt="">
                 <div class="text">
                     <div class="txt">{{=it[i].product.name }}</div>

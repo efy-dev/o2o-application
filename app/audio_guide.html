@@ -24,29 +24,35 @@
 
     <ul class="list" style="width: 100%;">
         {{ for(var i = 0 ; i < it.length ; i++){ }}
-        {{ if(it[i].audio!=null){ }}
+
         <li>
+
             <div class="audio-box" id="{{=it[i].id}}">
                 <a data-type="audio-button">
-                    <div class="img"><img src="{{=it[i].pictureUrl}}@!o2o-audio-list" alt="">
+                    <div class="img">
+                        {{ if(it[i].pictureUrl!=null){ }}
+                        <img src="{{=it[i].pictureUrl}}@!o2o-audio-list" alt="">
+                        {{ } }}
+
+                        {{ if(it[i].audio!=''){ }}
                         <div class="audio">
                             <audio class="audio" data-type="audio-body" src="{{=it[i].audio}}"></audio>
-                            <span class="play" data-type="audio-icon">
-                            <i class="icon"></i>
-                        </span>
+                            <span class="play" data-type="audio-icon"><i class="icon"></i></span>
                         </div>
+                        {{ } }}
                     </div>
                 </a>
             </div>
+
             <div class="text">
                 <div class="txt">{{=it[i].name}}</div>
                 <div class="des">{{=subString(it[i].content,28,"...")}}
-                    <a class="more" href="/app/tenant_details.html?tenantId={{=it[i].id}}&title={{=it[i].name}}">了解详情<i
+                    <a class="more" href="tenant_details.html?tenantId={{=it[i].id}}&title={{=it[i].name}}">了解详情<i
                             class="angle right"></i></a>
                 </div>
             </div>
         </li>
-        {{ } }}
+
         {{ } }}
     </ul>
 

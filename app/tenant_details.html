@@ -112,11 +112,12 @@
 
     <div class="swiper-wrapper">
         {{
-
         for (var i = 0 ; i < it.length ; i++) {
         var product = it[i];
-
         }}
+
+        {{ if(product.productModel_url != ''){ }}
+
         <div class="swiper-slide">
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
@@ -134,6 +135,8 @@
                 </div>
             </a>
         </div>
+        {{ } }}
+
         {{ } }}
     </div>
 

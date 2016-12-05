@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>搜索结果页</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body style="background:#f5f5f5;">
+<div class="header" style="padding-right:60px;border-bottom: 0;">
+    <div class="search active">
+        <i class="icon"></i>
+        <form action=""><input type="text" value="" placeholder="搜索"></form>
+    </div>
+    <span style="width: 60px;line-height: 44px;text-align: center;position: absolute;top:0;right: 0;">取消</span>
+    <div class="layer">
+        <a class="link" href="index.html"><i class="icon icon-home"></i>首页</a>
+        <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a><i class="angle"></i>
+    </div>
+</div>
+<!--//End--header-->
+<div class="filter">
+    <div class="tab"><span class="active">价格</span><span>分类</span><span>排序</span></div>
+    <div class="content">
+        <ul class="price" style="display: none;">
+            <li>199元以下</li>
+            <li>199元 — 599元</li>
+            <li>599元 — 999元</li>
+            <li>1000元以上</li>
+        </ul>
+        <ul class="category" style="display: none;">
+            <li>199元以下</li>
+            <li>199元 — 599元</li>
+            <li>599元 — 999元</li>
+            <li>1000元以上</li>
+        </ul>
+        <ul class="sort" style="display: none;">
+            <li>199元以下</li>
+            <li>199元 — 599元</li>
+            <li>599元 — 999元</li>
+            <li>1000元以上</li>
+        </ul>
+    </div>
+</div>
+<!--//End-->
+<div class="filter-list">
+    <dl>
+        <dt>热搜商品</dt>
+        <dd>
+            <a href="">
+                <img src="uploads/guide1.jpg" alt="">
+                <div class="text">
+                    <p>苏绣—水乡小品</p>
+                    <p>水乡小品是姚慧芬大师的作品，水乡小品是姚...</p>
+                </div>
+            </a>
+        </dd>
+        <dd>
+            <a href="">
+                <img src="uploads/guide1.jpg" alt="">
+                <div class="text">
+                    <p>苏绣—水乡小品</p>
+                    <p>水乡小品是姚慧芬大师的作品，水乡小品是姚...</p>
+                </div>
+            </a>
+        </dd>
+        <dd>
+            <a href="">
+                <img src="uploads/guide1.jpg" alt="">
+                <div class="text">
+                    <p>苏绣—水乡小品</p>
+                    <p>水乡小品是姚慧芬大师的作品，水乡小品是姚...</p>
+                </div>
+            </a>
+        </dd>
+    </dl>
+</div>
+
+
+
+
+<script type="text/x-dot-template" id="home-recommend-list">
+    <div class="swiper-wrapper">
+        {{ for(var i = 0 ; i < it.length ;i++){ }}
+        {{ if(it[i].image!=null){ }}
+        <div class="swiper-slide">
+            <a href="{{=it[i].redirect}}">
+                <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
+                <div class="base">
+                    <dl class="txt" style="padding-right: 0px;">
+                        <dt>{{=it[i].title}}</dt>
+                        <dd>{{=it[i].shortText}}</dd>
+                    </dl>
+                </div>
+            </a>
+        </div>
+        <!--//End 3-->
+        {{ } }}
+        {{ } }}
+    </div>
+</script>
+
+
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+
+
+<script>
+    wx_share_title = "前门华韵"; //分享标题
+    wx_share_des = "带上耳机，轻松领略中国传统文化与传承";  //分享描述
+    var redirect = "http://www.efeiyi.com/app/index.html";
+    var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
+    wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+        "appid=wx7f6aa253b75466dd" +
+        "&redirect_uri=" +
+        encodeURI(redirect_uri) +
+        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+
+    $().ready(function () {
+        initPage();
+    });
+
+    function initPage() {
+        getRecommendList({}, 5, 0, function () {
+            renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
+        });
+
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

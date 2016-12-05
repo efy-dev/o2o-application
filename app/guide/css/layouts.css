@@ -589,7 +589,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", Arial, Helvetica, STHeiti, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.5;
     margin: 0 auto;
-    padding-top:44px;
+    padding-top: 44px;
 }
 
 ul,
@@ -618,9 +618,9 @@ img {
     width: 100%;
 }
 
-input[type=button] {
+input[type=button], input[type=text] {
     -webkit-appearance: none;
-    outline: none
+    outline: none;
 }
 
 .fixed {
@@ -649,7 +649,7 @@ input[type=button] {
 }
 
 /*--//End Reset--*/
-.icon {
+.icon, .header .icon:after {
     background: url(../../images/icon.png) 0 0 no-repeat;
     background-size: 132px auto;
 }
@@ -680,6 +680,7 @@ input[type=button] {
     position: absolute;
     top: 50%;
     margin-top: -11px;
+    z-index:2;
 }
 
 .angle.left {
@@ -721,22 +722,27 @@ input[type=button] {
 .header {
     width: 100%;
     height: 44px;
-    padding: 11px 60px;
+    padding: 0 44px 0 16px;
     background: #fff;
     border-bottom: 1px solid #f0f0f0;
     text-align: center;
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     z-index: 10;
 }
 
 .header h1 {
+    height:16px;
+    line-height:16px;
     font-size: 16px;
     color: #333;
-    display: inline-block;
     margin: 0;
     font-weight: normal;
+    position: absolute;
+    top:14px;
+    left:0;
+    z-index:-1;
 }
 
 .header .logo {
@@ -770,17 +776,103 @@ input[type=button] {
     margin-top: -6px;
 }
 
+.header .search .icon,
 .header .user {
-    width: 22px;
-    height: 22px;
-    background-position: 0 -58px;
+    background: #fff;
+    width: 44px;
+    height: 44px;
     position: absolute;
-    top: 50%;
-    right: 16px;
-    margin-top: -11px;
+    top: 0;
 }
 
-.header .user.active {
+.header .search .icon:after,
+.header .user:after {
+    content: '';
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -11px;
+    margin-left: -11px;
+}
+
+.header .search {
+    width:44px;
+    height:44px;
+    float: right;
+    position: relative;
+    z-index:10;
+}
+
+.header .search .icon {
+    left:0;
+    z-index:1;
+}
+
+
+.header .search input[type=text]{
+    width:100%;
+    height:32px;
+    line-height:32px;
+    padding:0 10px 0 42px;
+    border:0;
+    background: #fff;
+    z-index:10;
+    display: none;
+}
+
+.header .search.active {
+    width: 32px;
+    height: 32px;
+    margin-top:6px;
+    border: 1px solid #e6e6e6;
+    overflow: hidden;
+}
+
+.header .search.active .icon {
+    width:32px;
+    height:32px;
+    top:0;
+    left:0;
+    left: 0;
+}
+.header .search.active input[type=text]{
+    display: block;
+}
+
+
+
+.header .search .icon:after {
+    background-position: -44px -58px;
+    z-index: 2;
+}
+.header .search.active {
+    width:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header .user {
+    right: 0;
+}
+
+.header .user:after {
+    background-position: 0 -58px;
+}
+
+.header .user.active:after {
     background-position: -22px -58px;
 }
 
@@ -789,7 +881,7 @@ input[type=button] {
     line-height: 48px;
     position: absolute;
     top: 44px;
-    right: 8px;
+    right: 3px;
     background: #fff;
     border: 1px solid #dbdbdb;
     display: none;

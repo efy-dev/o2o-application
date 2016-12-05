@@ -9,6 +9,21 @@
 <body>
 <div class="header" dot-template="header"></div>
 <!--//End--header-->
+<!--<div class="header" dot-template="header">
+    <a href="http://www.efeiyi.com/app/index.html" class="icon logo_efeiyi" title="e飞蚁"></a>
+    <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a>
+    <div class="search">
+        <i class="icon"></i>
+        <form action=""><input type="text" value="" placeholder="搜索"></form>
+    </div>
+    <button class="icon user" title="个人中心" style="border: none;"></button>
+    <div class="layer">
+        <a class="link" href="index.html"><i class="icon icon-home"></i>首页</a>
+        <a class="link" href="http://i.efeiyi.com/"><i
+            class="icon icon-center"></i>个人中心</a> <i class="angle"></i>
+    </div>
+</div>-->
+
 
 <div class="image">
     <img src="uploads/b1.jpg" alt="">
@@ -18,7 +33,8 @@
 <div class="menu">
     <a href="http://www.efeiyi.com/app/audio_guide.html?title=语音导览"><i class="icon icon-audio"></i><span>语音导览</span></a>
     <a href=""><i class="icon icon-tour"></i><span>旅游攻略</span></a>
-    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i class="icon icon-limit"></i><span>限时折扣</span></a>
+    <a href="http://www.efeiyi.com/app/product_list.html?title=限时折扣"><i
+            class="icon icon-limit"></i><span>限时折扣</span></a>
 </div>
 <!--//End--menu-->
 
@@ -58,15 +74,7 @@
         {{ } }}
     </div>
 </script>
-<script type="text/x-dot-template" id="header">
-    <a href="http://www.efeiyi.com/app/index.html" class="icon logo" title="前门 华韵"></a>
-    <a class="icon user" title="个人中心"></a>
-    <div class="layer">
-        <a class="link" href="/"><i class="icon icon-home"></i>首页</a>
-        <a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a>
-        <i class="angle"></i>
-    </div>
-</script>
+
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
@@ -97,6 +105,7 @@
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
+
 
     }
 

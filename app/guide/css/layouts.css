@@ -589,6 +589,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", Arial, Helvetica, STHeiti, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.5;
     margin: 0 auto;
+    padding-top:44px;
 }
 
 ul,
@@ -723,8 +724,10 @@ input[type=button] {
     padding: 11px 60px;
     background: #fff;
     border-bottom: 1px solid #f0f0f0;
-    position: fixed;
     text-align: center;
+    position: fixed;
+    top:0;
+    left:0;
     z-index: 10;
 }
 

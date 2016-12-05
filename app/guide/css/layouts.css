@@ -558,6 +558,10 @@ button.swiper-pagination-bullet {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%23fff'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")
 }
 
+::-webkit-input-placeholder {
+    color: #e5e5e5
+}
+
 @-webkit-keyframes swiper-preloader-spin {
     100% {
         -webkit-transform: rotate(360deg)
@@ -573,6 +577,10 @@ button.swiper-pagination-bullet {
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
@@ -608,10 +616,12 @@ dt {
 img {
     width: 100%;
 }
-input[type=button]{
-    -webkit-appearance:none;
-    outline:none
+
+input[type=button] {
+    -webkit-appearance: none;
+    outline: none
 }
+
 .fixed {
     position: fixed;
     bottom: 0;
@@ -708,11 +718,14 @@ input[type=button]{
 
 /*--//End custom--*/
 .header {
+    width: 100%;
     height: 44px;
     padding: 11px 60px;
     background: #fff;
-    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+    position: fixed;
     text-align: center;
+    z-index: 10;
 }
 
 .header h1 {
@@ -1856,9 +1869,11 @@ footer .copyright {
 .appointment {
     font-size: 14px;
 }
+
 .appointment .text {
-    padding:0 15px;
+    padding: 0 15px;
 }
+
 .appointment .text h2 {
     font-size: 16px;
     font-weight: normal;
@@ -1950,13 +1965,13 @@ footer .copyright {
     border: 0;
 }
 
-.detail.introduce .info{
-    width:100%;
+.detail.introduce .info {
+    width: 100%;
 }
 
 .introduce {
-    width:100%;
-    padding-bottom:80px;
+    width: 100%;
+    padding-bottom: 80px;
     float: left;
 }
 
@@ -2032,27 +2047,174 @@ footer .copyright {
 }
 
 .introduce .imglist .focus {
-    margin-bottom:12px;
+    margin-bottom: 12px;
 }
 
 .introduce .btn {
-    width:100%;
-    line-height:44px;
+    width: 100%;
+    line-height: 44px;
     text-align: center;
     color: #fff;
     background: #00863c;
     position: fixed;
-    bottom:0;
-    left:0;
+    bottom: 0;
+    left: 0;
 }
-
-
 
 /*--/End预约信息/--*/
-
-::-webkit-input-placeholder {
-    color: #e5e5e5
+.address {
+    width: 100%;
+    height: 100%;
+    float: left;
+    padding-top: 43px;
 }
+
+.address-list {
+    height: 100%;
+    position: relative;
+}
+
+.address-list input[type=button] {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.address-list .item {
+    padding: 0 36px 0 15px;
+    height: 92px;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+    position: relative;
+    background: #fff;
+}
+
+.address-list .item p:nth-child(1) {
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: right;
+}
+
+.address-list .item p:nth-child(1) strong {
+    font-weight: bold;
+    float: left;
+}
+
+.address-list .item p:nth-child(2) {
+    color: #808080;
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.address-list .item .arrow-right {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -10px;
+}
+
+.address-list .item .arrow-right:after {
+    content: '';
+    width: 13px;
+    height: 13px;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    margin-left: 0;
+    display: inline-block;
+    transform: rotate(45deg);
+}
+
+.address-add .group {
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    padding: 0 15px;
+    background: #fff;
+}
+
+.address-add .group strong {
+    width: 70px;
+    color: #808080;
+    font-weight: normal;
+    text-align: right;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+}
+
+.address-add .group label {
+    width: 100%;
+    padding-left: 75px;
+    font-weight: normal;
+    border-bottom: 1px solid #f5f5f5;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.address-add .group label input,
+.address-add .group select {
+    width: 100%;
+    height: 59px;
+    border: 0;
+    float: left;
+    outline: none;
+}
+
+.address-add .group label input {
+    padding: 20px 0;
+}
+
+.address-add .group.text {
+    height: 120px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.address-add .group.text label {
+    border-bottom: 0;
+}
+
+.address-add .group.text textarea {
+    width: 100%;
+    padding: 10px;
+    min-height: 100px;
+    max-height: 100px;
+    line-height: 20px;
+    margin-top: 10px;
+    border: 1px solid #f5f5f5;
+    outline: none;
+}
+
+.address-add .group.button {
+    height: auto;
+    line-height: 100%;
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background: transparent;
+}
+
+.address-add .group.button input[type=button] {
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #000;
+    border: 0;
+}
+
+
 
 
 

@@ -23,7 +23,7 @@
 <script type="text/x-dot-template" id="product-base">
 
     <div class="shop_signs">
-        <a href="tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
+        <a href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"><img src="{{=it.product.tenant.logoUrl}}@!o2o-tenant-logo" alt=""></a>
     </div>
 
     <div class="focus">
@@ -53,12 +53,12 @@
             {{ if(it.price != null){ }}
             <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
             <div class="fixed">
-                <a class="tenant_link" href="tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
+                <a class="tenant_link" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
                 <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
                    class="button-block-danger">立即购买</a>
             </div>
             {{ }else{ }}
-            <div class="fixed"><a class="tenant_link" style="bottom:16px" href="tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a></div>
+            <div class="fixed"><a class="tenant_link" style="bottom:16px" href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a></div>
             {{ } }}
 
 
@@ -84,7 +84,9 @@
             <div class="text"><span>所属地区：</span>{{=it.product.project.addressDistrict.name}}</div>
             {{ } }}
             <div class="text des"><span>技艺简介：</span>{{=it.product.project.description}}</div>
-            <div class="text more"><a href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i class="angle right"></i></a></div>
+            <div class="text more" id="artistry"><a
+                    href="http://minglu.efeiyi.com/minglu/artistry?projectId={{=it.product.project.id}}">了解技艺<i
+                    class="angle right"></i></a></div>
         </div>
         {{ } }}
     </div>
@@ -145,10 +147,10 @@
             var redirect = "http://www.efeiyi.com/qrcode/redirect/product/" + PageVariable.productId;
             var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
             wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                    "appid=wx7f6aa253b75466dd" +
-                    "&redirect_uri=" +
-                    encodeURI(redirect_uri) +
-                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+                "appid=wx7f6aa253b75466dd" +
+                "&redirect_uri=" +
+                encodeURI(redirect_uri) +
+                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             wx_share_imgUrl = PageVariable.productModel.productModel_url + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
             renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
@@ -158,6 +160,10 @@
                     PageVariable.setCurrentAudio(PageVariable.audioList[0]);
                 })
             });
+            var project = PageVariable.productModel.product.project;
+            if (project != null) {
+                artistryUrl(project.id);
+            }
         });
 
 
@@ -165,6 +171,15 @@
             renderTemplate(PageVariable.template.productDetail, PageVariable.productModelColumnList);
         })
 
+    }
+
+
+    function artistryUrl(projectId) {
+        hasArtistry(projectId, function () {
+            if (PageVariable.hasArtistry == "1") {
+                $("#artistry").remove();
+            }
+        })
     }
 
 

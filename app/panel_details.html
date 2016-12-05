@@ -25,9 +25,11 @@
             var $imgList=it.imageList;
             for( var i=0; i < $imgList.length; i++ ){
             var $hotSpotList=$imgList[i].image.hotSpotList;
+
             }}
             <div class="swiper-slide">
                 <img src="{{=$imgList[i].image.src}}@!o2o-home-banner" alt="">
+                {{ if(typeof $hotSpotList != "undefined"){ }}
                 {{ for(var j=0; j < $hotSpotList.length; j++){ }}
                 <span class="hot" data-abscissa="{{=$hotSpotList[j].abscissa}}"
                       data-ordinate="{{=$hotSpotList[j].ordinate}}">
@@ -35,7 +37,9 @@
                             class="icon"></i></a>
                 </span>
                 {{ } }}
+                {{ } }}
             </div>
+
             {{ } }}
         </div>
         <!-- Add Pagination -->

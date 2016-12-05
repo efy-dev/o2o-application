@@ -126,12 +126,14 @@
                         <dt class="text_hidden">{{=product.product.name}}</dt>
                         <dd class="text_hidden">{{=product.product.subName}}</dd>
                     </dl>
+                    {{ if(product.price!=null){ }}
                     <dl class="price">
                         <dt class="text_hidden"> ¥ {{=product.price}}</dt>
                         {{ if(product.marketPrice!=null && product.marketPrice > product.price){ }}
                         <dd class="text_hidden">原价 ¥ 8800</dd>
                         {{ } }}
                     </dl>
+                    {{ } }}
                 </div>
             </a>
         </div>

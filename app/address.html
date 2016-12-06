@@ -14,15 +14,15 @@
     <div class="address-list" style="display: block;">
         <div class="item">
             <p><strong>温群英</strong><span>15110008479</span></p>
-            <p><span data-address="default">[默认]</span>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
             <i class="arrow-right"></i>
         </div>
         <div class="item">
             <p><strong>温群英</strong><span>15110008479</span></p>
-            <p><span data-address="default"></span>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
             <i class="arrow-right"></i>
         </div>
-        <input class="btn-new" type="button" value="新增收货人信息">
+        <input class="btn-new" type="button" value="新增收货地址">
     </div>
     <!--/End/地址列表-->
     <div class="address-add" style="display: none;">
@@ -109,14 +109,9 @@
         $newAddress.on('click', function () {
             $list.hide();
             $add.show();
-            $('h1').html('新建收货地址');
+            $('h1').html('新增收货地址');
         });
 
-        //选择默认地址
-        $selectAddress.on('click', function () {
-            $selectAddress.find('span[data-address="default"]').html('');
-            $(this).find('span[data-address="default"]').html('[默认]');
-        });
 
     }
 

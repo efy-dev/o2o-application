@@ -25,9 +25,6 @@ $().ready(function () {
     initWx("http://www.efeiyi.com/wx/init.do");
 
     var $header=$("[dot-template=header]");
-
-
-
     $header.on("touchend", '.search', function (e) {
         $(this).addClass('active');
         // e.preventDefault();

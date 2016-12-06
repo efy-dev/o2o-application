@@ -1029,8 +1029,10 @@ input[type=button], input[type=text] {
 
 /*--//End ad--*/
 .horizontal {
+    width: 100%;
     padding: 8px 0;
-    border-top: 1px solid #e6e6e6; /*margin-top: 24px;*/
+    border-top: 1px solid #e6e6e6;
+    float: left;
 }
 
 .horizontal .title {
@@ -2368,39 +2370,94 @@ footer .copyright {
 }
 
 .filter-list dt {
-    line-height:42px;
-    font-size:12px;
+    line-height: 42px;
+    font-size: 12px;
     color: #999;
-    font-weight:normal;
+    font-weight: normal;
 }
+
 .filter-list dd {
-    height:60px;
-    padding-left:70px;
+    height: 60px;
+    padding-left: 70px;
     position: relative;
-    margin-bottom:24px;
+    margin-bottom: 24px;
 }
+
 .filter-list dd img {
-    width:60px;
-    height:60px;
+    width: 60px;
+    height: 60px;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
 }
+
 .filter-list dd .text {
-    font-size:12px;
-    line-height:30px;
+    font-size: 12px;
+    line-height: 30px;
     color: #666;
 }
-.filter-list dd .text p:nth-child(1){
-    font-size:14px;
-    line-height:30px;
+
+.filter-list dd .text p:nth-child(1) {
+    font-size: 14px;
+    line-height: 30px;
 }
 
+/*--/End/--*/
+.tenant .filter {
+    width: 100%;
+    line-height: 53px;
+    border-top: 1px solid #e6e6e6;
+    float: left;
+}
 
+.tenant .filter .tab span:nth-child(2):before {
+    background: #fff;
+}
 
+.tenant .product-list {
+    width: 100%;
+    padding: 0 16px;
+    float: left;
+    background: #f5f5f5;
+}
+.tenant .product-list ul {
+    margin-top:15px;
+}
+.tenant .product-list li {
+    width: 49%;
+    float: left;
+    margin-bottom: 15px;
+}
 
+.tenant .product-list li:nth-child(2n) {
+    float: right;
+}
 
+.tenant .product-list li {
+    text-align: center;
+}
 
+.tenant .product-list li a img,
+.tenant .product-list li a p {
+    width: 100%;
+    float: left;
+}
+
+.tenant .product-list li a .text {
+    color: #333;
+    font-size: 15px;
+    height: 15px;
+    line-height: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.tenant .product-list li a .price {
+    color: #b5261f;
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+}
 
 
 

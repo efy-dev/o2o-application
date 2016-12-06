@@ -13,12 +13,33 @@
 <!--//End--header-->
 
 <div dot-template="tenant-base"></div>
+<!--//End-->
 
-<div class="horizontal" style="margin-top: 0;margin-bottom:24px">
-    <div class="title"><h2>所有商品</h2></div>
-    <div class="swiper-container" dot-template="tenant-product-list">
+
+<div class="tenant">
+    <div class="filter">
+        <div class="tab"><span class="active">价格</span><span>品类</span></div>
+        <div class="content">
+            <ul class="price" style="display: none;">
+                <li>199元以下</li>
+                <li>199元 — 599元</li>
+                <li>599元 — 999元</li>
+                <li>1000元以上</li>
+            </ul>
+            <ul class="category" style="display: none;">
+                <li>199元以下</li>
+                <li>199元 — 599元</li>
+                <li>599元 — 999元</li>
+                <li>1000元以上</li>
+            </ul>
+        </div>
     </div>
+    <div class="product-list" dot-template="tenant-product-list"></div>
 </div>
+
+
+
+
 
 
 <div class="horizontal" style="margin-top: 0;margin-bottom:24px">
@@ -109,39 +130,22 @@
 </script>
 
 <script type="text/x-dot-template" id="tenant-product-list">
-
-    <div class="swiper-wrapper">
+    <ul>
         {{
         for (var i = 0 ; i < it.length ; i++) {
         var product = it[i];
         }}
-
-        {{ if(product.productModel_url != ''){ }}
-
-        <div class="swiper-slide">
+        {{ if(product.productModel_url != '' && product.price!=null ){ }}
+        <li>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
-                <div class="base">
-                    <dl class="txt">
-                        <dt class="text_hidden">{{=product.product.name}}</dt>
-                        <dd class="text_hidden">{{=product.product.subName}}</dd>
-                    </dl>
-                    {{ if(product.price!=null){ }}
-                    <dl class="price">
-                        <dt class="text_hidden"> ¥ {{=product.price}}</dt>
-                        {{ if(product.marketPrice!=null && product.marketPrice > product.price){ }}
-                        <dd class="text_hidden">原价 ¥ 8800</dd>
-                        {{ } }}
-                    </dl>
-                    {{ } }}
-                </div>
+                <p class="text">{{=product.product.name}}</p>
+                <p class="price">¥{{=product.price}}</p>
             </a>
-        </div>
+        </li>
         {{ } }}
-
         {{ } }}
-    </div>
-
+    </ul>
 </script>
 
 <script type="text/x-dot-template" id="tenant-panel-list">

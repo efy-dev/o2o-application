@@ -150,6 +150,7 @@
         $filterUl.find('li').on('click', function () {
             $filterUl.slideUp(200);
             $(this).addClass('active').siblings('li').removeClass('active');
+            $filterBtn.removeClass('active');
         });
 
         //第二部分筛选

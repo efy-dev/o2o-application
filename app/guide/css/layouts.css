@@ -2547,6 +2547,7 @@ footer .copyright {
     line-height: 53px;
     border-top: 1px solid #e6e6e6;
     float: left;
+    position: relative;
 }
 
 .tenant .filter .tab span:nth-child(2):before {

@@ -63,10 +63,6 @@
 </article>
 
 
-
-
-
-
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
@@ -80,6 +76,8 @@
     });
     function initPage() {
         $("[dot-template=header]").html(renderHeader(PageVariable));
+        //去掉搜索和下拉
+        $("[dot-template=header]").find('.search,.user,.layer').remove();
         $('h1').html('订单结算');
 
 
@@ -89,11 +87,11 @@
 
     //选择支付方式
     function selectPay() {
-        var $orderPay=$('.order-pay');
+        var $orderPay = $('.order-pay');
         $orderPay.find('li').click(function () {
-            $orderPay.find('input[type=radio]').prop("checked",false);
+            $orderPay.find('input[type=radio]').prop("checked", false);
             $(this).addClass('active').siblings('li').removeClass('active');
-            $(this).find('input[type=radio]').prop("checked",true);
+            $(this).find('input[type=radio]').prop("checked", true);
         });
     }
 

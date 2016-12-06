@@ -2154,6 +2154,7 @@ footer .copyright {
 .address-list {
     height: 100%;
     position: relative;
+    float: left;
 }
 
 .address-list input[type=button] {
@@ -2171,11 +2172,14 @@ footer .copyright {
 }
 
 .address-list .item {
-    padding: 0 36px 0 15px;
-    height: 92px;
+    width: 100%;
+    padding: 0 36px 10px 15px;
+    height: 102px;
     border-bottom: 1px solid #f0f0f0;
     position: relative;
     background: #fff;
+    margin-top: 10px;
+    float: left;
 }
 
 .address-list .item p:nth-child(1) {
@@ -2461,21 +2465,25 @@ footer .copyright {
 
 /*--/End/--*/
 .order {
-    width:100%;
+    width: 100%;
     float: left;
-    padding-bottom:64px;
+    padding-bottom: 64px;
 }
 
-.order-base, .order-pay, .order-invoice {
+.order-base, .order-pay, .order-invoice, .order-info {
     width: 100%;
     float: left;
 }
 
-.order-base .text {
+.order-base {
     padding: 0 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-base .text {
     height: 90px;
     position: relative;
-    margin:24px 0;
+    margin: 24px 0;
 }
 
 .order-base .text img {
@@ -2483,7 +2491,7 @@ footer .copyright {
     height: 90px;
     position: absolute;
     top: 0;
-    left: 16px;
+    left: 0;
 }
 
 .order-base .text p {
@@ -2497,10 +2505,12 @@ footer .copyright {
 
 .order-base .text .subtitle {
     font-size: 12px;
+    color: #999;
 }
 
 .order-base .text .price {
     font-size: 16px;
+    color: #666;
     margin-top: 12px;
 }
 
@@ -2514,23 +2524,13 @@ footer .copyright {
     margin: 0 5px;
 }
 
-.order-base .text:after {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background: #f0f0f0;
-    float: left;
-    margin-top: 24px;
-}
-
 .order-base .total {
     width: 100%;
-    padding: 0 16px;
     line-height: 61px;
     text-align: right;
     font-size: 12px;
     float: left;
-    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #f0f0f0;
 }
 
 .order-base .total strong {
@@ -2683,25 +2683,27 @@ footer .copyright {
     line-height: 44px;
     background: #fff;
     position: fixed;
-    bottom:0;
-    left:0;
-    z-index:10;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
 }
 
 .order-buy span {
-    width:100%;
-    height:44px;
-    padding-right:120px;
-    padding-left:16px;
-    font-size:14px;
+    width: 100%;
+    height: 44px;
+    padding-right: 120px;
+    padding-left: 16px;
+    font-size: 14px;
     border-top: 1px solid #e6e6e6;
     float: left;
 }
+
 .order-buy strong {
     color: #b5261f;
     font-size: 16px;
-    font-weight:normal;
+    font-weight: normal;
 }
+
 .order-buy a.link {
     width: 120px;
     line-height: 44px;
@@ -2710,23 +2712,83 @@ footer .copyright {
     background: #44b577;
     border-left: 1px solid #e6e6e6;
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
 }
 
+.order .public {
+    width: 100%;
+    height: 110px;
+    padding: 15px 0;
+    float: left;
+    background: #fafafa;
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+}
 
+.order .public img {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 15px;
+    left: 16px;
+}
 
+.order .public .text {
+    padding-left: 110px;
+    font-size: 14px;
+    line-height: 20px;
+}
 
+.order .public .text .status {
+    line-height: 30px;
+    font-size: 16px;
+    color: #44b577;
+    margin-bottom: 5px;
+}
 
+.order-info {
+    padding: 0 16px 20px 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
 
+.order-info .title {
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 24px;
+    display: block;
+}
 
+.order-info ul.info {
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+}
 
+.order-info ul.info li {
+    line-height: 14px;
+    margin-top: 7px;
+}
 
-
-
-
-
-
+.order-logistics {
+    width:100%;
+    padding:0 16px;
+    float: left;
+    margin:24px 0;
+}
+.order-logistics .link {
+    width:120px;
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    font-size:14px;
+    color: #333;
+    border: 1px solid #ccc;
+    float: right;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
 
 
 

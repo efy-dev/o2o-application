@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<div class="header" dot-template="header"></div>
+<!--//End--header-->
+
+<article class="order" style="padding-bottom:0;">
+    <div class="public">
+        <img src="images/img-public.png" alt="">
+        <div class="text">
+            <p class="status">已发货！</p>
+            <p>长按识别并关注公众号</p>
+            <p>进入订单中心，方便了解订单信息</p>
+        </div>
+    </div>
+    <!--/End/-->
+    <div class="address-list">
+        <div class="item">
+            <p><strong>温群英</strong><span>15110008479</span></p>
+            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+            <i class="arrow-right"></i>
+        </div>
+    </div>
+    <!--/End/-->
+    <div class="order-base">
+        <div class="text">
+            <img src="uploads/guide1.jpg" alt="">
+            <p class="title text_hidden">苏绣 — 清供小品</p>
+            <p class="subtitle text_hidden">店铺名称：姚惠芬苏绣艺术馆</p>
+            <p class="price text_hidden"><strong>¥19999</strong><span>X</span>1</p>
+        </div>
+    </div>
+    <!--/End/-->
+    <div class="order-info">
+        <div class="title">订单信息</div>
+        <ul class="info">
+            <li>订单编号：1234567890</li>
+            <li>交易号：1234567890987654321</li>
+            <li>付款时间：2016-12-05  18:30:15</li>
+        </ul>
+    </div>
+    <!--/End/-->
+    <div class="order-logistics">
+        <a class="link" href="">查看物流</a>
+    </div>
+    <!--/End/-->
+</article>
+
+
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--//End-->
+<script>
+    $().ready(function () {
+        initPage();
+    });
+    function initPage() {
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+        //去掉搜索和下拉
+        $("[dot-template=header]").find('.search,.user,.layer').remove();
+        $('h1').html('订单详情');
+
+
+        selectPay();
+    }
+
+
+    //选择支付方式
+    function selectPay() {
+        var $orderPay = $('.order-pay');
+        $orderPay.find('li').click(function () {
+            $orderPay.find('input[type=radio]').prop("checked", false);
+            $(this).addClass('active').siblings('li').removeClass('active');
+            $(this).find('input[type=radio]').prop("checked", true);
+        });
+    }
+
+
+</script>
+
+
+</body>
+</html>

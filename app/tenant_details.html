@@ -259,15 +259,14 @@
         var $span = $filter.find('.tab span');
         var $ul = $filter.find('.content ul');
 
-        $span.on('click',function () {
+        $span.on('touchend',function () {
             var index = $(this).index();
             $(this).toggleClass('active').siblings('span').removeClass('active');
-            $ul.slideUp(0);
-            $ul.eq(index).stop(true).slideToggle(200);
+            $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);;
         });
 
         //下拉框：筛选条件
-        $ul.find('li').on('click', function () {
+        $ul.find('li').on('touchend', function () {
             $ul.slideUp(200);
             $span.removeClass('active');
             $(this).addClass('active').siblings('li').removeClass('active');

@@ -139,11 +139,12 @@
 
 
         //筛选条件
-        $filterBtn.on('click', function () {
+        $filterBtn.on('touchend', function () {
             var index = $(this).index();
             $(this).toggleClass('active').siblings('span').removeClass('active');
-            $filterUl.slideUp(0);
-            $filterUl.eq(index).stop(true).slideToggle(200);
+
+            $filterUl.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
+//            $filterUl.slideUp(0);
         });
 
         //下拉框：筛选条件
@@ -155,7 +156,7 @@
 
         //第二部分筛选
         var indexold = -1;
-        $filterTab2.on('click', '.together, .price, .sales, .heat', function (e) {
+        $filterTab2.on('touchend', '.together, .price, .sales, .heat', function (e) {
             var index= $(this).index();
             $filterTab2.find('div').removeClass('active active2');
             $(this).addClass('active');

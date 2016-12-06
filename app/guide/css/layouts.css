@@ -2173,9 +2173,7 @@ footer .copyright {
 .address-list .item {
     padding: 0 36px 0 15px;
     height: 92px;
-    border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
-    margin-bottom: 10px;
     position: relative;
     background: #fff;
 }
@@ -2477,8 +2475,7 @@ footer .copyright {
     padding: 0 16px;
     height: 90px;
     position: relative;
-    margin-top: 14px;
-    margin-bottom: 24px;
+    margin:24px 0;
 }
 
 .order-base .text img {

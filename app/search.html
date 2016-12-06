@@ -142,9 +142,7 @@
         $filterBtn.on('touchend', function () {
             var index = $(this).index();
             $(this).toggleClass('active').siblings('span').removeClass('active');
-
             $filterUl.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
-//            $filterUl.slideUp(0);
         });
 
         //下拉框：筛选条件
@@ -155,17 +153,27 @@
         });
 
         //第二部分筛选
-        var indexold = -1;
         $filterTab2.on('touchend', '.together, .price, .sales, .heat', function (e) {
             var index= $(this).index();
-            $filterTab2.find('div').removeClass('active active2');
+            $filterTab2.find('div').removeClass('active');
             $(this).addClass('active');
-            if(index==indexold){
-                $(this).addClass('active2');
-            }
-            indexold=index;
             e.preventDefault();
         });
+
+        //价格
+        var indexold = -1;
+        $filterTab2.on('touchend', '.price', function (e) {
+            var index=0;
+            $(this).addClass('active');
+            if(index==indexold){
+                $(this).toggleClass('active2');
+            }
+            indexold=index;
+            console.log(indexold)
+            e.preventDefault();
+        });
+
+
     }
 </script>
 

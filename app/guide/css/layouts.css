@@ -2211,8 +2211,8 @@ footer .copyright {
     content: '';
     width: 13px;
     height: 13px;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border-top: 1px solid #9a9a9a;
+    border-right: 1px solid #9a9a9a;
     margin-left: 0;
     display: inline-block;
     transform: rotate(45deg);
@@ -2420,9 +2420,11 @@ footer .copyright {
     float: left;
     background: #f5f5f5;
 }
+
 .tenant .product-list ul {
-    margin-top:15px;
+    margin-top: 15px;
 }
+
 .tenant .product-list li {
     width: 49%;
     float: left;
@@ -2458,6 +2460,280 @@ footer .copyright {
     height: 16px;
     line-height: 16px;
 }
+
+/*--/End/--*/
+.order {
+    width:100%;
+    float: left;
+    padding-bottom:64px;
+}
+
+.order-base, .order-pay, .order-invoice {
+    width: 100%;
+    float: left;
+}
+
+.order-base .text {
+    padding: 0 16px;
+    height: 90px;
+    position: relative;
+    margin-top: 14px;
+    margin-bottom: 24px;
+}
+
+.order-base .text img {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    left: 16px;
+}
+
+.order-base .text p {
+    padding-left: 106px;
+    line-height: 26px;
+}
+
+.order-base .text .title {
+    font-size: 15px;
+}
+
+.order-base .text .subtitle {
+    font-size: 12px;
+}
+
+.order-base .text .price {
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.order-base .text .price strong {
+    color: #b5261f;
+    font-weight: normal;
+}
+
+.order-base .text .price span {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.order-base .text:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #f0f0f0;
+    float: left;
+    margin-top: 24px;
+}
+
+.order-base .total {
+    width: 100%;
+    padding: 0 16px;
+    line-height: 61px;
+    text-align: right;
+    font-size: 12px;
+    float: left;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-base .total strong {
+    color: #b5261f;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.order-pay {
+    padding: 0 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-pay .title {
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 24px;
+    display: block;
+}
+
+.order-pay ul.pay li {
+    line-height: 60px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+}
+
+.order-pay ul.pay li label {
+    display: block;
+}
+
+.order-pay ul.pay li .zhifubao,
+.order-pay ul.pay li .wechat {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    margin-left: 30px;
+    margin-right: 7px;
+    position: relative;
+    top: 5px;
+}
+
+.order-pay ul.pay li .zhifubao {
+    background-position: -59px -150px;
+}
+
+.order-pay ul.pay li .wechat {
+    background-position: -91px -150px;
+}
+
+.order-pay ul.pay li input[type=radio] {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    z-index: 3;
+    outline: none;
+}
+
+.order-pay ul.pay li:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 1px solid #cdcdcd;
+    background: #fff;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -6px;
+    z-index: 1;
+}
+
+.order-pay ul.pay li:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #44b577;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    margin-top: -3px;
+    z-index: 2;
+    display: none;
+}
+
+.order-pay ul.pay li.active:before {
+    display: block;
+}
+
+.order-pay ul.pay li:last-child {
+    border-bottom: 0;
+}
+
+.order-invoice {
+    padding: 0 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.order-invoice .title {
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 24px;
+    display: block;
+}
+
+.order-invoice ul.invoice {
+    width: 100%;
+    float: left;
+}
+
+.order-invoice ul.invoice li {
+    width: 100%;
+    height: 43px;
+    line-height: 43px;
+    float: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-invoice ul.invoice li input[type=text] {
+    width: 100%;
+    height: 40px;
+    padding: 10px 0;
+    border: 0;
+    display: block;
+}
+
+.order-invoice ul.invoice li select {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    float: left;
+    outline: none;
+}
+
+.order-invoice ul.invoice li:last-child {
+    border-bottom: 0;
+}
+
+.order-buy {
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    background: #fff;
+    position: fixed;
+    bottom:0;
+    left:0;
+    z-index:10;
+}
+
+.order-buy span {
+    width:100%;
+    height:44px;
+    padding-right:120px;
+    padding-left:16px;
+    font-size:14px;
+    border-top: 1px solid #e6e6e6;
+    float: left;
+}
+.order-buy strong {
+    color: #b5261f;
+    font-size: 16px;
+    font-weight:normal;
+}
+.order-buy a.link {
+    width: 120px;
+    line-height: 44px;
+    color: #fff;
+    text-align: center;
+    background: #44b577;
+    border-left: 1px solid #e6e6e6;
+    position: absolute;
+    top:0;
+    right:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

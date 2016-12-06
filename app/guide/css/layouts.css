@@ -2592,6 +2592,9 @@ footer .copyright {
     line-height: 15px;
     margin-top: 10px;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
 
 .tenant .product-list li a .price {

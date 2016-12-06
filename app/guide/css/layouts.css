@@ -2419,6 +2419,14 @@ footer .copyright {
     color: #666;
 }
 
+.filter-list dd .text p {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .filter-list dd .text p:nth-child(1) {
     font-size: 14px;
     line-height: 30px;
@@ -2756,7 +2764,7 @@ footer .copyright {
 
 .order .public .text {
     padding-left: 110px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
 }
 

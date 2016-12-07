@@ -11,12 +11,12 @@
 <!--//End--header-->
 
 <article class="order">
-    <div class="address-list">
-        <div class="item">
-            <p><strong>温群英</strong><span>15110008479</span></p>
-            <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
-            <i class="arrow-right"></i>
-        </div>
+    <div class="address-list" dot-template="purchase-address" style="width: 100%;">
+        <!--<div class="item">-->
+        <!--<p><strong>温群英</strong><span>15110008479</span></p>-->
+        <!--<p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>-->
+        <!--<i class="arrow-right"></i>-->
+        <!--</div>-->
     </div>
     <!--/End/-->
     <div class="order-base" dot-template="purchase-product">
@@ -44,14 +44,14 @@
     <div class="order-invoice">
         <div class="title">开具发票</div>
         <ul class="invoice">
-            <li><input type="text" placeholder="请填写发票类型" value="办公用品"></li>
+            <li><input type="text" placeholder="请填写发票类型" id="invoiceType" value="办公用品"></li>
             <li>
-                <select name="" id="">
-                    <option value="0">公司</option>
-                    <option value="1">个人</option>
+                <select name="" id="invoiceTitle">
+                    <option value="公司">公司</option>
+                    <option value="个人">个人</option>
                 </select>
             </li>
-            <li><input type="text" placeholder="请填写发票抬头"></li>
+            <li><input type="text" id="invoiceName" placeholder="请填写发票抬头"></li>
         </ul>
     </div>
     <!--/End/-->
@@ -81,7 +81,7 @@
 <script type="text/x-dot-template" id="purchase-order">
 
     <span>实付款： <strong>¥{{=it.total}}</strong></span>
-    <a class="link" href="/order/pay/{{=it.id}}{{if( isWeixin() ){ }}?isWeiXin=true{{ } }}">结算</a>
+    <a class="link" onclick="confirm()">结算</a>
 
 </script>
 
@@ -89,19 +89,36 @@
 
     <div class="title">支付方式</div>
     <ul class="pay">
-        {{ if(!isWeixin()){
-        PageVariable.currentPaymentType="zhifubao";
+        {{ if(!isWeiXin()){
+        PageVariable.currentPaymentType="1";
         }}
         <li class="active">
             <input id="zhifubao" type="radio"><i class="icon zhifubao"></i>支付宝支付
         </li>
-        {{ } else { PageVariable.currentPaymentType="weixin"; }}
+        {{ } else { PageVariable.currentPaymentType="3"; }}
         <li class="active">
             <input id="wechat" type="radio"><i class="icon wechat"></i>微信支付
         </li>
         {{ } }}
     </ul>
 
+</script>
+
+
+<script type="text/x-dot-template" id="purchase-address">
+    <a onclick="addressList()">
+        <div class="item">
+            {{ if(it.id != null && typeof typeof it.id != "undefined"){ }}
+            <p><strong>{{=it.consignee}}</strong><span>{{=it.phone}}</span></p>
+            <p>{{=it.province+it.city+it.district+it.detail}}</p>
+            <i class="arrow-right"></i>
+            {{ }else{ }}
+            <p></p>
+            <p style="margin-top: 41px;">请选择收货地址</p>
+            <i class="arrow-right"></i>
+            {{ } }}
+        </div>
+    </a>
 </script>
 
 
@@ -133,6 +150,11 @@
             })
         });
 
+
+        getDefaultConsumerAddress(function () {
+            renderTemplate(PageVariable.template.purchaseAddress, PageVariable.currentAddress)
+        });
+
         selectPay();
     }
 
@@ -150,6 +172,40 @@
             $(this).addClass('active').siblings('li').removeClass('active');
             $(this).find('input[type=radio]').prop("checked", true);
         });
+    }
+
+
+    function confirm() {
+//        1.获得支付方式
+//        2.获得订单
+//        3.获得发票信息
+//        4.获得地址信息
+//        4.1.参数校验
+//        5.调用confirmOrderById方法
+//        6.confirm成功之后跳转到支付处理接口
+        var payment = PageVariable.currentPaymentType;
+        var orderId = PageVariable.purchaseOrder.id;
+        var invoiceName = $("#invoiceName").val();
+        var invoiceType = $("#invoiceType").val();
+        var invoiceTitle = $("#invoiceTitle").val();
+        var consumerAddressId = PageVariable.currentAddress.id;
+        if (typeof consumerAddressId == "undefined" || consumerAddressId == null || consumerAddressId == "") {
+            modal.overAlert("请选择收货地址", "fail");
+        } else {
+            confirmOrderById(orderId, consumerAddressId, invoiceName, invoiceType, invoiceTitle, payment, function () {
+                var redirectUrl = "http://localhost/order/pay/" + orderId;
+                if (isWeiXin()) {
+                    redirectUrl += "?isWeiXin=true";
+                }
+                window.location.href = redirectUrl;
+            })
+        }
+
+    }
+
+
+    function addressList() {
+
     }
 
 

@@ -1,5 +1,5 @@
-// var api_url = '';
-var api_url = 'http://192.168.1.10';
+var api_url = '';
+// var api_url = 'http://192.168.1.10';
 // var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
@@ -19,6 +19,8 @@ var PageVariable = {
         purchaseProduct: "purchase-product",
         purchaseOrder: "purchase-order",
         purchasePay: "purchase-pay",
+        purchaseInfo: "purchase-info",
+        purchaseAddress: "purchase-address"
     },
     service: {
         login: "/wx/login",
@@ -38,7 +40,9 @@ var PageVariable = {
         hasArtistry: api_url + "/project/hasArtistry",
         createNewOrder: api_url + "/order/createNewOrder",
         hasAuthenticated: api_url + "/hasAuthenticated",
-        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById"
+        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+        getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
+        confirmOrderById: api_url + "/order/confirmOrderById"
     },
 
     currentUser: null,
@@ -224,7 +228,6 @@ function getRecommendList(param, limit, offset, callback) {
         PageVariable.recommendList = data;
         if (typeof callback == "function") {
             callback();
-            swiperContaniner('.swiper-container');
         }
     };
     var requestParam = {};
@@ -289,14 +292,33 @@ function createNewOrder(productList, tenantId, callback) {
     var requestParam = {};
     requestParam.productList = productList;
     requestParam.tenantId = tenantId;
+    requestParam.callback = "http://localhost/app/order_detail.html";
     ajaxRequest(PageVariable.service.createNewOrder, requestParam, success);
 }
 
+function confirmOrderById(orderId, consumerAddressId, invoiceName, invoiceType, invoiceTitle, paymentType, callback) {
+    var success = function (data) {
+        callback();
+    };
+    var requestParam = {};
+    requestParam.purchaseOrderId = orderId;
+    requestParam.invoiceName = invoiceName;
+    requestParam.invoiceType = invoiceType;
+    requestParam.invoiceTitle = invoiceTitle;
+    requestParam.consumerAddressId = consumerAddressId;
+    requestParam.paymentType = paymentType;
+
+    ajaxRequest(PageVariable.service.confirmOrderById, requestParam, success);
+}
 
 function getPurchaseOrderById(id, callback) {
     var success = function (data) {
         PageVariable.purchaseOrder = data.purchaseOrder;
         PageVariable.productList = data.productList;
+        PageVariable.deliveryList = data.deliveryList;
+
+        PageVariable.purchaseorderInfo = data;
+
         callback();
     };
     var requestParam = {};
@@ -315,6 +337,22 @@ function authenticationFilter(filterMappingFunction, failFunction) {
         }
     };
     ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+}
+
+function getDefaultConsumerAddress(callback) {
+    var success = function (data) {
+        var currentAddress = {};
+        currentAddress.id = data.addressId;
+        currentAddress.city = data.addressCity;
+        currentAddress.province = data.addressProvince;
+        currentAddress.district = data.addressDistrict;
+        currentAddress.consignee = data.addressConsignee;
+        currentAddress.phone = data.addressPhone;
+        currentAddress.detail = data.addressDetail;
+        PageVariable.currentAddress = currentAddress;
+        callback();
+    };
+    ajaxRequest(PageVariable.service.getDefaultConsumerAddress, {}, success);
 }
 
 getCurrentUser();

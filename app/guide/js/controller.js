@@ -20,9 +20,13 @@ function renderFooter(it /**/) {
 
 //所有页面加载最先加载当前用户数据
 
-
-function isWeixin() {
-    return typeof wx != "undefined";
+function isWeiXin() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 $().ready(function () {

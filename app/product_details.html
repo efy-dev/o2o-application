@@ -56,7 +56,7 @@
             <div class="fixed">
                 <a class="tenant_link"
                    href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
-                <a href="http://localhost/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&tenantId={{=it.product.tenant.id}}&callback=http://localhost/app/order_detail.html"
+                <a href="http://localhost/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&callback={{=encodeURIComponent('http://localhost/app/order_detail.html')}}&tenantId={{=it.product.tenant.id}}"
                    class="button-block-danger">立即购买</a>
             </div>
             {{ }else{ }}
@@ -190,8 +190,10 @@
         var result = [];
         var obj = {};
         obj.id = data.id;
+        obj.amount = 1;
         result.push(obj);
-        return JSON.stringify(result);
+        var resultStr = JSON.stringify(result);
+        return encodeURI(resultStr);
     }
 
 

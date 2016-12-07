@@ -22,7 +22,7 @@ var PageVariable = {
         addressList: "address-list",
         provinceList: "province-list",
         cityList:　"city-list",
-        districtList: "district-list"
+        districtList: "district-list",
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
         purchaseDelivery: "purchase-delivery"
@@ -50,7 +50,7 @@ var PageVariable = {
         getProvinceList: api_url + "/address/getProvinceList",
         getCityList: api_url + "/address/getCityList",
         getDistrictList: api_url + "/address/getDistrictList",
-        addAddress: api_url + "/address/addAddress"
+        addAddress: api_url + "/address/addAddress",
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",

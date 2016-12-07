@@ -68,7 +68,7 @@
                 </label>
             </div>
             <div class="group button">
-                <input type="button" value="保存收货人信息" id="save_address" fun-type="add"/>
+                <input type="button" value="保存收货人信息" id="save_address"/>
             </div>
         </form>
     </div>
@@ -79,18 +79,8 @@
 <script type="text/x-dot-template" id="address-list">
     {{ for(var i = 0 ; i < it.length ; i++){ }}
         <div class="item">
-            <p><strong class="data-item consignee">{{=it[i].consignee}}</strong><span class="data-item phone">{{=it[i].phone}}</span></p>
-            <!--<p class="display-none data-item id">{{=it[i].id}}</p>
-            {{ if(it[i].province!=null){ }}
-                <p class="display-none data-item province-id">{{=it[i].province.id}}</p>
-            {{ } }}
-            {{ if(it[i].city!=null){ }}
-                <p class="display-none data-item city-id">{{=it[i].city.id}}</p>
-            {{ } }}
-            {{ if(it[i].district!=null){ }}
-                <p class="display-none data-item district-id">{{=it[i].district.id}}</p>
-            {{ } }}-->
-            <p class="data-item details">{{=it[i].details}}</p>
+            <p><strong>{{=it[i].consignee}}</strong><span>{{=it[i].phone}}</span></p>
+            <p>{{=it[i].details}}</p>
             <i class="arrow-right"></i>
         </div>
     {{ } }}
@@ -135,18 +125,6 @@
 
         getAddressList(function () {
             renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
-
-            $(".arrow-right").on("click", function () {
-                $(".address .address-list").hide();
-                $(".address .address-add").show();
-                $("#save_address").attr("fun-type", "update");
-                $('h1').html('修改收货地址');
-
-                /*var data_items = $(this).parent().find(".data-item");
-                for(var i = 0; i < data_items.length; i++) {
-
-                }*/
-            });
         });
 
         getProvinceList(function () {
@@ -234,7 +212,6 @@
         $newAddress.on('click', function () {
             $list.hide();
             $add.show();
-            $("#save_address").attr("fun-type", "add");
             $('h1').html('新增收货地址');
         });
     }

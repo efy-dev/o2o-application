@@ -1,5 +1,5 @@
-// var api_url = '';
-var api_url = 'http://192.168.1.10';
+var api_url = '';
+// var api_url = 'http://192.168.1.10';
 // var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
@@ -21,7 +21,7 @@ var PageVariable = {
         purchasePay: "purchase-pay",
         addressList: "address-list",
         provinceList: "province-list",
-        cityList:　"city-list",
+        cityList: "city-list",
         districtList: "district-list",
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
@@ -54,7 +54,8 @@ var PageVariable = {
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
-        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial"
+        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
+        getConsumerAddressById: api_url + "/address/getConsumerAddressById"
     },
 
     currentUser: null,
@@ -412,6 +413,22 @@ function getCityList(param, callback) {
         }
     };
     ajaxRequest(PageVariable.service.getCityList, param, success);
+}
+
+function getConsumerAddressById(id, callback) {
+    var success = function (data) {
+        var currentAddress = {};
+        currentAddress.id = data.addressId;
+        currentAddress.city = data.addressCity;
+        currentAddress.province = data.addressProvince;
+        currentAddress.district = data.addressDistrict;
+        currentAddress.consignee = data.addressConsignee;
+        currentAddress.phone = data.addressPhone;
+        currentAddress.detail = data.addressDetail;
+        PageVariable.currentAddress = currentAddress;
+        callback();
+    };
+    ajaxRequest(PageVariable.service.getConsumerAddressById, {"id": id}, success);
 }
 
 function getDistrictList(param, callback) {

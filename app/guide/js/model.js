@@ -1,5 +1,5 @@
-var api_url = '';
-// var api_url = 'http://192.168.1.10';
+// var api_url = '';
+var api_url = 'http://192.168.1.10';
 // var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
@@ -19,6 +19,10 @@ var PageVariable = {
         purchaseProduct: "purchase-product",
         purchaseOrder: "purchase-order",
         purchasePay: "purchase-pay",
+        addressList: "address-list",
+        provinceList: "province-list",
+        cityList:　"city-list",
+        districtList: "district-list"
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
         purchaseDelivery: "purchase-delivery"
@@ -41,6 +45,12 @@ var PageVariable = {
         hasArtistry: api_url + "/project/hasArtistry",
         createNewOrder: api_url + "/order/createNewOrder",
         hasAuthenticated: api_url + "/hasAuthenticated",
+        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+        getAddressList: api_url + "/address/getAddressList",
+        getProvinceList: api_url + "/address/getProvinceList",
+        getCityList: api_url + "/address/getCityList",
+        getDistrictList: api_url + "/address/getDistrictList",
+        addAddress: api_url + "/address/addAddress"
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
@@ -66,6 +76,10 @@ var PageVariable = {
     imageStyle: {},
     currentAudio: null,
     audioList: [],
+    addressList: [],
+    provinceList: [],
+    cityList: [],
+    districtList: [],
 
     setCurrentAudio: function (audio) {
         if (PageVariable.currentAudio != null) {
@@ -368,6 +382,46 @@ function getDeliveryInfoBySerial(serial, company, callback) {
     requestParam.company = company;
     ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
 
+}
+
+function getAddressList(callback) {
+    var success = function (data) {
+        PageVariable.addressList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getAddressList, {}, success);
+}
+
+function getProvinceList(callback) {
+    var success = function (data) {
+        PageVariable.provinceList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProvinceList, {}, success);
+}
+
+function getCityList(param, callback) {
+    var success = function (data) {
+        PageVariable.cityList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getCityList, param, success);
+}
+
+function getDistrictList(param, callback) {
+    var success = function (data) {
+        PageVariable.districtList = data.data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getDistrictList, param, success);
 }
 
 getCurrentUser();

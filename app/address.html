@@ -166,6 +166,21 @@
             param.phone = $("#phone").val();
             param.details = $("#doc-vld-ta-2-1").val();
 
+            if(param.consignee == null || param.consignee == "") {
+                modal.overAlert('收货人不能为空', 'fail');
+                return;
+            }
+
+            if(param.phone == null || param.phone == "") {
+                modal.overAlert('手机号不能为空', 'fail');
+                return;
+            }
+
+            if(param.details == null || param.details == "") {
+                modal.overAlert('具体地址不能为空', 'fail');
+                return;
+            }
+
             var provinceId = $("#0").val();
             var cityId = $("#1").val();
             var districtId = $("#2").val();

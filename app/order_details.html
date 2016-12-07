@@ -8,11 +8,13 @@
 </head>
 <body>
 <div class="header" dot-template="header"></div>
+
+<div class="header" dot-template="logicHeader" style="display: none"></div>
 <!--//End--header-->
 
-<article class="order" style="padding-bottom:0;">
+<article class="order" style="padding-bottom:0;" id="mainInfo">
     <div class="public">
-        <img src="images/img-public.png" alt="">
+        <img src="images/qrcode_for_gh_11d9fd068e18_1280(1).jpg"/>
         <div class="text">
             <p class="status" id="orderStatus">已发货！</p>
             <p>长按识别并关注公众号</p>
@@ -50,11 +52,38 @@
         <!--</div>-->
     </div>
     <!--/End/-->
-    <div class="order-logistics">
-        <a class="link" href="">查看物流</a>
+
+    <div dot-template="purchase-delivery">
+
+
     </div>
     <!--/End/-->
 </article>
+
+<article id="deliveryInfo" style="display: none;height: 100%;">
+
+    <iframe id="deliveryFrame" width="100%" height="100%" scrolling="yes" frameborder="0"></iframe>
+
+</article>
+
+</article>
+
+<script type="text/x-dot-template" id="purchase-delivery">
+
+    {{ if(it.deliveryList!=null && typeof it.deliveryList != "undefined" && it.deliveryList.length>0){
+
+    var delivery = it.deliveryList[0];
+
+    }}
+
+    <div class="order-logistics">
+        <a class="link" onclick="showDeliveryInfo('{{=delivery.serial}}','{{=delivery.company}}')">查看物流</a>
+    </div>
+
+    {{ } }}
+
+
+</script>
 
 
 <script type="text/x-dot-template" id="purchase-info">
@@ -119,9 +148,24 @@
 
             $("#orderStatus").html(PageVariable.purchaseorderInfo.purchaseOrder.orderStatus);
             renderTemplate(PageVariable.template.purchaseInfo, PageVariable.purchaseorderInfo);
+            renderTemplate(PageVariable.template.purchaseDelivery, PageVariable.purchaseorderInfo);
         })
 
     }
+
+    function showDeliveryInfo(serial, company) {
+        getDeliveryInfoBySerial(serial, company, function () {
+            $("#mainInfo").hide();
+            $("#deliveryInfo").show();
+            $("#deliveryFrame").attr("src", PageVariable.deliveryInfo);
+            $("[dot-template=header]").hide();
+            logicHeader("物流信息", "$('[dot-template=header]').show();$('[dot-template=logicHeader]').hide();$('#mainInfo').show();$('#deliveryInfo').hide()");
+
+        })
+    }
+
+
+
 
 
 </script>

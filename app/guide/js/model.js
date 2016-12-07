@@ -20,7 +20,8 @@ var PageVariable = {
         purchaseOrder: "purchase-order",
         purchasePay: "purchase-pay",
         purchaseInfo: "purchase-info",
-        purchaseAddress: "purchase-address"
+        purchaseAddress: "purchase-address",
+        purchaseDelivery: "purchase-delivery"
     },
     service: {
         login: "/wx/login",
@@ -42,7 +43,8 @@ var PageVariable = {
         hasAuthenticated: api_url + "/hasAuthenticated",
         getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
-        confirmOrderById: api_url + "/order/confirmOrderById"
+        confirmOrderById: api_url + "/order/confirmOrderById",
+        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial"
     },
 
     currentUser: null,
@@ -292,7 +294,7 @@ function createNewOrder(productList, tenantId, callback) {
     var requestParam = {};
     requestParam.productList = productList;
     requestParam.tenantId = tenantId;
-    requestParam.callback = "http://localhost/app/order_detail.html";
+    requestParam.callback = "http://localhost/app/order_details.html";
     ajaxRequest(PageVariable.service.createNewOrder, requestParam, success);
 }
 
@@ -353,6 +355,19 @@ function getDefaultConsumerAddress(callback) {
         callback();
     };
     ajaxRequest(PageVariable.service.getDefaultConsumerAddress, {}, success);
+}
+
+
+function getDeliveryInfoBySerial(serial, company, callback) {
+    var success = function (data) {
+        PageVariable.deliveryInfo = data.src;
+        callback();
+    };
+    var requestParam = {};
+    requestParam.serial = serial;
+    requestParam.company = company;
+    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
+
 }
 
 getCurrentUser();

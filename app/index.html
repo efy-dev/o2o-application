@@ -23,7 +23,8 @@
 
 
 <div class="image">
-    <a href="http://www.efeiyi.com/app/tenant_details.html?tenantId=iugd2v0v7mbwxumv&title=%E5%89%8D%E9%97%A8%E5%8D%8E%E9%9F%B5%E9%9D%9E%E9%81%97%E4%BD%93%E9%AA%8C%E4%B8%AD%E5%BF%83"><img src="uploads/668284120090350147.jpg"/></a>
+    <a href="http://www.efeiyi.com/app/tenant_details.html?tenantId=iugd2v0v7mbwxumv&title=%E5%89%8D%E9%97%A8%E5%8D%8E%E9%9F%B5%E9%9D%9E%E9%81%97%E4%BD%93%E9%AA%8C%E4%B8%AD%E5%BF%83"><img
+            src="uploads/668284120090350147.jpg"/></a>
 </div>
 <!--//End--focus-->
 
@@ -65,9 +66,9 @@
 </div>
 
 <script type="text/x-dot-template" id="home-recommend-list">
+    {{ for(var i = 0 ; i < it.length ;i++){ }}
+    {{ if(it[i].image!=null){ }}
     <div class="swiper-wrapper">
-        {{ for(var i = 0 ; i < it.length ;i++){ }}
-        {{ if(it[i].image!=null){ }}
         <div class="swiper-slide">
             <a href="{{=it[i].redirect}}">
                 <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
@@ -79,10 +80,10 @@
                 </div>
             </a>
         </div>
-        <!--//End 3-->
-        {{ } }}
-        {{ } }}
     </div>
+    <!--//End 3-->
+    {{ } }}
+    {{ } }}
 </script>
 
 

@@ -25,7 +25,10 @@ var PageVariable = {
         districtList: "district-list",
         purchaseInfo: "purchase-info",
         purchaseAddress: "purchase-address",
-        purchaseDelivery: "purchase-delivery"
+        purchaseDelivery: "purchase-delivery",
+        tenantCategory: "tenant-category",
+        productModels: "search-productModels",
+        productCategory: "product-category"
     },
     service: {
         login: "/wx/login",
@@ -55,7 +58,11 @@ var PageVariable = {
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
         getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
-        getConsumerAddressById: api_url + "/address/getConsumerAddressById"
+        getConsumerAddressById: api_url + "/address/getConsumerAddressById",
+        tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
+        searchProductModels: api_url + "/product/searchProductModels",
+        searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
+        getProductCategory: api_url + "/product/getProductCategory"
     },
 
     currentUser: null,
@@ -81,6 +88,9 @@ var PageVariable = {
     provinceList: [],
     cityList: [],
     districtList: [],
+    tenantCategory: [],  //店铺品类
+    productCategory: [],
+    requestModel: {},
 
     setCurrentAudio: function (audio) {
         if (PageVariable.currentAudio != null) {
@@ -442,3 +452,67 @@ function getDistrictList(param, callback) {
 }
 
 getCurrentUser();
+
+
+/**
+ * @param 店铺品类
+ * @param callback
+ */
+function getTenantCategory(id, callback) {
+    console.log('====' + id)
+
+    var success = function (data) {
+        PageVariable.tenantCategory = data;
+
+        console.log(data)
+
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.tenantId = id;
+    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
+}
+
+function getProductCategory(id, callback) {
+    var success = function (data) {
+        PageVariable.productCategory = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProductCategory, null, success);
+}
+
+/**
+ * @param 筛选店铺内商品
+ * @param callback
+ */
+function searchProductModelsByTenantGroup(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = JSON.stringify(param);
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
+}
+
+function searchProductModels(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
+}

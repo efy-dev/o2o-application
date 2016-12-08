@@ -19,26 +19,22 @@
 <div class="tenant">
     <div class="filter">
         <div class="tab"><span>价格</span><span>品类</span></div>
-        <div class="content" style="width: 100%;position: absolute;top:54px;left: 0;background:#fff;border:0;">
+        <div class="content"
+             style="width: 100%;position: absolute;top:54px;left: 0;background:#fff;border:0;z-index:10;">
             <ul class="price" style="display: none;">
-                <li>199元以下</li>
-                <li>199元 — 599元</li>
-                <li>599元 — 999元</li>
-                <li>1000元以上</li>
+                <li onclick="filterPrice(0,10000000000000000)">全部</li>
+                <li onclick="filterPrice(0,200)">0元-200元</li>
+                <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
+                <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
+                <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
             </ul>
-            <ul class="category" style="display: none;">
-                <li>品类1</li>
-                <li>品类2</li>
-                <li>品类3</li>
+            <ul class="category" dot-template="tenant-category" style="display: none;">
+
             </ul>
         </div>
     </div>
     <div class="product-list" dot-template="tenant-product-list"></div>
 </div>
-
-
-
-
 
 
 <div class="horizontal" style="margin-top: 0;margin-bottom:24px">
@@ -47,8 +43,7 @@
 
     </div>
 </div>
-<div class="footer">
-</div>
+<div class="footer"></div>
 
 <script type="text/x-dot-template" id="tenant-base">
     <div class="focus">
@@ -78,7 +73,9 @@
             </div>
             {{ } }}
             <!--<div class="subtitle text_hidden">主营项目：苏绣手工艺术品</div>-->
-            <div class="subtitle text_hidden">地址：<a style="color: #333;" onclick="openLocation({{=it.latitude}},{{=it.longitude}},'{{=it.name}}',14,'')"><span>{{=it.address}}<i class="icon icon_map"></i></span></a></div>
+            <div class="subtitle text_hidden">地址：<a style="color: #333;"
+                                                    onclick="openLocation({{=it.latitude}},{{=it.longitude}},'{{=it.name}}',14,'')"><span>{{=it.address}}<i
+                    class="icon icon_map"></i></span></a></div>
         </div>
         <!--//End base-->
         <div class="praise" dot-template="tenant-praise"></div>
@@ -139,12 +136,13 @@
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
                 <p class="text">{{=product.product.name}}</p>
-                <p class="price">¥{{=product.price}}</p>
+                <p class="price">¥<span>{{=product.price}}</span></p>
             </a>
         </li>
         {{ } }}
         {{ } }}
     </ul>
+    <a class="more" onclick="loadMore()">加载更多</a>
 </script>
 
 <script type="text/x-dot-template" id="tenant-panel-list">
@@ -158,6 +156,16 @@
         {{ } }}
     </div>
 </script>
+
+<script type="text/x-dot-template" id="tenant-category">
+    <li onclick="filterCategory()">全部</li>
+    {{ for( var i=0; i < it.length; i++ ){ }}
+
+    <li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>
+
+    {{ } }}
+</script>
+
 
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
@@ -221,16 +229,23 @@
             });
         });
 
-        getProductModelList("{\"product.tenant.id\":\"" + PageVariable.tenantId + "\"}", 30, 0, function () {
+        PageVariable.requestModel["product.tenant.id"] = PageVariable.tenantId;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        });
+        })
 
         getImageTextListByTenant(PageVariable.tenantId, function () {
             renderTemplate(PageVariable.template.tenantPanelList, PageVariable.imageTextList);
         })
 
+
+        //品类
+        getTenantCategory(PageVariable.tenantId, function () {
+            renderTemplate(PageVariable.template.tenantCategory, PageVariable.tenantCategory);
+        });
         filterTenant();
     }
+
 
     function praiseTenant(tenantId, delFlag) {
         saveTenantPraise(tenantId, delFlag, function () {
@@ -258,21 +273,54 @@
         var $filter = $('.filter');
         var $span = $filter.find('.tab span');
         var $ul = $filter.find('.content ul');
+        var $tab = $filter.find(".tab");
 
-        $span.on('touchend',function () {
+        $tab.on('touchend', "span", function () {
             var index = $(this).index();
             $(this).toggleClass('active').siblings('span').removeClass('active');
-            $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);;
+            $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
         });
 
         //下拉框：筛选条件
-        $ul.find('li').on('touchend', function () {
+        $ul.on('touchend', "li", function () {
             $ul.slideUp(200);
             $span.removeClass('active');
             $(this).addClass('active').siblings('li').removeClass('active');
         });
 
     }
+
+    //价格筛选
+    var page = 1;
+    function filterPrice(min, max) {
+        PageVariable.requestModel["startPrice"] = min;
+        PageVariable.requestModel["endPrice"] = max;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+
+    function filterCategory(id) {
+        if (id != null && id != "undefined") {
+            PageVariable.requestModel["tenantGroup.id"] = id;
+        } else {
+            delete PageVariable.requestModel["tenantGroup.id"];
+        }
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+    function loadMore() {
+        page = page + 1;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6 * page, 0, function () {
+            renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
+        });
+    }
+    //
+
+
 </script>
 
 

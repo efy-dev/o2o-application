@@ -24,16 +24,13 @@
 <div class="filter" style="width:100%;position: fixed;top:44px;left: 0;background:#fff;z-index:3;">
     <div class="content">
         <ul class="price" style="display: none;">
-            <li>199元以下</li>
-            <li>199元 — 599元</li>
-            <li>599元 — 999元</li>
-            <li>1000元以上</li>
+            <li onclick="filterPrice(0,200)">0元-200元</li>
+            <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
+            <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
+            <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
         </ul>
-        <ul class="category" style="display: none;">
-            <li>分类1</li>
-            <li>分类2</li>
-            <li>分类3</li>
-            <li>分类4</li>
+        <ul class="category" dot-template="tenant-category" style="display: none;">
+
         </ul>
     </div>
 </div>
@@ -48,8 +45,8 @@
     </div>
 </div>
 <!--//End-->
-<div class="filter-list">
-    <dl>
+<div class="filter-list" dot-template="search-productModels">
+    <!--<dl>
         <dt>热搜商品</dt>
         <dd>
             <a href="">
@@ -72,7 +69,7 @@
             </a>
         </dd>
 
-    </dl>
+    </dl>-->
 </div>
 
 
@@ -95,6 +92,33 @@
         {{ } }}
         {{ } }}
     </div>
+</script>
+<script type="text/x-dot-template" id="search-productModels">
+    <dl>
+        <dt>热搜商品</dt>
+        {{
+        for (var i = 0 ; i < it.length ; i++) {
+        var product = it[i];
+        }}
+        {{ if(product.productModel_url != '' && product.price!=null ){ }}
+        <dd>
+            <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
+                <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
+                <p class="text">{{=product.product.name}}</p>
+                <p class="price">¥<span>{{=product.price}}</span></p>
+            </a>
+        <dd>
+            {{ } }}
+            {{ } }}
+    </dl>
+    <a class="more" href="">加载更多</a>
+</script>
+<script type="text/x-dot-template" id="product-category">
+    {{ for( var i=0; i < it.length; i++ ){ }}
+
+    <li onclick="filterCategory(it[i].id)">{{=it[i].name}}</li>
+
+    {{ } }}
 </script>
 
 
@@ -126,7 +150,13 @@
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
-
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        });
+        //品类
+        getProductCategory({}, function () {
+            renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
+        });
         filterSearch();
     }
 
@@ -154,7 +184,7 @@
 
         //第二部分筛选
         $filterTab2.on('touchend', '.together, .price, .sales, .heat', function (e) {
-            var index= $(this).index();
+            var index = $(this).index();
             $filterTab2.find('div').removeClass('active');
             $(this).addClass('active');
             e.preventDefault();
@@ -163,17 +193,37 @@
         //价格
         var indexold = -1;
         $filterTab2.on('touchend', '.price', function (e) {
-            var index=0;
+            var index = 0;
             $(this).addClass('active');
-            if(index==indexold){
+            if (index == indexold) {
                 $(this).toggleClass('active2');
             }
-            indexold=index;
+            indexold = index;
             console.log(indexold)
             e.preventDefault();
         });
 
 
+    }
+    function filterPrice(min, max) {
+        PageVariable.requestModel["startPrice"] = min;
+        PageVariable.requestModel["endPrice"] = max;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
+    }
+    function filterCategory(id) {
+        PageVariable.requestModel["projectCategoryId"] = id;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
+    }
+    function filterOrderBy(field, flag) {
+        PageVariable.requestModel["sortField"] = field;
+        PageVariable.requestModel["sortFlag"] = flag;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
     }
 </script>
 

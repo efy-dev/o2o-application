@@ -85,7 +85,7 @@
 
 <article class="address" id="addressFormPanel" style="display: none;">
     <div class="address-add">
-        <form action="">
+        <form action="" id="addressForm">
             <div class="group">
                 <strong>收货人：</strong>
                 <label for=""><input type="text" placeholder="请输入收货人" id="consignee"/></label>
@@ -298,6 +298,7 @@
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
                 chooseAddress(data.data.id);
+                $("#addressForm")[0].reset();
             });
         });
     }

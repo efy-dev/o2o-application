@@ -91,7 +91,7 @@ var PageVariable = {
     tenantCategory: [],  //店铺品类
     productCategory: [],
     requestModel: {},
-    name:"",
+    name: "",
 
     setCurrentAudio: function (audio) {
         if (PageVariable.currentAudio != null) {
@@ -320,7 +320,7 @@ function createNewOrder(productList, tenantId, callback) {
     var requestParam = {};
     requestParam.productList = productList;
     requestParam.tenantId = tenantId;
-    requestParam.callback = "http://localhost/app/order_details.html";
+    requestParam.callback = "http://www.efeiyi.com/app/order_details.html";
     ajaxRequest(PageVariable.service.createNewOrder, requestParam, success);
 }
 

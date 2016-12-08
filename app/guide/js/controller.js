@@ -4,7 +4,7 @@
  * @returns {string}
  */
 function renderHeader(it /**/) {
-    var out = ' <a href="javascript:history.go(-1)" class="angle left" title="返回上一页"></a><h1 class="text_hidden">' + (it.title) + '</h1><div class="search"><i class="icon"></i><form action=""><input type="text" value="" placeholder="搜索"></form></div><button class="icon user" title="个人中心" style="border: none;"></button> <div class="layer"><a class="link" href="index.html"><i class="icon icon-home"></i>首页</a><a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a><i class="angle"></i></div>';
+    var out = ' <a href="javascript:history.go(-1)" class="angle left" title="返回上一页"></a><h1 class="text_hidden">' + (it.title) + '</h1><div class="search"><i class="icon"></i><form action=""><input class="name" type="text" value="" placeholder="搜索"></form></div><button class="icon user" title="个人中心" style="border: none;"></button> <div class="layer"><a class="link" href="index.html"><i class="icon icon-home"></i>首页</a><a class="link" href="http://i.efeiyi.com/"><i class="icon icon-center"></i>个人中心</a><i class="angle"></i></div>';
     return out;
 }
 

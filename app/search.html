@@ -12,7 +12,7 @@
     <!--/End/-->
     <div class="search active">
         <i class="icon"></i>
-        <form action=""><input type="text" value="" placeholder="搜索"></form>
+        <form action=""><input type="text" class="name" value="" placeholder="搜索"></form>
     </div>
     <!--/End/-->
     <div class="filter-btn">
@@ -24,12 +24,13 @@
 <div class="filter" style="width:100%;position: fixed;top:44px;left: 0;background:#fff;z-index:3;">
     <div class="content">
         <ul class="price" style="display: none;">
+            <li onclick="filterPrice(0,10000000000000000)">全部</li>
             <li onclick="filterPrice(0,200)">0元-200元</li>
             <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
             <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
             <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
         </ul>
-        <ul class="category" dot-template="tenant-category" style="display: none;">
+        <ul class="category" dot-template="product-category" style="display: none;">
 
         </ul>
     </div>
@@ -37,9 +38,9 @@
 
 
 <div class="filter">
-    <div class="tab2">
-        <div class="together">综合</div>
-        <div class="price ">价格<i></i></div>
+    <div id="tab2" class="tab2">
+        <!--<div class="together">综合</div>-->
+        <div class="price">价格<i></i></div>
         <div class="sales">销量</div>
         <div class="heat">热度</div>
     </div>
@@ -105,18 +106,22 @@
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
                 <p class="text">{{=product.product.name}}</p>
+                {{if(product.product.tenant!=null){}}
+                <p class="text">{{=product.product.tenant.name}}</p>
+                {{ }}}
                 <p class="price">¥<span>{{=product.price}}</span></p>
             </a>
-        <dd>
-            {{ } }}
-            {{ } }}
+        </dd>
+        {{ } }}
+        {{ } }}
     </dl>
-    <a class="more" href="">加载更多</a>
+    <a class="more" onclick="loadMore()">加载更多</a>
 </script>
 <script type="text/x-dot-template" id="product-category">
+    <li onclick="filterCategory('')">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
-    <li onclick="filterCategory(it[i].id)">{{=it[i].name}}</li>
+    <li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>
 
     {{ } }}
 </script>
@@ -137,26 +142,52 @@
     var redirect = "http://www.efeiyi.com/app/index.html";
     var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
     wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-        "appid=wx7f6aa253b75466dd" +
-        "&redirect_uri=" +
-        encodeURI(redirect_uri) +
-        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+            "appid=wx7f6aa253b75466dd" +
+            "&redirect_uri=" +
+            encodeURI(redirect_uri) +
+            "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 
     $().ready(function () {
         initPage();
+        var requestParam = getRequestParameter();
+        $('input.name').val(requestParam.name);
     });
 
     function initPage() {
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+
+        searchProductModels({}, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
         //品类
         getProductCategory({}, function () {
             renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
         });
+        $('input.name').on('focus', function () {
+            var $mask = $('<div></div>');
+            $mask.css('width', '100%');
+            $mask.css('height', '100%');
+            $mask.css('position', 'absolute');
+            $mask.css('top', '0');
+            $mask.css('left', '0');
+            $mask.css('z-index', '999');
+
+            $('body').append($mask);
+            $mask.on('click', function() {
+                $mask.remove();
+            })
+
+        })
+
+        $('input.name').on('blur', function () {
+            PageVariable.requestModel["name"] = $(this).val();
+            searchProductModels(PageVariable.requestModel, 6, 0, function () {
+                renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+            });
+            return false;
+        })
         filterSearch();
     }
 
@@ -166,7 +197,6 @@
         var $filterBtn = $('.filter-btn span');
         var $filterUl = $('.filter .content ul');
         var $filterTab2 = $('.filter .tab2');
-
 
         //筛选条件
         $filterBtn.on('touchend', function () {
@@ -187,6 +217,11 @@
             var index = $(this).index();
             $filterTab2.find('div').removeClass('active');
             $(this).addClass('active');
+            if ($(this).attr("class") == "sales" || $(this).attr("class") == "sales active") {
+                filterOrderBy('saleAmount', 'desc');
+            } else if ($(this).attr("class") == "heat" || $(this).attr("class") == "heat active") {
+                filterOrderBy('popularityAmount', 'desc');
+            }
             e.preventDefault();
         });
 
@@ -199,31 +234,45 @@
                 $(this).toggleClass('active2');
             }
             indexold = index;
-            console.log(indexold)
+            if ($(this).attr("class") == "price active active2") {
+                filterOrderBy('price', 'asc');
+            } else if ($(this).attr("class") == "price active") {
+                filterOrderBy('price', 'desc');
+            }
             e.preventDefault();
         });
 
 
     }
+    var page = 1;
     function filterPrice(min, max) {
         PageVariable.requestModel["startPrice"] = min;
         PageVariable.requestModel["endPrice"] = max;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
+        page = 1;
     }
     function filterCategory(id) {
         PageVariable.requestModel["projectCategoryId"] = id;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
+        page = 1;
     }
     function filterOrderBy(field, flag) {
         PageVariable.requestModel["sortField"] = field;
         PageVariable.requestModel["sortFlag"] = flag;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
+        page = 1;
+    }
+    function loadMore() {
+        page = page + 1;
+        searchProductModels(PageVariable.requestModel, 6 * page, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        });
     }
 </script>
 

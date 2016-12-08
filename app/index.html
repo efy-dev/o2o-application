@@ -115,8 +115,10 @@
         getRecommendList({}, 5, 0, function () {
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
-
-
+        $('input.name').on('blur', function () {
+            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
+            window.location.href = "search.html?name=" + $(this).val();
+        });
     }
 
 

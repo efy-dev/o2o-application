@@ -1,6 +1,6 @@
 var api_url = '';
 // var api_url = 'http://192.168.1.10';
-// var api_url = 'http://192.168.1.72';
+var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -91,6 +91,7 @@ var PageVariable = {
     tenantCategory: [],  //店铺品类
     productCategory: [],
     requestModel: {},
+    name:"",
 
     setCurrentAudio: function (audio) {
         if (PageVariable.currentAudio != null) {
@@ -485,6 +486,25 @@ function getProductCategory(id, callback) {
     ajaxRequest(PageVariable.service.getProductCategory, null, success);
 }
 
+function searchProductModels(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam["sortField"] = typeof param.sortField == "undefined" ? "" : param.sortField;
+    requestParam["sortFlag"] = typeof param.sortFlag == "undefined" ? "" : param.sortFlag;
+    requestParam["startPrice"] = typeof param.startPrice == "undefined" ? "" : param.startPrice;
+    requestParam["endPrice"] = typeof  param.endPrice == "undefined" ? "" : param.endPrice;
+    requestParam["projectCategoryId"] = typeof param.projectCategoryId == "undefined" ? "" : param.projectCategoryId;
+    requestParam["name"] = typeof  param.name == "undefined" ? "" : param.name;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
+}
+
 /**
  * @param 筛选店铺内商品
  * @param callback
@@ -501,18 +521,4 @@ function searchProductModelsByTenantGroup(param, limit, offset, callback) {
     requestParam.limit = limit;
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
-}
-
-function searchProductModels(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.productModelList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
 }

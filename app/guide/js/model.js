@@ -1,6 +1,6 @@
 var api_url = '';
 // var api_url = 'http://192.168.1.10';
-var api_url = 'http://192.168.1.72';
+// var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",

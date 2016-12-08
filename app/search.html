@@ -105,11 +105,11 @@
         <dd>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
-                <p class="text">{{=product.product.name}}</p>
+                <p class="text">{{=product.name}}</p>
                 {{if(product.product.tenant!=null){}}
                 <p class="text">{{=product.product.tenant.name}}</p>
                 {{ }}}
-                <p class="price">¥<span>{{=product.price}}</span></p>
+                <p class="text">¥<span>{{=product.price}}</span></p>
             </a>
         </dd>
         {{ } }}
@@ -150,7 +150,12 @@
     $().ready(function () {
         initPage();
         var requestParam = getRequestParameter();
-        $('input.name').val(requestParam.name);
+        requestParam = decodeURI(requestParam.name);
+        $('input.name').val(requestParam);
+        PageVariable.requestModel["name"] = requestParam;
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        });
     });
 
     function initPage() {
@@ -158,9 +163,9 @@
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
 
-        searchProductModels({}, 6, 0, function () {
+     /*   searchProductModels({}, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        });
+        });*/
         //品类
         getProductCategory({}, function () {
             renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
@@ -254,11 +259,13 @@
         page = 1;
     }
     function filterCategory(id) {
+        filterSearch();
         PageVariable.requestModel["projectCategoryId"] = id;
         searchProductModels(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
         page = 1;
+        filterSearch();
     }
     function filterOrderBy(field, flag) {
         PageVariable.requestModel["sortField"] = field;

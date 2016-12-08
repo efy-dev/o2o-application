@@ -309,9 +309,9 @@
 
     function filterCategory(id) {
         if (id != null && id != "undefined") {
-            PageVariable.requestModel["tenantGroup.id"] = id;
+            PageVariable.requestModel["product.tenantGroup.id"] = id;
         } else {
-            delete PageVariable.requestModel["tenantGroup.id"];
+            delete PageVariable.requestModel["product.tenantGroup.id"];
         }
         searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);

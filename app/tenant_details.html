@@ -81,8 +81,9 @@
         <div class="praise" dot-template="tenant-praise"></div>
         <!--//End praise-->
         {{
-        if(it.tenantMasterList.length!=null &&it.tenantMasterList.length > 0) {
+        if(it.tenantMasterList!=null &&it.tenantMasterList.length > 0) {
         var master = it.tenantMasterList[0];
+        if(master.master!=null){
         }}
         <div class="master">
             <a href="http://minglu.efeiyi.com/minglu/master/{{=master.master.id}}">
@@ -95,6 +96,7 @@
             </a>
         </div>
 
+        {{ } }}
         {{ } }}
         <!--//End master-->
     </div>

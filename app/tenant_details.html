@@ -22,11 +22,11 @@
         <div class="content"
              style="width: 100%;position: absolute;top:54px;left: 0;background:#fff;border:0;z-index:10;">
             <ul class="price" style="display: none;">
-                <li onclick="filterPrice(0,10000000000000000)">全部</li>
-                <li onclick="filterPrice(0,200)">0元-200元</li>
-                <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
-                <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
-                <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
+                <li min="0" ,max="10000000000000000">全部</li>
+                <li min="0" max="200">0元-200元</li>
+                <li min="200" max="1000">200元 — 1000元</li>
+                <li min="1000" max="5000">1000元 — 5000元</li>
+                <li min="5000" ,max="10000000000000000">5000元以上</li>
             </ul>
             <ul class="category" dot-template="tenant-category" style="display: none;">
 
@@ -160,11 +160,11 @@
 </script>
 
 <script type="text/x-dot-template" id="tenant-category">
-    <li onclick="filterCategory()">全部</li>
+    <li categoryId="">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
-    <li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>
-
+    <!--<li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>-->
+    <li categoryId="{{=it[i].id}}">{{=it[i].name}}</li>
     {{ } }}
 </script>
 
@@ -272,30 +272,6 @@
             });
         })
     }
-
-    //筛选
-    function filterTenant() {
-        //选择按钮
-        var $filter = $('.filter');
-        var $span = $filter.find('.tab span');
-        var $ul = $filter.find('.content ul');
-        var $tab = $filter.find(".tab");
-
-        $tab.on('touchend', "span", function () {
-            var index = $(this).index();
-            $(this).toggleClass('active').siblings('span').removeClass('active');
-            $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
-        });
-
-        //下拉框：筛选条件
-        $ul.on('touchend', "li", function () {
-            $ul.slideUp(400);
-            $span.removeClass('active');
-            $(this).addClass('active').siblings('li').removeClass('active');
-        });
-
-    }
-
     //价格筛选
     var page = 1;
     function filterPrice(min, max) {
@@ -324,7 +300,32 @@
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
         });
     }
-    //
+
+    //筛选
+    function filterTenant() {
+        //选择按钮
+        var $filter = $('.filter');
+        var $span = $filter.find('.tab span');
+        var $ul = $filter.find('.content ul');
+        var $tab = $filter.find(".tab");
+
+        $tab.on('touchend', "span", function () {
+            var index = $(this).index();
+            $(this).toggleClass('active').siblings('span').removeClass('active');
+            $ul.eq(index).stop(true).slideToggle(200).siblings('ul').slideUp(0);
+        });
+
+        //下拉框：筛选条件
+        $ul.on('touchend', "li", function () {
+            $ul.slideUp(200);
+            $span.removeClass('active');
+            $(this).addClass('active').siblings('li').removeClass('active');
+            filterPrice($(this).attr("min"), $(this).attr("max"));
+            filterCategory($(this).attr("categoryId"))
+        });
+    }
+
+
 
 
 </script>

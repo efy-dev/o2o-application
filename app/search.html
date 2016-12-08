@@ -24,11 +24,11 @@
 <div class="filter" style="width:100%;position: fixed;top:44px;left: 0;background:#fff;z-index:3;">
     <div class="content">
         <ul class="price" style="display: none;">
-            <li onclick="filterPrice(0,10000000000000000)">全部</li>
-            <li onclick="filterPrice(0,200)">0元-200元</li>
-            <li onclick="filterPrice(200,1000)">200元 — 1000元</li>
-            <li onclick="filterPrice(1000,5000)">1000元 — 5000元</li>
-            <li onclick="filterPrice(5000,10000000000000000)">5000元以上</li>
+            <li min="0" max="10000000000000000">全部</li>
+            <li min="0" max="200">0元-200元</li>
+            <li min="200" max="1000">200元 — 1000元</li>
+            <li min=1000" max="5000">1000元 — 5000元</li>
+            <li min="5000" max="10000000000000000">5000元以上</li>
         </ul>
         <ul class="category" dot-template="product-category" style="display: none;">
 
@@ -121,7 +121,7 @@
     <li onclick="filterCategory('')">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
-    <li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>
+    <li categoryId="{{=it[i].id}}" )>{{=it[i].name}}</li>
 
     {{ } }}
 </script>
@@ -196,6 +196,37 @@
         filterSearch();
     }
 
+    var page = 1;
+    function filterCategory(id) {
+        PageVariable.requestModel["projectCategoryId"] = id;
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+    function filterPrice(min, max) {
+        PageVariable.requestModel["startPrice"] = min;
+        PageVariable.requestModel["endPrice"] = max;
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+    function filterOrderBy(field, flag) {
+        PageVariable.requestModel["sortField"] = field;
+        PageVariable.requestModel["sortFlag"] = flag;
+        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        })
+        page = 1;
+    }
+    function loadMore() {
+        page = page + 1;
+        searchProductModels(PageVariable.requestModel, 6 * page, 0, function () {
+            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+        });
+    }
+
     //筛选
     function filterSearch() {
         //选择按钮
@@ -211,10 +242,12 @@
         });
 
         //下拉框：筛选条件
-        $filterUl.find('li').on('click', function () {
+        $filterUl.on('click',"li", function () {
             $filterUl.slideUp(200);
             $(this).addClass('active').siblings('li').removeClass('active');
             $filterBtn.removeClass('active');
+            filterCategory($(this).attr("categoryId"));
+            filterPrice($(this).attr("min"), $(this).attr("max"));
         });
 
         //第二部分筛选
@@ -249,38 +282,7 @@
 
 
     }
-    var page = 1;
-    function filterPrice(min, max) {
-        PageVariable.requestModel["startPrice"] = min;
-        PageVariable.requestModel["endPrice"] = max;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
-    }
-    function filterCategory(id) {
-        filterSearch();
-        PageVariable.requestModel["projectCategoryId"] = id;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
-        filterSearch();
-    }
-    function filterOrderBy(field, flag) {
-        PageVariable.requestModel["sortField"] = field;
-        PageVariable.requestModel["sortFlag"] = flag;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
-    }
-    function loadMore() {
-        page = page + 1;
-        searchProductModels(PageVariable.requestModel, 6 * page, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        });
-    }
+
 </script>
 
 

@@ -19,11 +19,6 @@
                 <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
                 <i class="arrow-right"></i>
             </div>
-            <div class="item">
-                <p><strong>温群英</strong><span>15110008479</span></p>
-                <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
-                <i class="arrow-right"></i>
-            </div>
         </div>
         <input class="btn-new" type="button" value="新增收货地址"/>
     </div>
@@ -62,9 +57,20 @@
 
 <script type="text/x-dot-template" id="address-list">
     {{ for(var i = 0 ; i < it.length ; i++){ }}
-        <div class="item">
+        <div class="item" item-id="{{=it[i].id}}">
             <p><strong>{{=it[i].consignee}}</strong><span>{{=it[i].phone}}</span></p>
-            <p>{{=it[i].details}}</p>
+            <p>
+                {{if(it[i].province!=null) { }}
+                    <label>{{=it[i].province.name}}</label>
+                {{ } }}
+                {{if(it[i].city!=null) { }}
+                    <label>{{=it[i].city.name}}</label>
+                {{ } }}
+                {{if(it[i].district!=null) { }}
+                    <label>{{=it[i].district.name}}</label>
+                {{ } }}
+                <label>{{=it[i].details}}</label>
+            </p>
             <i class="arrow-right"></i>
         </div>
     {{ } }}
@@ -94,6 +100,30 @@
             renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
         });
 
+        addListener();
+    }
+
+    function addressEvent() {
+        var $address = $('article.address');
+        var $list = $address.find('div.address-list'); //地址列表
+        var $add = $address.find('div.address-add');   //新建收货人表单
+        var $selectAddress = $address.find('div.item');   //新增收货人信息按钮
+        var $newAddress = $address.find('input.btn-new');   //新增收货人信息按钮
+
+        //新增收货地址
+        $newAddress.on('click', function () {
+            $list.hide();
+            $add.show();
+            $('h1').html('新增收货地址');
+
+            $('.header').find('a.left').removeAttr('href');
+            $('.header').find('a.left').on('click', function () {
+                location.reload();
+            });
+        });
+    }
+
+    function addListener() {
         $("#save_address").on("click", function () {
             var param = {};
             param.consignee = $("#consignee").val();
@@ -105,8 +135,8 @@
                 return;
             }
 
-            if(param.phone == null || param.phone == "") {
-                modal.overAlert('手机号不能为空', 'fail');
+            if(!(/^1[34578]\d{9}$/.test(param.phone))){
+                modal.overAlert('手机号不能为空或格式不对', 'fail');
                 return;
             }
 
@@ -135,26 +165,12 @@
             }
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
-                if(data.code == "0") {
-                    location.reload();
+                if(data.code != "0") {
+                    modal.overAlert(data.decription, 'fail');
+                    return;
                 }
+                location.reload();
             });
-        });
-
-    }
-
-    function addressEvent() {
-        var $address = $('article.address');
-        var $list = $address.find('div.address-list'); //地址列表
-        var $add = $address.find('div.address-add');   //新建收货人表单
-        var $selectAddress = $address.find('div.item');   //新增收货人信息按钮
-        var $newAddress = $address.find('input.btn-new');   //新增收货人信息按钮
-
-        //新增收货地址
-        $newAddress.on('click', function () {
-            $list.hide();
-            $add.show();
-            $('h1').html('新增收货地址');
         });
     }
 

@@ -297,9 +297,7 @@
             }
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
-                if (data.code == "0") {
-                    location.reload();
-                }
+                chooseAddress(data.data.id);
             });
         });
     }

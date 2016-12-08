@@ -174,7 +174,8 @@
     {{ for(var i = 0 ; i < it.length ; i++){ }}
     <div class="item" onclick="chooseAddress('{{=it[i].id}}')">
         <p><strong>{{=it[i].consignee}}</strong><span>{{=it[i].phone}}</span></p>
-        <p>{{=it[i].province.name+it[i].city.name+it[i].district.name+it[i].details}}</p>
+        <p>
+            {{=getValue(it[i].province,'name')+getValue(it[i].city,'name')+getValue(it[i].district,'name')+it[i].details}}</p>
         <i class="arrow-right"></i>
     </div>
     {{ } }}
@@ -276,9 +277,12 @@
                 return;
             }
 
-            var provinceId = $("#0").val();
-            var cityId = $("#1").val();
-            var districtId = $("#2").val();
+            var city = $("#city_value").val();
+            var city_arr = city.split(',');
+
+            var provinceId = city_arr[0];
+            var cityId = city_arr[1];
+            var districtId = city_arr[2];
 
             if (provinceId != null && provinceId != "") {
                 param.provinceId = provinceId;
@@ -293,10 +297,9 @@
             }
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
-//                if (data.code == "0") {
-//                    location.reload();
-//                }
-                chooseAddress(data.data.id);
+                if (data.code == "0") {
+                    location.reload();
+                }
             });
         });
     }
@@ -346,8 +349,9 @@
         $("#addressListPanel").show();
         getAddressList(function () {
             renderTemplate(PageVariable.template.addressList, PageVariable.addressList);
-
         });
+
+        backOrder();
     }
 
     function chooseAddress(id) {
@@ -357,12 +361,48 @@
         getConsumerAddressById(id, function () {
             renderTemplate(PageVariable.template.purchaseAddress, PageVariable.currentAddress)
         });
+        backPrePage();
     }
 
     function newAddress() {
         $("#addressFormPanel").show();
         $("#addressListPanel").hide();
         $("#orderPanel").hide();
+        backAddressList();
+    }
+
+    function backOrder() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            $("#orderPanel").show();
+            $("#addressListPanel").hide();
+            $("#addressFormPanel").hide();
+            backPrePage();
+        });
+
+    }
+
+    function backAddressList() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            $("#orderPanel").hide();
+            $("#addressFormPanel").hide();
+            $("#addressListPanel").show();
+            backOrder();
+        });
+    }
+
+    function backPrePage() {
+        var $backButton = $(".header").find("a");
+        $backButton.unbind();
+        $backButton.attr("href", "javascript:void(0)");
+        $backButton.click(function () {
+            history.go(-1);
+        });
     }
 
 
@@ -394,9 +434,16 @@
         //新增收货地址
         $newAddress.on('click', function () {
             $("#save_address").attr("fun-type", "add");
-            $('h1').html('新增收货地址');
         });
 
+    }
+
+    function getValue(obj, key) {
+        if (obj != null && typeof obj != "undefined") {
+            return obj[key]
+        } else {
+            return "";
+        }
     }
 
 

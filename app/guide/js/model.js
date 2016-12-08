@@ -1,6 +1,6 @@
-var api_url = '';
+//var api_url = '';
 // var api_url = 'http://192.168.1.10';
-// var api_url = 'http://192.168.1.72';
+ var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -518,6 +518,8 @@ function searchProductModelsByTenantGroup(param, limit, offset, callback) {
     };
     var requestParam = {};
     requestParam.param = JSON.stringify(param);
+    requestParam.param["endPrice"]=="undefined"?"":param.endPrice;
+    requestParam.param["startPrice"]=="undefined"?"":param.startPrice;
     requestParam.limit = limit;
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,11 +159,11 @@
 </script>
 
 <script type="text/x-dot-template" id="tenant-category">
-    <li categoryId="">全部</li>
+    <li class='category' categoryId="">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
     <!--<li onclick="filterCategory('{{=it[i].id}}')">{{=it[i].name}}</li>-->
-    <li categoryId="{{=it[i].id}}">{{=it[i].name}}</li>
+    <li class='category' categoryId="{{=it[i].id}}">{{=it[i].name}}</li>
     {{ } }}
 </script>
 
@@ -199,11 +198,11 @@
             var redirect = "http://www.efeiyi.com/qrcode/redirect/tenant/" + PageVariable.tenantId;
             var redirect_uri = "http://mall.efeiyi.com/wx/login.do?redirect=" + redirect;
             wx_share_link = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=wx7f6aa253b75466dd" +
-                "&redirect_uri=" +
-                encodeURI(redirect_uri) +
+                    "appid=wx7f6aa253b75466dd" +
+                    "&redirect_uri=" +
+                    encodeURI(redirect_uri) +
 
-                "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+                    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             wx_share_imgUrl = PageVariable.tenant.pictureUrl + "@!o2o-audio-list";
             renderTemplate(PageVariable.template.tenantBase, PageVariable.tenant);
             getTenantPraiseListByTenant(PageVariable.tenantId, function () {
@@ -246,7 +245,7 @@
             renderTemplate(PageVariable.template.tenantCategory, PageVariable.tenantCategory);
         });
         $('input.name').on('blur', function () {
-          //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
+            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
             window.location.href = "search.html?name=" + $(this).val();
         });
         filterTenant();
@@ -284,14 +283,14 @@
     }
 
     function filterCategory(id) {
-        if (id != null && id != "undefined") {
-            PageVariable.requestModel["product.tenantGroup.id"] = id;
-        } else {
+        if (id == "") {
             delete PageVariable.requestModel["product.tenantGroup.id"];
+        } else {
+            PageVariable.requestModel["product.tenantGroup.id"] = id;
         }
         searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        })
+        });
         page = 1;
     }
     function loadMore() {
@@ -320,12 +319,14 @@
             $ul.slideUp(200);
             $span.removeClass('active');
             $(this).addClass('active').siblings('li').removeClass('active');
-            filterPrice($(this).attr("min"), $(this).attr("max"));
-            filterCategory($(this).attr("categoryId"))
+            if ($(this).attr("class") == "active") {
+                filterPrice($(this).attr("min"), $(this).attr("max"));
+            }
+            if ($(this).attr("class") == "category active") {
+                filterCategory($(this).attr("categoryId"));
+            }
         });
     }
-
-
 
 
 </script>

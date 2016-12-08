@@ -12,7 +12,7 @@
     <!--/End/-->
     <div class="search active">
         <i class="icon"></i>
-        <form action=""><input type="text" class="name" value="" placeholder="搜索"></form>
+        <input type="text" class="name" value="" placeholder="搜索">
     </div>
     <!--/End/-->
     <div class="filter-btn">
@@ -101,7 +101,7 @@
         for (var i = 0 ; i < it.length ; i++) {
         var product = it[i];
         }}
-        {{ if(product.productModel_url != '' && product.price!=null ){ }}
+        {{ if(product.productModel_url != '' && product.price!=null){ }}
         <dd>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
@@ -118,7 +118,7 @@
     <a class="more" onclick="loadMore()">加载更多</a>
 </script>
 <script type="text/x-dot-template" id="product-category">
-    <li onclick="filterCategory('')">全部</li>
+    <li categoryId="">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
 
     <li categoryId="{{=it[i].id}}" )>{{=it[i].name}}</li>
@@ -156,6 +156,10 @@
         searchProductModels(PageVariable.requestModel, 6, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
+        $('input.name').on('blur', function () {
+            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
+            window.location.href = "search.html?name=" + $(this).val();
+        })
     });
 
     function initPage() {
@@ -246,8 +250,12 @@
             $filterUl.slideUp(200);
             $(this).addClass('active').siblings('li').removeClass('active');
             $filterBtn.removeClass('active');
-            filterCategory($(this).attr("categoryId"));
-            filterPrice($(this).attr("min"), $(this).attr("max"));
+            if ($(this).attr("class") == "active") {
+                filterPrice($(this).attr("min"), $(this).attr("max"));
+            }
+            if ($(this).parent().attr("class") == "category") {
+                filterCategory($(this).attr("categoryId"));
+            };
         });
 
         //第二部分筛选

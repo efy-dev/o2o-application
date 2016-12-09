@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>前门华韵</title>
+    <link rel="stylesheet" href="guide/css/layouts.css">
+</head>
+<body>
+<div class="header" dot-template="header"></div>
+
+
+<article>
+    <img src="http://wiki-oss.efeiyi.com/picture/020.jpg@!o2o-sale-and-o2o">
+</article>
+
+<script src="common/js/common.js"></script>
+<script src="common/js/util.js"></script>
+<script src="common/js/weixin.js"></script>
+<script src="guide/js/controller.js"></script>
+<script src="guide/js/model.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+
+    $().ready(function () {
+        initPage()
+    });
+
+
+    function initPage() {
+        PageVariable.title = "前门华韵";
+        $("[dot-template=header]").html(renderHeader(PageVariable));
+    }
+
+</script>
+
+</body>
+</html>

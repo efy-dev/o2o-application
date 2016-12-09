@@ -30,7 +30,7 @@
             <li min=1000" max="5000">1000元 — 5000元</li>
             <li min="5000" max="10000000000000000">5000元以上</li>
         </ul>
-        <ul class="category" dot-template="product-category" style="display: none;">
+        <ul class="category" id="category" dot-template="product-category" style="display: none;">
 
         </ul>
     </div>
@@ -257,9 +257,9 @@
             }
             indexold = index;
             if ($(this).attr("class") == "price active active2") {
-                filterOrderBy('price', 'asc');
-            } else if ($(this).attr("class") == "price active") {
                 filterOrderBy('price', 'desc');
+            } else if ($(this).attr("class") == "price active") {
+                filterOrderBy('price', 'asc');
             }
             e.preventDefault();
         });

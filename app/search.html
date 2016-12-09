@@ -74,26 +74,6 @@
 </div>
 
 
-<script type="text/x-dot-template" id="home-recommend-list">
-    <div class="swiper-wrapper">
-        {{ for(var i = 0 ; i < it.length ;i++){ }}
-        {{ if(it[i].image!=null){ }}
-        <div class="swiper-slide">
-            <a href="{{=it[i].redirect}}">
-                <img src="{{=it[i].image.src}}@!o2o-tenant-list" alt="">
-                <div class="base">
-                    <dl class="txt" style="padding-right: 0px;">
-                        <dt>{{=it[i].title}}</dt>
-                        <dd>{{=it[i].shortText}}</dd>
-                    </dl>
-                </div>
-            </a>
-        </div>
-        <!--//End 3-->
-        {{ } }}
-        {{ } }}
-    </div>
-</script>
 <script type="text/x-dot-template" id="search-productModels">
     <dl>
         <dt>热搜商品</dt>
@@ -104,7 +84,7 @@
         {{ if(product.productModel_url != '' && product.price!=null){ }}
         <dd>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
-                <img src="{{=product.productModel_url}}@!o2o-tenant-list" alt="">
+                <img src="{{=product.productModel_url}}@!o2o-audio-list" alt="">
                 <p class="text">{{=product.name}}</p>
                 {{if(product.product.tenant!=null){}}
                 <p class="text">{{=product.product.tenant.name}}</p>

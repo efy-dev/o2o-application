@@ -101,7 +101,7 @@
         var product = it.productList[i];
         }}
         <div class="text">
-            <img src="uploads/guide1.jpg" alt="">
+            <img src="{{=product.imageUrl}}" alt="">
             <p class="title text_hidden">{{=product.productModelName}}</p>
             <p class="subtitle text_hidden">店铺名称：{{=it.purchaseOrder.tenantName}}</p>
             <p class="price text_hidden"><strong>¥{{=product.price}}</strong><span>X</span>{{=product.amount}}</p>
@@ -163,9 +163,6 @@
 
         })
     }
-
-
-
 
 
 </script>

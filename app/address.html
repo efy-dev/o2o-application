@@ -14,11 +14,11 @@
 <article class="address">
     <div class="address-list" style="display: block;">
         <div dot-template="address-list">
-            <div class="item">
+            <!--<div class="item">
                 <p><strong>温群英</strong><span>15110008479</span></p>
                 <p>北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
                 <i class="arrow-right"></i>
-            </div>
+            </div>-->
         </div>
         <input class="btn-new" type="button" value="新增收货地址"/>
     </div>
@@ -116,7 +116,7 @@
             $add.show();
             $('h1').html('新增收货地址');
 
-            $('.header').find('a.left').removeAttr('href');
+            $('.header').find('a.left').attr('href', 'JavaScript:void(0)');
             $('.header').find('a.left').on('click', function () {
                 location.reload();
             });
@@ -165,10 +165,6 @@
             }
 
             ajaxRequest(PageVariable.service.addAddress, param, function (data) {
-                if(data.code != "0") {
-                    modal.overAlert(data.decription, 'fail');
-                    return;
-                }
                 location.reload();
             });
         });
@@ -183,7 +179,7 @@
             name: 'name'
         }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
         'type': 1, //数据源类型
-        'data': LAreaData //数据源
+        'data': (typeof LAreaData != 'undefined' && LAreaData != null) ? LAreaData : []//数据源
     });
     area.value=[0,0,2];//控制初始位置，注意：该方法并不会影响到input的value
 

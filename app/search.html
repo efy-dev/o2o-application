@@ -85,11 +85,15 @@
         <dd>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-audio-list" alt="">
-                <p class="text">{{=product.name}}</p>
-                {{if(product.product.tenant!=null){}}
-                <p class="text">{{=product.product.tenant.name}}</p>
-                {{ }}}
-                <p class="text">¥<span>{{=product.price}}</span></p>
+                <div class="text">
+                    <p>{{=product.name}}</p>
+                    {{if(product.product.tenant!=null){}}
+                    <p>{{=product.product.tenant.name}}</p>
+                    {{ }else{ }}
+                    <p>&nbsp;</p>
+                    {{ } }}
+                    <p>¥<span>{{=product.price}}</span></p>
+                </div>
             </a>
         </dd>
         {{ } }}
@@ -129,28 +133,19 @@
 
     $().ready(function () {
         initPage();
+    });
+
+    function initPage() {
         var requestParam = getRequestParameter();
         requestParam = decodeURI(requestParam.name);
         $('input.name').val(requestParam);
         PageVariable.requestModel["name"] = requestParam;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
         $('input.name').on('blur', function () {
-            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
             window.location.href = "search.html?name=" + $(this).val();
         })
-    });
-
-    function initPage() {
-        getRecommendList({}, 5, 0, function () {
-            renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
-        });
-
-     /*   searchProductModels({}, 6, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        });*/
-        //品类
         getProductCategory({}, function () {
             renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
         });
@@ -164,7 +159,7 @@
             $mask.css('z-index', '999');
 
             $('body').append($mask);
-            $mask.on('click', function() {
+            $mask.on('click', function () {
                 $mask.remove();
             })
 
@@ -172,7 +167,7 @@
 
         $('input.name').on('blur', function () {
             PageVariable.requestModel["name"] = $(this).val();
-            searchProductModels(PageVariable.requestModel, 6, 0, function () {
+            searchProductModels(PageVariable.requestModel, 30, 0, function () {
                 renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
             });
             return false;
@@ -183,7 +178,7 @@
     var page = 1;
     function filterCategory(id) {
         PageVariable.requestModel["projectCategoryId"] = id;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
         page = 1;
@@ -191,7 +186,7 @@
     function filterPrice(min, max) {
         PageVariable.requestModel["startPrice"] = min;
         PageVariable.requestModel["endPrice"] = max;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
         page = 1;
@@ -199,14 +194,14 @@
     function filterOrderBy(field, flag) {
         PageVariable.requestModel["sortField"] = field;
         PageVariable.requestModel["sortFlag"] = flag;
-        searchProductModels(PageVariable.requestModel, 6, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         })
         page = 1;
     }
     function loadMore() {
         page = page + 1;
-        searchProductModels(PageVariable.requestModel, 6 * page, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30 * page, 0, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
     }
@@ -226,16 +221,17 @@
         });
 
         //下拉框：筛选条件
-        $filterUl.on('click',"li", function () {
+        $filterUl.on('click', "li", function () {
             $filterUl.slideUp(200);
             $(this).addClass('active').siblings('li').removeClass('active');
             $filterBtn.removeClass('active');
-            if ($(this).attr("class") == "active") {
-                filterPrice($(this).attr("min"), $(this).attr("max"));
-            }
             if ($(this).parent().attr("class") == "category") {
                 filterCategory($(this).attr("categoryId"));
-            };
+            }
+            if ($(this).parent().attr("class") == "price") {
+                filterPrice($(this).attr("min"), $(this).attr("max"));
+            }
+            return false;
         });
 
         //第二部分筛选

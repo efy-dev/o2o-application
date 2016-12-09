@@ -1,6 +1,6 @@
 var api_url = '';
 // var api_url = 'http://192.168.1.10';
-//  var api_url = 'http://192.168.1.72';
+//var api_url = 'http://192.168.1.72';
 var PageVariable = {
     template: {
         homeRecommendList: "home-recommend-list",
@@ -54,7 +54,6 @@ var PageVariable = {
         getCityList: api_url + "/address/getCityList",
         getDistrictList: api_url + "/address/getDistrictList",
         addAddress: api_url + "/address/addAddress",
-        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
         getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
         confirmOrderById: api_url + "/order/confirmOrderById",
         getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",

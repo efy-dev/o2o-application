@@ -316,7 +316,7 @@
         });
 
         //下拉框：筛选条件
-        $ul.on('touchend', "li", function () {
+        $ul.on('click', "li", function () {
             $ul.slideUp(200);
             $span.removeClass('active');
             $(this).addClass('active').siblings('li').removeClass('active');

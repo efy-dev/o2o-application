@@ -2486,6 +2486,19 @@ footer .copyright {
     color: #b5261f;
 }
 
+.filter ul.category {
+    width:100%;
+    height:250px;
+    overflow: auto;
+    float: left;
+}
+.filter ul.category li.category {
+    width:100%;
+}
+
+
+
+
 .filter-list {
     padding: 0 16px;
 }

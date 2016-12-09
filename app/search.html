@@ -85,11 +85,15 @@
         <dd>
             <a href="product_details.html?productId={{=product.id}}&title={{=product.product.name}}">
                 <img src="{{=product.productModel_url}}@!o2o-audio-list" alt="">
-                <p class="text">{{=product.name}}</p>
-                {{if(product.product.tenant!=null){}}
-                <p class="text">{{=product.product.tenant.name}}</p>
-                {{ }}}
-                <p class="text">¥<span>{{=product.price}}</span></p>
+                <div class="text">
+                    <p>{{=product.name}}</p>
+                    {{if(product.product.tenant!=null){}}
+                    <p>{{=product.product.tenant.name}}</p>
+                    {{ }else{ }}
+                    <p>&nbsp;</p>
+                    {{ } }}
+                    <p>¥<span>{{=product.price}}</span></p>
+                </div>
             </a>
         </dd>
         {{ } }}
@@ -147,9 +151,9 @@
             renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
         });
 
-     /*   searchProductModels({}, 6, 0, function () {
-            renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        });*/
+        /*   searchProductModels({}, 6, 0, function () {
+         renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
+         });*/
         //品类
         getProductCategory({}, function () {
             renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
@@ -164,7 +168,7 @@
             $mask.css('z-index', '999');
 
             $('body').append($mask);
-            $mask.on('click', function() {
+            $mask.on('click', function () {
                 $mask.remove();
             })
 
@@ -226,7 +230,7 @@
         });
 
         //下拉框：筛选条件
-        $filterUl.on('click',"li", function () {
+        $filterUl.on('click', "li", function () {
             $filterUl.slideUp(200);
             $(this).addClass('active').siblings('li').removeClass('active');
             $filterBtn.removeClass('active');
@@ -235,7 +239,8 @@
             }
             if ($(this).parent().attr("class") == "category") {
                 filterCategory($(this).attr("categoryId"));
-            };
+            }
+            ;
         });
 
         //第二部分筛选

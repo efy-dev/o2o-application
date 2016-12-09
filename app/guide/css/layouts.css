@@ -2941,7 +2941,8 @@ footer .copyright {
     display: none;
 }
 
-.more {
+.product-list .more,
+.filter-list .more{
     width:100%;
     height:44px;
     line-height:14px;
@@ -2956,8 +2957,3 @@ footer .copyright {
     margin-bottom:20px;
     background: #fff;
 }
-
-
-
-
-

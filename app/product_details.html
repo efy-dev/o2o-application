@@ -57,12 +57,12 @@
             <div class="subtitle">{{=it.product.subName}}</div>
 
             {{ if(it.price != null){ }}
-            <div class="price"><span> ¥ </span><strong>{{=it.price}}</strong></div>
+            <div class="price"><span> ¥ </span><strong>{{=it.price}} </strong></div>
             <div class="fixed">
                 <a class="tenant_link"
                    href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
                 <a href="http://www.efeiyi.com/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&callback={{=encodeURIComponent('http://www.efeiyi.com/app/order_details.html')}}&tenantId={{=it.product.tenant.id}}"
-                   class="button-block-danger">立即购买</a>
+                   class="button-block-danger">立即购买{{if(it.product.tenant.discount!=null) { }}享{{=it.product.tenant.discount/10}}折优惠{{ } }}</a>
             </div>
             {{ }else{ }}
             <div class="fixed"><a class="tenant_link" style="bottom:16px"

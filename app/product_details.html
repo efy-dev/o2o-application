@@ -12,13 +12,12 @@
     </style>
 </head>
 <body class="detail" style="padding-bottom:60px">
+
 <div class="header" dot-template="header"></div>
-<!--//End--header-->
 
 <div dot-template="product-base"></div>
 
 <div class="wlist" dot-template="product-detail"></div>
-<!--//End wlist-->
 
 <div class="fixed" dot-template="product-buy"></div>
 
@@ -114,17 +113,6 @@
     {{ } }}
 </script>
 
-<!--<script type="text/x-dot-template" id="product-buy">
-    {{ if( it.amount > 0 ){ }}
-        <a class="tenant_link" href="tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
-        <a href="http://mall.efeiyi.com/order/saveOrUpdateOrder2.do?productModelId={{=it.id}}&amount=1&price={{=it.price}}&orderType=6&callback=http%3a%2f%2fi.efeiyi.com%2forder%2fmyEfeiyi%2fview%2f{{=it.id}}"
-           class="button-block-danger">立即购买</a>
-    {{ }else{ }}
-        <a class="tenant_link" style="bottom:16px" href="tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
-    {{ } }}
-</script>-->
-
-
 <script src="common/js/common.js"></script>
 <script src="common/js/util.js"></script>
 <script src="common/js/weixin.js"></script>
@@ -161,14 +149,17 @@
                 encodeURI(redirect_uri) +
                 "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             wx_share_imgUrl = PageVariable.productModel.productModel_url + "@!o2o-audio-list";
+
             renderTemplate(PageVariable.template.productBase, PageVariable.productModel);
             renderTemplate(PageVariable.template.productBuy, PageVariable.productModel);
+
             $(".audio-box").each(function () {
                 PageVariable.audioList.push(new Audio($(this).attr("id"), true));
                 wx.ready(function () {
                     PageVariable.setCurrentAudio(PageVariable.audioList[0]);
                 })
             });
+
             var project = PageVariable.productModel.product.project;
             if (project != null) {
                 artistryUrl(project.id);
@@ -181,7 +172,6 @@
         })
 
     }
-
 
     function artistryUrl(projectId) {
         hasArtistry(projectId, function () {

@@ -282,6 +282,7 @@
         page = 1;
     }
 
+
     function filterCategory(id) {
         if (id == "") {
             delete PageVariable.requestModel["product.tenantGroup.id"];
@@ -293,6 +294,8 @@
         });
         page = 1;
     }
+
+
     function loadMore() {
         page = page + 1;
         searchProductModelsByTenantGroup(PageVariable.requestModel, 6 * page, 0, function () {

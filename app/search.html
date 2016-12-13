@@ -6,7 +6,11 @@
     <title>搜索结果页</title>
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
+
+
 <body style="background:#f5f5f5;">
+
+
 <div class="header pagesearch">
     <a href="javascript:history.go(-1)" class="angle left" title="返回上一页"></a>
     <!--/End/-->
@@ -20,7 +24,8 @@
         <span>分类</span>
     </div>
 </div>
-<!--//End--header-->
+
+
 <div class="filter" style="width:100%;position: fixed;top:44px;left: 0;background:#fff;z-index:3;">
     <div class="content">
         <ul class="price" style="display: none;">
@@ -45,7 +50,8 @@
         <div class="heat">热度</div>
     </div>
 </div>
-<!--//End-->
+
+
 <div class="filter-list" dot-template="search-productModels">
     <!--<dl>
         <dt>热搜商品</dt>
@@ -101,6 +107,8 @@
     </dl>
     <a class="more" onclick="loadMore()">加载更多</a>
 </script>
+
+
 <script type="text/x-dot-template" id="product-category">
     <li categoryId="">全部</li>
     {{ for( var i=0; i < it.length; i++ ){ }}
@@ -205,7 +213,6 @@
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
     }
-
     //筛选
     function filterSearch() {
         //选择按钮

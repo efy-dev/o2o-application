@@ -111,22 +111,6 @@ var PageVariable = {
     }
 };
 
-function getTenantById(id, callback) {
-    var success = function (data) {
-        PageVariable.tenant = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.viewTenantById, requestParam, success);
-}
-
-//@TODO
-function getColumnListByTenant(id) {
-
-}
 
 function getCurrentUser(callback) {
     var success = function (data) {
@@ -139,6 +123,20 @@ function getCurrentUser(callback) {
 }
 
 
+// ----------------------tenant start------------------------
+
+function getTenantById(id, callback) {
+    var success = function (data) {
+        PageVariable.tenant = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.viewTenantById, requestParam, success);
+}
+
 function getTenantPraiseListByTenant(id, callback) {
     var success = function (data) {
         PageVariable.tenantPraiseList = data;
@@ -150,7 +148,6 @@ function getTenantPraiseListByTenant(id, callback) {
     requestParam.id = id;
     ajaxRequest(PageVariable.service.listTenantPraise, requestParam, success);
 }
-
 
 function saveTenantPraise(tenantId, delFlag, callback) {
     var success = function (data) {
@@ -178,6 +175,62 @@ function saveTenantPraise(tenantId, delFlag, callback) {
 
 }
 
+function getTenantList(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.tenantList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.listTenant, requestParam, success);
+}
+
+function getImageTextListByTenant(id, callback) {
+    var success = function (data) {
+        PageVariable.imageTextList = data;
+        if (typeof callback == "function") {
+            callback();
+            swiperContaniner('[dot-template=tenant-panel-list]');
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.listTenantPanel, requestParam, success);
+}
+
+function getPanelById(id, callback) {
+    var success = function (data) {
+        PageVariable.panelList = data;
+        if (typeof callback == "function") {
+            callback();
+            swiperContaniner('.swiper-container');
+        }
+    };
+
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.panelById, requestParam, success);
+}
+
+function getOrderById(id, callback) {
+    var success = function (data) {
+        PageVariable.appointment = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.id = id;
+    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
+}
+
+// ----------------------tenant end--------------------------
+
+// ----------------------product start------------------------
 
 function getProductModelById(id, callback) {
     var success = function (data) {
@@ -203,20 +256,6 @@ function getColumnListByProductModel(id, callback) {
     ajaxRequest(PageVariable.service.listProductModelPanel, requestParam, success);
 }
 
-function getTenantList(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.tenantList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.listTenant, requestParam, success);
-}
-
 function getProductModelList(param, limit, offset, callback) {
     var success = function (data) {
         PageVariable.productModelList = data;
@@ -232,74 +271,6 @@ function getProductModelList(param, limit, offset, callback) {
     ajaxRequest(PageVariable.service.listProductModel, requestParam, success);
 }
 
-function getImageTextListByTenant(id, callback) {
-    var success = function (data) {
-        PageVariable.imageTextList = data;
-        if (typeof callback == "function") {
-            callback();
-            swiperContaniner('[dot-template=tenant-panel-list]');
-        }
-    };
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.listTenantPanel, requestParam, success);
-}
-
-//@TODO
-function getImageTextById(id) {
-
-}
-
-function getRecommendList(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.recommendList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = param;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.listRecommend, requestParam, success);
-}
-
-/**
- * @param 店铺实景
- * @param callback
- */
-function getPanelById(id, callback) {
-    var success = function (data) {
-        PageVariable.panelList = data;
-        if (typeof callback == "function") {
-            callback();
-            swiperContaniner('.swiper-container');
-        }
-    };
-
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.panelById, requestParam, success);
-}
-
-
-/**
- * @param 店铺预约
- * @param callback
- */
-function getOrderById(id, callback) {
-    var success = function (data) {
-        PageVariable.appointment = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.id = id;
-    ajaxRequest(PageVariable.service.getOrderById, requestParam, success);
-}
-
-
 function hasArtistry(projectId, callback) {
     var success = function (data) {
         PageVariable.hasArtistry = data;
@@ -310,6 +281,72 @@ function hasArtistry(projectId, callback) {
     ajaxRequest(PageVariable.service.hasArtistry, requestParam, success);
 }
 
+function getTenantCategory(id, callback) {
+    console.log('====' + id)
+
+    var success = function (data) {
+        PageVariable.tenantCategory = data;
+
+        console.log(data)
+
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.tenantId = id;
+    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
+}
+
+function getProductCategory(id, callback) {
+    var success = function (data) {
+        PageVariable.productCategory = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.getProductCategory, null, success);
+}
+
+function searchProductModels(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam["sortField"] = typeof param.sortField == "undefined" ? "" : param.sortField;
+    requestParam["sortFlag"] = typeof param.sortFlag == "undefined" ? "" : param.sortFlag;
+    requestParam["startPrice"] = typeof param.startPrice == "undefined" ? "" : param.startPrice;
+    requestParam["endPrice"] = typeof  param.endPrice == "undefined" ? "" : param.endPrice;
+    requestParam["projectCategoryId"] = typeof param.projectCategoryId == "undefined" ? "" : param.projectCategoryId;
+    requestParam["name"] = typeof  param.name == "undefined" ? "" : param.name;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
+}
+
+function searchProductModelsByTenantGroup(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.productModelList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = JSON.stringify(param);
+    requestParam.param["endPrice"] == "undefined" ? "" : param.endPrice;
+    requestParam.param["startPrice"] == "undefined" ? "" : param.startPrice;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
+}
+
+
+// ----------------------product end--------------------------
+
+// ----------------------order start------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 function createNewOrder(productList, tenantId, callback) {
     var success = function (data) {
@@ -353,18 +390,22 @@ function getPurchaseOrderById(id, callback) {
     ajaxRequest(PageVariable.service.getPurchaseOrderById, requestParam, success);
 }
 
-
-function authenticationFilter(filterMappingFunction, failFunction) {
+function getDeliveryInfoBySerial(serial, company, callback) {
     var success = function (data) {
-        PageVariable.hasAuthenticated = data.hasAuthenticated;
-        if (PageVariable.hasAuthenticated) {
-            filterMappingFunction();
-        } else {
-            failFunction();
-        }
+        PageVariable.deliveryInfo = data.src;
+        callback();
     };
-    ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+    var requestParam = {};
+    requestParam.serial = serial;
+    requestParam.company = company;
+    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
+
 }
+
+
+// ----------------------order end--------------------------
+
+// ----------------------address start------------------------
 
 function getDefaultConsumerAddress(callback) {
     var success = function (data) {
@@ -380,19 +421,6 @@ function getDefaultConsumerAddress(callback) {
         callback();
     };
     ajaxRequest(PageVariable.service.getDefaultConsumerAddress, {}, success);
-}
-
-
-function getDeliveryInfoBySerial(serial, company, callback) {
-    var success = function (data) {
-        PageVariable.deliveryInfo = data.src;
-        callback();
-    };
-    var requestParam = {};
-    requestParam.serial = serial;
-    requestParam.company = company;
-    ajaxRequest(PageVariable.service.getDeliveryInfoBySerial, requestParam, success);
-
 }
 
 function getAddressList(callback) {
@@ -451,75 +479,36 @@ function getDistrictList(param, callback) {
     ajaxRequest(PageVariable.service.getDistrictList, param, success);
 }
 
+// ----------------------address end--------------------------
+
+// ----------------------other start--------------------------
+
+function getRecommendList(param, limit, offset, callback) {
+    var success = function (data) {
+        PageVariable.recommendList = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.param = param;
+    requestParam.limit = limit;
+    requestParam.offset = offset;
+    ajaxRequest(PageVariable.service.listRecommend, requestParam, success);
+}
+
+function authenticationFilter(filterMappingFunction, failFunction) {
+    var success = function (data) {
+        PageVariable.hasAuthenticated = data.hasAuthenticated;
+        if (PageVariable.hasAuthenticated) {
+            filterMappingFunction();
+        } else {
+            failFunction();
+        }
+    };
+    ajaxRequest(PageVariable.service.hasAuthenticated, {}, success);
+}
+
+// ----------------------other end----------------------------
+
 getCurrentUser();
-
-
-/**
- * @param 店铺品类
- * @param callback
- */
-function getTenantCategory(id, callback) {
-    console.log('====' + id)
-
-    var success = function (data) {
-        PageVariable.tenantCategory = data;
-
-        console.log(data)
-
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.tenantId = id;
-    ajaxRequest(PageVariable.service.tenantCategoryId, requestParam, success);
-}
-
-function getProductCategory(id, callback) {
-    var success = function (data) {
-        PageVariable.productCategory = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    ajaxRequest(PageVariable.service.getProductCategory, null, success);
-}
-
-function searchProductModels(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.productModelList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam["sortField"] = typeof param.sortField == "undefined" ? "" : param.sortField;
-    requestParam["sortFlag"] = typeof param.sortFlag == "undefined" ? "" : param.sortFlag;
-    requestParam["startPrice"] = typeof param.startPrice == "undefined" ? "" : param.startPrice;
-    requestParam["endPrice"] = typeof  param.endPrice == "undefined" ? "" : param.endPrice;
-    requestParam["projectCategoryId"] = typeof param.projectCategoryId == "undefined" ? "" : param.projectCategoryId;
-    requestParam["name"] = typeof  param.name == "undefined" ? "" : param.name;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
-}
-
-/**
- * @param 筛选店铺内商品
- * @param callback
- */
-function searchProductModelsByTenantGroup(param, limit, offset, callback) {
-    var success = function (data) {
-        PageVariable.productModelList = data;
-        if (typeof callback == "function") {
-            callback();
-        }
-    };
-    var requestParam = {};
-    requestParam.param = JSON.stringify(param);
-    requestParam.param["endPrice"]=="undefined"?"":param.endPrice;
-    requestParam.param["startPrice"]=="undefined"?"":param.startPrice;
-    requestParam.limit = limit;
-    requestParam.offset = offset;
-    ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
-}

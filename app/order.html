@@ -331,7 +331,7 @@
             modal.overAlert("请选择收货地址", "fail");
         } else {
             confirmOrderById(orderId, consumerAddressId, invoiceName, invoiceType, invoiceTitle, payment, function () {
-                var redirectUrl = "http://www.efeiyi.com/order/pay/" + orderId;
+                var redirectUrl = "/order/pay/" + orderId;
                 if (isWeiXin()) {
                     redirectUrl += "?isWeiXin=true";
                 }

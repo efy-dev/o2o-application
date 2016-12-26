@@ -60,7 +60,7 @@
             <div class="fixed">
                 <a class="tenant_link"
                    href="/app/tenant_details.html?tenantId={{=it.product.tenant.id}}&title={{=it.product.tenant.name}}"></a>
-                <a href="http://www.efeiyi.com/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&callback={{=encodeURIComponent('http://www.efeiyi.com/app/order_details.html')}}&tenantId={{=it.product.tenant.id}}"
+                <a href="/app/order.html?productList={{=generateJSONArrayFromProduct(it)}}&callback={{=encodeURIComponent('http://www.efeiyi.com/app/order_details.html')}}&tenantId={{=it.product.tenant.id}}"
                    class="button-block-danger">立即购买{{if(it.product.tenant.discount!=null) { }}享{{=it.product.tenant.discount/10}}折优惠{{ } }}</a>
             </div>
             {{ }else{ }}

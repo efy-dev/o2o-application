@@ -2955,7 +2955,11 @@ footer .copyright {
     background: #f5f5f5;
 }
 
-.myorder .home .header  {
+.myorder .header .search {
+    display: none;
+}
+
+.myorder .home .header {
     background: #94b1bf;
     border-color: #94b1bf;
 }
@@ -2963,10 +2967,6 @@ footer .copyright {
 .myorder .home .header .angle:before,
 .myorder .home .header .angle:after {
     background: #fff
-}
-
-.myorder .home .header .search {
-    display: none;
 }
 
 .myorder .home .header .user {
@@ -3120,9 +3120,130 @@ footer .copyright {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     position: absolute;
-    top:50%;
-    right:0;
-    margin-top:-5px;
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+}
+
+.myorder .list {
+    padding-top:32px;
+}
+
+.myorder .list .header {
+    border-bottom: 0;
+}
+
+.myorder .list .header .user {
+    display: none;
+}
+
+.myorder .list .tab-header {
+    width: 100%;
+    height: 32px;
+    background: #fff;
+    position: fixed;
+    top:44px;
+    z-index: 10;
+}
+
+.myorder .list .tab-header li {
+    width: 20%;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    float: left;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.myorder .list .tab-header li.active {
+    color: #b5261f;
+}
+.myorder .list .tab-content .tab-item {
+    display: none;
+}
+.myorder .list .tab-content .item {
+    width: 100%;
+    padding: 0 16px;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background: #fff;
+    float: left;
+    margin-top: 10px;
+}
+
+.myorder .list .tab-content .item .title {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    font-weight: normal;
+    float: left;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.myorder .list .tab-content .item .title span {
+    color: #f25a60;
+    font-size: 12px;
+    float: right;
+}
+
+.myorder .list .tab-content .item .info {
+    width: 100%;
+    height: 100px;
+    padding-left: 80px;
+    font-size: 14px;
+    line-height: 14px;
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    float: left;
+}
+
+.myorder .list .tab-content .item .info .image {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+.myorder .list .tab-content .item .info .name {
+    line-height: 40px;
+}
+
+.myorder .list .tab-content .item .info .price em {
+    font-style: normal;
+    font-size: 12px;
+    color: #999;
+    float: right;
+}
+
+.myorder .list .tab-content .item .handle {
+    width: 100%;
+    text-align: right;
+    float: left;
+    margin: 10px 0;
+}
+
+.myorder .list .tab-content .item .handle a {
+    width: 92px;
+    line-height: 32px;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #c9c7c7;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.myorder .list .tab-content .item .handle a.status2 {
+    color: #f25a60;
+    border-color: #f25a60;
 }
 
 /*--//End myorder--*/

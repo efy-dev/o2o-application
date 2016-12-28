@@ -3126,7 +3126,7 @@ footer .copyright {
 }
 
 .myorder .list {
-    padding-top:32px;
+    padding-top: 32px;
 }
 
 .myorder .list .header {
@@ -3142,7 +3142,7 @@ footer .copyright {
     height: 32px;
     background: #fff;
     position: fixed;
-    top:44px;
+    top: 44px;
     z-index: 10;
 }
 
@@ -3160,9 +3160,11 @@ footer .copyright {
 .myorder .list .tab-header li.active {
     color: #b5261f;
 }
+
 .myorder .list .tab-content .tab-item {
     display: none;
 }
+
 .myorder .list .tab-content .item {
     width: 100%;
     padding: 0 16px;
@@ -3244,6 +3246,26 @@ footer .copyright {
 .myorder .list .tab-content .item .handle a.status2 {
     color: #f25a60;
     border-color: #f25a60;
+}
+
+.myorder .list .tab-content .no-exist {
+    width: 100px;
+    height: 132px;
+    text-align: center;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -61px;
+    margin-left: -50px;
+}
+
+.myorder .list .tab-content .no-exist i {
+    background: url(../../images/no-exits.png) 0 0 no-repeat;
+    background-size: 76px auto;
+    width: 76px;
+    height: 92px;
+    display: inline-block;
 }
 
 /*--//End myorder--*/

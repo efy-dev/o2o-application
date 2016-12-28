@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body class="myorder">
-<article class="list">
+<article class="list" style="display: none;">
     <div class="header" dot-template="header"></div>
     <!--//End--header-->
     <div class="tab" id="tab">
@@ -161,8 +161,36 @@
             <!--//End 5 待收货-->
         </div>
     </div>
-
 </article>
+<!--//End 有订单状态-->
+
+<article class="list">
+    <div class="header" dot-template="header"></div>
+    <!--//End--header-->
+    <div class="tab" id="tab">
+        <div class="tab-header">
+            <ul>
+                <li class="active">全部</li>
+                <li>待付款</li>
+                <li>待发货</li>
+                <li>待收货</li>
+                <li>待评价</li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-item" style="display: block;">
+                <div class="no-exist"><i></i><p>暂无相关订单</p></div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
 
 
 <script src="common/js/common.js"></script>

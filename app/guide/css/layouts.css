@@ -2955,36 +2955,36 @@ footer .copyright {
     background: #f5f5f5;
 }
 
-.myorder .header {
+.myorder .home .header  {
     background: #94b1bf;
     border-color: #94b1bf;
 }
 
-.myorder .header .angle:before,
-.myorder .header .angle:after {
+.myorder .home .header .angle:before,
+.myorder .home .header .angle:after {
     background: #fff
 }
 
-.myorder .header .search {
+.myorder .home .header .search {
     display: none;
 }
 
-.myorder .header .user {
+.myorder .home .header .user {
     background: #94b1bf
 }
 
-.myorder .header .user:after {
+.myorder .home .header .user:after {
     background-position: -66px -58px;
 }
 
-.myorder .base {
+.myorder .home .base {
     text-align: center;
     font-size: 0;
     padding-bottom: 14px;
     background: #94b1bf;
 }
 
-.myorder .base img {
+.myorder .home .base img {
     width: 62px;
     height: 62px;
     -webkit-border-radius: 50%;
@@ -2992,7 +2992,7 @@ footer .copyright {
     border: 1px solid #fff;
 }
 
-.myorder .base .text {
+.myorder .home .base .text {
     color: #fff;
     font-size: 16px;
     height: 36px;
@@ -3000,7 +3000,7 @@ footer .copyright {
     padding: 10px 0;
 }
 
-.myorder .nav {
+.myorder .home .nav {
     padding: 0 16px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
@@ -3008,34 +3008,34 @@ footer .copyright {
     background: #fff;
 }
 
-.myorder .nav li {
+.myorder .home .nav li {
     height: 60px;
     line-height: 60px;
     border-bottom: 1px solid #e6e6e6;
 }
 
-.myorder .nav li a {
+.myorder .home .nav li a {
     color: #333;
     font-size: 15px;
 }
 
-.myorder .nav li:last-child {
+.myorder .home .nav li:last-child {
     border-bottom: 0;
 }
 
-.myorder .nav li.title {
+.myorder .home .nav li.title {
     height: 45px;
     line-height: 45px;
     font-size: 15px;
 }
 
-.myorder .nav li.title .more {
+.myorder .home .nav li.title .more {
     font-size: 12px;
     color: #ccc;
     float: right;
 }
 
-.myorder .nav li.title .more i {
+.myorder .home .nav li.title .more i {
     width: 11px;
     height: 11px;
     border-top: 1px solid #cac8c8;
@@ -3045,7 +3045,7 @@ footer .copyright {
     transform: rotate(45deg);
 }
 
-.myorder .nav li.ms a {
+.myorder .home .nav li.ms a {
     width: 25%;
     line-height: 20px;
     font-size: 12px;
@@ -3055,43 +3055,43 @@ footer .copyright {
     padding: 14px 0 6px 0;
 }
 
-.myorder .nav li.ms span {
+.myorder .home .nav li.ms span {
     width: 100%;
     height: 12px;
     line-height: 12px;
     display: inline-block;
 }
 
-.myorder .nav li.ms .icon {
+.myorder .home .nav li.ms .icon {
     width: 16px;
     height: 15px;
     line-height: 15px;
     display: inline-block;
 }
 
-.myorder .nav li.ms .icon.fk {
+.myorder .home .nav li.ms .icon.fk {
     background-position: 0 -185px;
 }
 
-.myorder .nav li.ms .icon.fh {
+.myorder .home .nav li.ms .icon.fh {
     background-position: -16px -185px;
 }
 
-.myorder .nav li.ms .icon.sh {
+.myorder .home .nav li.ms .icon.sh {
     background-position: -32px -185px;
 }
 
-.myorder .nav li.ms .icon.pj {
+.myorder .home .nav li.ms .icon.pj {
     background-position: -48px -185px;
 }
 
-.myorder .nav .sub a {
+.myorder .home .nav .sub a {
     padding-left: 40px;
     display: block;
     position: relative;
 }
 
-.myorder .nav .sub .icon {
+.myorder .home .nav .sub .icon {
     width: 32px;
     height: 32px;
     position: absolute;
@@ -3100,19 +3100,19 @@ footer .copyright {
     margin-top: -16px;
 }
 
-.myorder .nav .sub .icon-address {
+.myorder .home .nav .sub .icon-address {
     background-position: 0 -210px;
 }
 
-.myorder .nav .sub .icon-about {
+.myorder .home .nav .sub .icon-about {
     background-position: -32px -210px;
 }
 
-.myorder .nav .sub .icon-service {
+.myorder .home .nav .sub .icon-service {
     background-position: -64px -210px;
 }
 
-.myorder .nav .sub em {
+.myorder .home .nav .sub em {
     width: 11px;
     height: 11px;
     border-top: 1px solid #cac8c8;

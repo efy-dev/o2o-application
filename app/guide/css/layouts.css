@@ -2204,6 +2204,7 @@ footer .copyright {
 }
 
 .address-list {
+    width: 100%;
     height: 100%;
     position: relative;
     float: left;
@@ -3137,7 +3138,10 @@ footer .copyright {
     display: none;
 }
 
-.myorder .list .tab-header {
+
+
+
+.myorder-tab .head {
     width: 100%;
     height: 32px;
     background: #fff;
@@ -3146,7 +3150,7 @@ footer .copyright {
     z-index: 10;
 }
 
-.myorder .list .tab-header li {
+.myorder-tab .head li {
     width: 20%;
     line-height: 32px;
     text-align: center;
@@ -3157,15 +3161,11 @@ footer .copyright {
     border-bottom: 1px solid #e6e6e6;
 }
 
-.myorder .list .tab-header li.active {
+.myorder-tab .head li.active {
     color: #b5261f;
 }
 
-.myorder .list .tab-content .tab-item {
-    display: none;
-}
-
-.myorder .list .tab-content .item {
+.myorder-tab .content .item {
     width: 100%;
     padding: 0 16px;
     border-top: 1px solid #e6e6e6;
@@ -3175,7 +3175,7 @@ footer .copyright {
     margin-top: 10px;
 }
 
-.myorder .list .tab-content .item .title {
+.myorder-tab .content .item .title {
     width: 100%;
     height: 45px;
     line-height: 45px;
@@ -3185,13 +3185,13 @@ footer .copyright {
     border-bottom: 1px solid #e6e6e6;
 }
 
-.myorder .list .tab-content .item .title span {
+.myorder-tab .content .item .title span {
     color: #f25a60;
     font-size: 12px;
     float: right;
 }
 
-.myorder .list .tab-content .item .info {
+.myorder-tab .content .item .info {
     width: 100%;
     height: 100px;
     padding-left: 80px;
@@ -3204,7 +3204,7 @@ footer .copyright {
     float: left;
 }
 
-.myorder .list .tab-content .item .info .image {
+.myorder-tab .content .item .info .image {
     width: 70px;
     height: 70px;
     position: absolute;
@@ -3212,25 +3212,25 @@ footer .copyright {
     left: 0;
 }
 
-.myorder .list .tab-content .item .info .name {
+.myorder-tab .content .item .info .name {
     line-height: 40px;
 }
 
-.myorder .list .tab-content .item .info .price em {
+.myorder-tab .content .item .info .price em {
     font-style: normal;
     font-size: 12px;
     color: #999;
     float: right;
 }
 
-.myorder .list .tab-content .item .handle {
+.myorder-tab .content .item .handle {
     width: 100%;
     text-align: right;
     float: left;
     margin: 10px 0;
 }
 
-.myorder .list .tab-content .item .handle a {
+.myorder-tab .content .item .handle a {
     width: 92px;
     line-height: 32px;
     text-align: center;
@@ -3243,12 +3243,12 @@ footer .copyright {
     margin-left: 5px;
 }
 
-.myorder .list .tab-content .item .handle a.status2 {
+.myorder-tab .content .item .handle a.status2 {
     color: #f25a60;
     border-color: #f25a60;
 }
 
-.myorder .list .tab-content .no-exist {
+.myorder-tab .content .no-exist {
     width: 100px;
     height: 132px;
     text-align: center;
@@ -3260,12 +3260,22 @@ footer .copyright {
     margin-left: -50px;
 }
 
-.myorder .list .tab-content .no-exist i {
+.myorder-tab .content .no-exist i {
     background: url(../../images/no-exits.png) 0 0 no-repeat;
     background-size: 76px auto;
     width: 76px;
     height: 92px;
     display: inline-block;
+}
+
+.myorder .details .address-list {
+
+}
+.myorder .details .address-list .item {
+    height:112px;
+    padding:10px 15px;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 /*--//End myorder--*/

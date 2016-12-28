@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="guide/css/layouts.css">
 </head>
 <body class="myorder">
-<article class="list" style="display: none;">
+<article class="list" style="display: block;">
     <div class="header" dot-template="header"></div>
     <!--//End--header-->
-    <div class="tab" id="tab">
-        <div class="tab-header">
+    <div class="myorder-tab">
+        <div class="head">
             <ul>
                 <li class="active">全部</li>
                 <li>待付款</li>
@@ -20,7 +20,7 @@
                 <li>待评价</li>
             </ul>
         </div>
-        <div class="tab-content">
+        <div class="content">
             <div class="tab-item" style="display: block;">
                 <div class="item">
                     <div class="title">订单编号:1234567<span>待付款</span></div>
@@ -164,7 +164,7 @@
 </article>
 <!--//End 有订单状态-->
 
-<article class="list">
+<article class="list" style="display: none;">
     <div class="header" dot-template="header"></div>
     <!--//End--header-->
     <div class="tab" id="tab">
@@ -220,13 +220,6 @@
     function initPage() {
         $("[dot-template=header]").html(renderHeader(PageVariable));
         $('h1').html('订单');
-        getRecommendList({}, 5, 0, function () {
-            renderTemplate(PageVariable.template.homeRecommendList, PageVariable.recommendList);
-        });
-        /*  $('input.name').on('blur', function () {
-         //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
-         window.location.href = "search.html?name=" + $(this).val();
-         });*/
 
 
         tabHandle();
@@ -235,15 +228,15 @@
 
     //选项卡
     function tabHandle() {
-        var $tab = $('#tab');
-        var $Menu=$tab.find('.tab-header li');
-        var $content=$tab.find('.tab-item');
-
+        var $tab = $('.myorder-tab');
+        var $Menu=$tab.find('.head li');
+        var $item=$tab.find('.tab-item');
+        $item.eq(0).hide();
 
         $Menu.on('click', function () {
             var index=$(this).index();
             $(this).addClass('active').siblings('li').removeClass('active');
-            $content.eq(index).show().siblings('.tab-item').hide();
+            $item.eq(index).show().siblings('.tab-item').hide();
         })
     }
 

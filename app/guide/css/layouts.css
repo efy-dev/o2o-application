@@ -3203,7 +3203,9 @@ footer .copyright {
     padding-bottom: 15px;
     float: left;
 }
-
+.myorder-tab .content .item .info:last-child{
+  border-bottom: 0
+}
 .myorder-tab .content .item .info .image {
     width: 70px;
     height: 70px;
@@ -3268,14 +3270,111 @@ footer .copyright {
     display: inline-block;
 }
 
-.myorder .details .address-list {
-
-}
 .myorder .details .address-list .item {
     height:112px;
     padding:10px 15px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
+}
+
+.myorder .details .pay-base {
+    width: 100%;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background: #fff;
+    padding:10px 16px;
+    float: left;
+    margin: 10px 0;
+}
+.myorder .details .pay-base li {
+  width: 100%;
+  line-height: 30px;
+  font-size: 14px;
+  float:left;
+}
+.myorder .details .pay-base li span {
+width: 80px;
+  color:#999;
+  display: inline-block;
+}
+.myorder .details .pay-base li strong {
+  font-weight: normal;
+}
+
+.myorder .details .handle {
+  width: 100%;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  background: #fff;
+  float: left;
+  position: relative;
+}
+.myorder .details .handle:after{
+  content:'';
+  width: 1px;
+  height: 27px;
+  background: #f0f0f0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -13px;
+}
+.myorder .details .handle a {
+  width: 50%;
+  line-height: 45px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  float: left;
+}
+.myorder .details .handle .icon {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-right: 5px;
+  position: relative;
+  top:1px;
+}
+.myorder .details .handle .icon-contact{
+  background-position: 0 -252px;
+}
+.myorder .details .handle .icon-phone{
+  background-position: -12px -252px;
+}
+
+.myorder .details .handle-bottom {
+  line-height: 44px;
+  padding: 0 16px;
+  font-size: 14px;
+  border-top: 1px solid #e6e6e6;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.myorder .details .handle-bottom small {
+  color: #b5261f;font-size: 14px;
+}
+
+.myorder .details .handle-bottom a {
+  width: 92px;
+  line-height: 32px;
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  border: 1px solid #c9c7c7;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  float: right;
+  margin-left: 5px;
+  margin-top: 6px;
+}
+
+.myorder .details .handle-bottom .status2 {
+  color: #f25a60;
+  border-color: #f25a60;
 }
 
 /*--//End myorder--*/

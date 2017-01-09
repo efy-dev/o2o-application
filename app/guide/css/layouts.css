@@ -3388,6 +3388,22 @@ width: 80px;
     background: rgba(0, 0, 0, 0);
     display: none;
 }
+.hintTitle {
+    line-height: 350px;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    color: #999;
+}
+
+.hintTitleGroup {
+    line-height: 12px;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 15px;
+}
 
 .product-list .more,
 .filter-list .more {

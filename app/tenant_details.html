@@ -143,6 +143,7 @@
         {{ } }}
         {{ } }}
     </ul>
+    <div class="hintTitleGroup">暂无相关商品</div>
     <a class="more" onclick="loadMore()">加载更多</a>
 </script>
 
@@ -231,13 +232,13 @@
         });
 
         PageVariable.requestModel["product.tenant.id"] = PageVariable.tenantId;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, 1, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        })
+        });
 
         getImageTextListByTenant(PageVariable.tenantId, function () {
             renderTemplate(PageVariable.template.tenantPanelList, PageVariable.imageTextList);
-        })
+        });
 
 
         //品类
@@ -245,7 +246,6 @@
             renderTemplate(PageVariable.template.tenantCategory, PageVariable.tenantCategory);
         });
         $('input.name').on('blur', function () {
-            //  window.location.href = "localhost:63343/o2o-application/app/search.html?name=" + $(this).val();
             window.location.href = "search.html?name=" + $(this).val();
         });
         filterTenant();
@@ -272,33 +272,32 @@
         })
     }
     //价格筛选
-    var page = 1;
+    var index = 1;
     function filterPrice(min, max) {
         PageVariable.requestModel["startPrice"] = min;
         PageVariable.requestModel["endPrice"] = max;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        PageVariable.productModelList = [];
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, index, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
-        })
-        page = 1;
+        });
+        index = 1;
     }
 
-
     function filterCategory(id) {
+        PageVariable.productModelList = [];
         if (id == "") {
             delete PageVariable.requestModel["product.tenantGroup.id"];
         } else {
             PageVariable.requestModel["product.tenantGroup.id"] = id;
         }
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, function () {
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, 0, index, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
         });
-        page = 1;
+        index = 1;
     }
-
-
     function loadMore() {
-        page = page + 1;
-        searchProductModelsByTenantGroup(PageVariable.requestModel, 6 * page, 0, function () {
+        index = index + 1;
+        searchProductModelsByTenantGroup(PageVariable.requestModel, 6, (index - 1) * 6, index, function () {
             renderTemplate(PageVariable.template.tenantProductList, PageVariable.productModelList);
         });
     }

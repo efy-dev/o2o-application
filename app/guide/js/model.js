@@ -308,41 +308,64 @@ function getProductCategory(id, callback) {
     ajaxRequest(PageVariable.service.getProductCategory, null, success);
 }
 
-function searchProductModels(param, limit, offset, callback) {
+function searchProductModels(param, limit, offset, index, callback) {
     var success = function (data) {
-        PageVariable.productModelList = data;
+        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
         if (typeof callback == "function") {
             callback();
+            moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
         }
     };
     var requestParam = {};
-    requestParam["sortField"] = typeof param.sortField == "undefined" ? "" : param.sortField;
-    requestParam["sortFlag"] = typeof param.sortFlag == "undefined" ? "" : param.sortFlag;
-    requestParam["startPrice"] = typeof param.startPrice == "undefined" ? "" : param.startPrice;
-    requestParam["endPrice"] = typeof  param.endPrice == "undefined" ? "" : param.endPrice;
-    requestParam["projectCategoryId"] = typeof param.projectCategoryId == "undefined" ? "" : param.projectCategoryId;
-    requestParam["name"] = typeof  param.name == "undefined" ? "" : param.name;
+    requestParam["sortField"] = param.sortField;
+    requestParam["sortFlag"] = param.sortFlag;
+    requestParam["startPrice"] = param.startPrice;
+    requestParam["endPrice"] = param.endPrice;
+    requestParam["projectCategoryId"] = param.projectCategoryId;
+    requestParam["name"] = param.name;
     requestParam.limit = limit;
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.searchProductModels, requestParam, success);
 }
 
-function searchProductModelsByTenantGroup(param, limit, offset, callback) {
+function searchProductModelsByTenantGroup(param, limit, offset, index, callback) {
     var success = function (data) {
-        PageVariable.productModelList = data;
+        PageVariable.productModelList = extendData(PageVariable.productModelList, data.list);
         if (typeof callback == "function") {
             callback();
+            moreHide(index, data.pageEntity.pCount);
+            haveOrNotData(PageVariable.productModelList, data.list);
         }
     };
     var requestParam = {};
     requestParam.param = JSON.stringify(param);
-    requestParam.param["endPrice"] == "undefined" ? "" : param.endPrice;
-    requestParam.param["startPrice"] == "undefined" ? "" : param.startPrice;
+    requestParam.param["endPrice"] = param.endPrice;
+    requestParam.param["startPrice"] = param.startPrice;
     requestParam.limit = limit;
     requestParam.offset = offset;
     ajaxRequest(PageVariable.service.searchProductModelsByTenantGroup, requestParam, success);
 }
-
+function extendData(child, father) {
+    for (var i = 0; i < father.length; i++) {
+        child.push(father[i]);
+    }
+    return child;
+}
+function moreHide(index, count) {
+    if (index >= count) {
+        $(".more").hide();
+    }
+    return false;
+}
+function haveOrNotData(child, father) {
+    if (father.length == 0 && child.length == 0) {
+        $(".hintTitle,.hintTitleGroup").show();
+    } else {
+        $(".hintTitle,.hintTitleGroup").hide();
+    }
+    return false;
+}
 
 // ----------------------product end--------------------------
 

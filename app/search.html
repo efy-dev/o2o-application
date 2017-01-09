@@ -53,30 +53,6 @@
 
 
 <div class="filter-list" dot-template="search-productModels">
-    <!--<dl>
-        <dt>热搜商品</dt>
-        <dd>
-            <a href="">
-                <img src="uploads/guide1.jpg" alt="">
-                <div class="text">
-                    <p>苏绣—水乡小品</p>
-                    <p>姚惠芬苏绣艺术馆</p>
-                    <p>¥ 29999</p>
-                </div>
-            </a>
-        </dd>
-        <dd>
-            <a href="">
-                <img src="uploads/guide1.jpg" alt="">
-                <div class="text">
-                    <p>苏绣—水乡小品</p>
-                    <p>姚惠芬苏绣艺术馆</p>
-                    <p>¥ 29999</p>
-                </div>
-            </a>
-        </dd>
-
-    </dl>-->
 </div>
 
 
@@ -105,6 +81,7 @@
         {{ } }}
         {{ } }}
     </dl>
+    <div class="hintTitle">暂无相关商品</div>
     <a class="more" onclick="loadMore()">加载更多</a>
 </script>
 
@@ -148,12 +125,12 @@
         requestParam = decodeURI(requestParam.name);
         $('input.name').val(requestParam);
         PageVariable.requestModel["name"] = requestParam;
-        searchProductModels(PageVariable.requestModel, 30, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, 1, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
         $('input.name').on('blur', function () {
             window.location.href = "search.html?name=" + $(this).val();
-        })
+        });
         getProductCategory({}, function () {
             renderTemplate(PageVariable.template.productCategory, PageVariable.productCategory);
         });
@@ -171,45 +148,48 @@
                 $mask.remove();
             })
 
-        })
+        });
 
         $('input.name').on('blur', function () {
             PageVariable.requestModel["name"] = $(this).val();
-            searchProductModels(PageVariable.requestModel, 30, 0, function () {
+            searchProductModels(PageVariable.requestModel, 30, 0, 1, function () {
                 renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
             });
             return false;
-        })
+        });
         filterSearch();
     }
 
-    var page = 1;
+    var index = 1;
     function filterCategory(id) {
+        PageVariable.productModelList = [];
         PageVariable.requestModel["projectCategoryId"] = id;
-        searchProductModels(PageVariable.requestModel, 30, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, index, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
+        });
+        index = 1;
     }
     function filterPrice(min, max) {
+        PageVariable.productModelList = [];
         PageVariable.requestModel["startPrice"] = min;
         PageVariable.requestModel["endPrice"] = max;
-        searchProductModels(PageVariable.requestModel, 30, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, index, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
+        });
+        index = 1;
     }
     function filterOrderBy(field, flag) {
+        PageVariable.productModelList = [];
         PageVariable.requestModel["sortField"] = field;
         PageVariable.requestModel["sortFlag"] = flag;
-        searchProductModels(PageVariable.requestModel, 30, 0, function () {
+        searchProductModels(PageVariable.requestModel, 30, 0, index, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
-        })
-        page = 1;
+        });
+        index = 1;
     }
     function loadMore() {
-        page = page + 1;
-        searchProductModels(PageVariable.requestModel, 30 * page, 0, function () {
+        index = index + 1;
+        searchProductModels(PageVariable.requestModel, 30, (index - 1) * 30, index, function () {
             renderTemplate(PageVariable.template.productModels, PageVariable.productModelList);
         });
     }

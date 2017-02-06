@@ -1,115 +1,128 @@
 // var api_url = '';
 // var api_url = 'http://192.168.1.10';
 var api_url = 'http://192.168.1.72';
+// var api_url = '';
 var PageVariable = {
-    template: {
-        homeRecommendList: "home-recommend-list",
-        tenantBase: "tenant-base",
-        tenantPraise: "tenant-praise",
-        tenantProductList: "tenant-product-list",
-        tenantPanelList: "tenant-panel-list",
-        productBase: "product-base",
-        productDetail: "product-detail",
-        productBuy: "product-buy",
-        productList: "product-list",
-        tenantList: "tenant-list",
-        tenantAudioList: "tenant-audio-list",
-        panelBase: "panel-base",
-        tenantAppointment: "tenant-appointment",
-        purchaseProduct: "purchase-product",
-        purchaseOrder: "purchase-order",
-        purchasePay: "purchase-pay",
-        addressList: "address-list",
-        provinceList: "province-list",
-        cityList: "city-list",
-        districtList: "district-list",
-        purchaseInfo: "purchase-info",
-        purchaseAddress: "purchase-address",
-        purchaseDelivery: "purchase-delivery",
-        tenantCategory: "tenant-category",
-        productModels: "search-productModels",
-        productCategory: "product-category"
-    },
-    service: {
-        login: "/wx/login",
-        listProductModel: api_url + "/product/getProductModelList",
-        listTenant: api_url + "/tenant/getTenantList",
-        listRecommend: api_url + "/tenant/getRecommendList",
-        viewTenantById: api_url + "/tenant/getTenantById",
-        listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
-        saveTenantPraise: api_url + "/tenant/saveTenantPraise",
-        listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
-        viewProductModelById: api_url + "/product/getProductModelById",
-        listProductModelPanel: api_url + "/product/getColumnListByProductModel",
-        currentUser: api_url + "/user/getCurrentUser",
-        panelById: api_url + "/tenant/getPanelById",
-        saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
-        getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
-        hasArtistry: api_url + "/project/hasArtistry",
-        createNewOrder: api_url + "/order/createNewOrder",
-        hasAuthenticated: api_url + "/hasAuthenticated",
-        getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
-        getAddressList: api_url + "/address/getAddressList",
-        getProvinceList: api_url + "/address/getProvinceList",
-        getCityList: api_url + "/address/getCityList",
-        getDistrictList: api_url + "/address/getDistrictList",
-        addAddress: api_url + "/address/addAddress",
-        getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
-        confirmOrderById: api_url + "/order/confirmOrderById",
-        getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
-        getConsumerAddressById: api_url + "/address/getConsumerAddressById",
-        tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
-        searchProductModels: api_url + "/product/searchProductModels",
-        searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
-        getProductCategory: api_url + "/product/getProductCategory"
-    },
+        template: {
+            homeRecommendList: "home-recommend-list",
+            tenantBase: "tenant-base",
+            tenantPraise: "tenant-praise",
+            tenantProductList: "tenant-product-list",
+            tenantPanelList: "tenant-panel-list",
+            productBase: "product-base",
+            productDetail: "product-detail",
+            productBuy: "product-buy",
+            productList: "product-list",
+            tenantList: "tenant-list",
+            tenantAudioList: "tenant-audio-list",
+            panelBase: "panel-base",
+            tenantAppointment: "tenant-appointment",
+            purchaseProduct: "purchase-product",
+            purchaseOrder: "purchase-order",
+            purchasePay: "purchase-pay",
+            addressList: "address-list",
+            provinceList: "province-list",
+            cityList: "city-list",
+            districtList: "district-list",
+            purchaseInfo: "purchase-info",
+            purchaseAddress: "purchase-address",
+            purchaseDelivery: "purchase-delivery",
+            tenantCategory: "tenant-category",
+            productModels: "search-productModels",
+            productCategory: "product-category"
+        },
+        service: {
+            login: "/wx/login",
+            listProductModel: api_url + "/product/getProductModelList",
+            listTenant: api_url + "/tenant/getTenantList",
+            listRecommend: api_url + "/tenant/getRecommendList",
+            viewTenantById: api_url + "/tenant/getTenantById",
+            listTenantPraise: api_url + "/tenant/getTenantPraiseListByTenant",
+            saveTenantPraise: api_url + "/tenant/saveTenantPraise",
+            listTenantPanel: api_url + "/tenant/getImageTextListByTenant",
+            viewProductModelById: api_url + "/product/getProductModelById",
+            listProductModelPanel: api_url + "/product/getColumnListByProductModel",
+            currentUser: api_url + "/user/getCurrentUser",
+            panelById: api_url + "/tenant/getPanelById",
+            saveUserOrder: api_url + "/tenant/saveUserOrder",  //提交预约信息
+            getOrderById: api_url + "/tenant/getOrderById",  //获取预约信息
+            hasArtistry: api_url + "/project/hasArtistry",
+            createNewOrder: api_url + "/order/createNewOrder",
+            hasAuthenticated: api_url + "/hasAuthenticated",
+            getPurchaseOrderById: api_url + "/order/getPurchaseOrderById",
+            getAddressList: api_url + "/address/getAddressList",
+            getProvinceList: api_url + "/address/getProvinceList",
+            getCityList: api_url + "/address/getCityList",
+            getDistrictList: api_url + "/address/getDistrictList",
+            addAddress: api_url + "/address/addAddress",
+            getDefaultConsumerAddress: api_url + "/address/getDefaultConsumerAddress",
+            confirmOrderById: api_url + "/order/confirmOrderById",
+            getDeliveryInfoBySerial: api_url + "/order/getDeliveryInfoBySerial",
+            getConsumerAddressById: api_url + "/address/getConsumerAddressById",
+            tenantCategoryId: api_url + "/product/getTenantGroup", //店铺品类
+            searchProductModels: api_url + "/product/searchProductModels",
+            searchProductModelsByTenantGroup: api_url + "/product/searchProductModelsByTenantGroup",
+            getProductCategory: api_url + "/product/getProductCategory",
+            createPrepaidRecord: api_url + "/prepaidRecord/create",
+            checkPrepaidCard: api_url + "/prepaid/check"
+        },
 
-    currentUser: null,
-    userId: "",
-    tenant: {},
-    productModelList: [],
-    tenantColumnList: [],
-    tenantPraiseList: [],
-    productModel: {},
-    productModelColumnList: [],
-    tenantList: [],
-    master: {},
-    project: {},
-    imageTextList: [],
-    imageText: {},
-    recommendList: [],
-    panelList: {},  //店铺实景
-    appointment: {},
-    imageStyle: {},
-    currentAudio: null,
-    audioList: [],
-    addressList: [],
-    provinceList: [],
-    cityList: [],
-    districtList: [],
-    tenantCategory: [],  //店铺品类
-    productCategory: [],
-    requestModel: {},
-    name: "",
+        currentUser: null,
+        userId: "",
+        tenant: {}
+        ,
+        productModelList: [],
+        tenantColumnList: [],
+        tenantPraiseList: [],
+        productModel: {}
+        ,
+        productModelColumnList: [],
+        tenantList: [],
+        master: {}
+        ,
+        project: {}
+        ,
+        imageTextList: [],
+        imageText: {}
+        ,
+        recommendList: [],
+        panelList: {}
+        ,  //店铺实景
+        appointment: {}
+        ,
+        imageStyle: {}
+        ,
+        currentAudio: null,
+        audioList: [],
+        addressList: [],
+        provinceList: [],
+        cityList: [],
+        districtList: [],
+        tenantCategory: [],  //店铺品类
+        productCategory: [],
+        requestModel: {}
+        ,
+        name: "",
 
-    setCurrentAudio: function (audio) {
-        if (PageVariable.currentAudio != null) {
-            PageVariable.currentAudio.bodyStop();
+        setCurrentAudio: function (audio) {
+            if (PageVariable.currentAudio != null) {
+                PageVariable.currentAudio.bodyStop();
+            }
+            PageVariable.currentAudio = audio;
+            PageVariable.currentAudio.bodyPlay();
         }
-        PageVariable.currentAudio = audio;
-        PageVariable.currentAudio.bodyPlay();
-    }
-    ,
+        ,
 
-    removeCurrentAudio: function (audio) {
-        if (PageVariable.currentAudio == null) {
-            audio.bodyStop();
-        } else if (audio.id == PageVariable.currentAudio.id) {
-            PageVariable.currentAudio.bodyStop();
-            PageVariable.currentAudio = null;
+        removeCurrentAudio: function (audio) {
+            if (PageVariable.currentAudio == null) {
+                audio.bodyStop();
+            } else if (audio.id == PageVariable.currentAudio.id) {
+                PageVariable.currentAudio.bodyStop();
+                PageVariable.currentAudio = null;
+            }
         }
     }
-};
+    ;
 
 
 function getCurrentUser(callback) {
@@ -533,5 +546,31 @@ function authenticationFilter(filterMappingFunction, failFunction) {
 }
 
 // ----------------------other end----------------------------
+
+//-----------------------prepaidCard start ---------------------
+
+function createPrepaidRecord(purchaseOrderId, code, callback) {
+    var success = function (data) {
+        PageVariable.prepaidCardRecord = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    var requestParam = {};
+    requestParam.code = code;
+    requestParam.purchaseOrderId = purchaseOrderId;
+    ajaxRequest(PageVariable.service.createPrepaidRecord, requestParam, success);
+
+}
+
+function prepaidCheck(id, callback) {
+    var success = function (data) {
+        PageVariable.prepaidCardBalance = data;
+        if (typeof callback == "function") {
+            callback();
+        }
+    };
+    ajaxRequest(PageVariable.service.checkPrepaidCard, {id: id}, success);
+}
 
 getCurrentUser();

@@ -41,6 +41,17 @@
         <!--</li>-->
         <!--</ul>-->
     </div>
+
+    <div class="order-invoice" dot-template="purchase-prepaid">
+        <div class="title">优惠码</div>
+        <ul class="invoice">
+            <li><input type="text" placeholder="输入优惠码" id="prepaidCode" value=""></li>
+            <li id="balance" style="display: none;"></li>
+            <li>
+                <a style="padding: 5px 10px 5px 10px;width: 120px;line-height: 44px;color: #fff;text-align: center;background: #44b577;border-left: 1px solid #e6e6e6;"
+                   onclick="usePrepaid(this)">确认</a></li>
+        </ul>
+    </div>
     <!--/End/-->
     <div class="order-invoice">
         <div class="title">开具发票</div>
@@ -155,6 +166,7 @@
     </ul>
 
 </script>
+
 
 <script type="text/x-dot-template" id="purchase-address">
     <div class="item" onclick="addressList()">
@@ -441,6 +453,25 @@
             return obj[key]
         } else {
             return "";
+        }
+    }
+
+    function usePrepaid(element) {
+        var prepaidCode = $("#prepaidCode").val();
+        if (prepaidCode != "") {
+            $(element).hide();
+            createPrepaidRecord(PageVariable.purchaseOrderId, prepaidCode, function () {
+
+                var prepaidCardId = PageVariable.prepaidCardRecord.prepaidCard.id;
+
+                prepaidCheck(prepaidCardId, function () {
+                    //使用之后可用余额
+
+                    $("#balance").html("可用余额" + PageVariable.prepaidCardBalance);
+                    $("#balance").show();
+                })
+
+            })
         }
     }
 
